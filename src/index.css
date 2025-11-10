@@ -1,0 +1,281 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- ENABLE SCROLL AFTER INTRO --- */
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  width: 100%;
+  transition: overflow 0.4s ease;
+}
+
+/* After animation completes, this class allows scrolling */
+body.scroll-active {
+  overflow-y: auto;
+  height: auto;
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory; /* This enables snap scrolling */
+}
+
+section {
+  scroll-snap-align: start; /* This tells each section to snap to the top */
+}
+
+
+/* --- HEADER --- */
+.header {
+  transition: all 0.6s ease;
+  z-index: 100;
+  position: fixed;
+  top: 56px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-inline: 120px;
+}
+
+/* --- LOGOS --- */
+.logo-white {
+  opacity: 0;
+  transform: translateY(-200px);
+  animation:
+    slideDown 2s ease-out forwards,
+    fadeOutLogo 0.3s ease-in-out 4.9s forwards;
+}
+
+.logo-black {
+  opacity: 0;
+  animation: fadeInLogo 0.3s ease-in-out 5s forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutLogo {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes fadeInLogo {
+  0% { opacity: 0; transform: translateY(-5px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- NAVIGATION --- */
+.nav {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: showNav 1s ease-in-out 5.3s forwards;
+}
+
+@keyframes showNav {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- HERO SECTION --- */
+.herosection {
+  height: 100vh;
+  width: 100%;
+  background-color: #121212;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  animation: bgTransition 1.5s ease-in-out 3.8s forwards;
+}
+
+/* --- HEADING ANIMATION --- */
+.heading {
+  transform: translateY(400px);
+  font-size: 90px;
+  animation: slideAndScale 3.8s ease-out forwards, textToBlack 0.3s ease-in-out 5s forwards;
+  font-weight: bolder;
+  color: #FEFEFE33;
+  display: inline-block;
+  position: relative;
+}
+
+/* Slide + scale + color white */
+@keyframes slideAndScale {
+  0% {
+    opacity: 0;
+    transform: translateY(400px) scale(1);
+    color: #FEFEFE33;
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    color: #FEFEFE33;
+  }
+  35% {
+    transform: translateY(0) scale(0.8);
+  }
+  85% {
+    transform: translateY(0) scale(0.8);
+    color: #FEFEFE33;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    color: white;
+  }
+}
+
+/* --- TEXT COLOR TRANSITION TO BLACK --- */
+@keyframes textToBlack {
+  0% { color: white; }
+  100% { color: black; }
+}
+
+/* --- WORD HIGHLIGHTS --- */
+.word1, .word2, .word3 {
+  padding-right: 12px;
+  display: inline-block;
+  animation: wordHighlight 1s ease-in-out forwards;
+}
+
+.word1 { animation-delay: 1.5s; }
+.word2 { animation-delay: 2s; }
+.word3 { animation-delay: 2.5s; }
+
+@keyframes wordHighlight {
+  0% { color: #FEFEFE33; }
+  20% { color: white; }
+  50% { color: #FEFEFE33; }
+}
+
+/* --- TM SYMBOL --- */
+.tm {
+  position: absolute;
+  top: 12px;
+  right: -49px;
+  font-size: 64px;
+  font-weight: bolder;
+  opacity: 0;
+  color: white;
+  animation: fadeInTM 0.3s ease-in-out 3.4s forwards, tmToBlack 0.3s ease-in-out 5s forwards;
+}
+
+@keyframes fadeInTM {
+  from { opacity: 0; transform: translateY(0px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tmToBlack {
+  0% { color: white; }
+  100% { color: black; }
+}
+
+/* --- BACKGROUND TRANSITION --- */
+@keyframes bgTransition {
+  0% { background-color: #121212; }
+  40% { background-color: #121212; }
+  100% { background-color: white; }
+}
+
+/* --- HERO GRADIENT (exact Anvi Robotics style) --- */
+.hero-gradient {
+  /* Creates a soft top-half circular glow */
+  background: radial-gradient(
+    ellipse at center top,
+    rgba(19, 80, 220, 0.55) 0%,      /* bright blue center */
+    rgba(22, 100, 240, 0.4) 30%,     /* medium blue transition */
+    rgba(120, 180, 255, 0.25) 55%,   /* soft outer blue fade */
+    rgba(255, 255, 255, 0.95) 90%,   /* smooth white fade */
+    rgba(255, 255, 255, 1) 100%      /* merge with white background */
+  );
+  filter: blur(80px);
+  opacity: 0;
+  animation: showGradient 1.4s ease-in-out 5.2s forwards;
+}
+
+@keyframes showGradient {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.hero-text{
+  animation:slideup 1s ease-in-out 5.1s forwards;
+}
+@keyframes slideup {
+  0% {
+    opacity: 0;
+    transform: translateY(400px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.about-section {
+  position: relative;
+  background: radial-gradient(
+      circle at bottom center,
+      rgba(0, 29, 61, 0.35) 0%,
+      rgba(0, 13, 26, 0.6) 45%,
+      rgba(0, 0, 0, 1) 100%
+    ),
+    #000;
+  overflow: hidden;
+}
+
+.about-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 950px;
+  height: 520px;
+  background: radial-gradient(
+    circle at center top,
+    rgba(14, 61, 190, 0.45) 0%,
+    rgba(19, 80, 220, 0.25) 25%,
+    rgba(22, 100, 240, 0.15) 40%,
+    rgba(0, 0, 0, 0.95) 80%
+  );
+  filter: blur(90px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-section > * {
+  position: relative;
+  z-index: 2;
+}
+.navlink{
+  height: 80px;
+  animation: slideup 1s ease-in-out ;
+}
