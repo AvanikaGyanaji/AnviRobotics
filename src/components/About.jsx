@@ -35,7 +35,7 @@ export const About = () => {
   const missionOpacity = useTransform(
     scrollYProgress,
     [0.25, 0.75,0.9,1], // As we scroll from 65% to 80%...
-    [0, 0.2,1,0.2] // ...fade from 0 to 1
+    [0, 0.2,1,1] // ...fade from 0 to 1
   );
 
   return (

@@ -149,7 +149,7 @@ export const Header = () => {
 
       {/* --- Main Logo --- */}
       <div
-        className={`relative w-[110px] h-[70px] ml-[120px] transition-opacity duration-700 ${
+        className={`relative w-[110px] h-[70px]  transition-opacity duration-700 ${
           showIntroLogos ? "opacity-0" : "opacity-100"
         }`}
       >
@@ -183,7 +183,7 @@ export const Header = () => {
       >
        {[
   { id: "about", label: "About" },
-  { id: "products", link:"/survaillence" ,label: "Product" },
+  { id: "products", link:"/survillance" ,label: "Product" },
   { id: "technologies", label: "Technology" },
   { id: "contact", label: "Contact" },
 ].map(({ id, label,link }) => (
