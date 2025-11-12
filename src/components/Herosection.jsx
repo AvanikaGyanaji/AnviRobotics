@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import {ChevronsUp} from 'lucide-react'
 
 export const Herosection = () => {
  useEffect(() => {
@@ -58,8 +59,12 @@ export const Herosection = () => {
         </p>
       </div>
 
-      <div className="text-scroll absolute bottom-[10px] opacity-0">
-        <h1>Scroll to Roboverse</h1>
+      <div className="text-scroll absolute bottom-[10px] opacity-0 flex gap-x-[5px]">
+        <h1 className="inline-block">Scroll to Roboverse </h1>
+        <div className="h-[20px] overflow-auto scrollbar-hide z-[100] bg-transparent  ">
+          <span className="text-[#888888]"><ChevronsUp /></span>
+          <span className="text-white"><ChevronsUp /></span>
+        </div>
       </div>
     </section>
   );

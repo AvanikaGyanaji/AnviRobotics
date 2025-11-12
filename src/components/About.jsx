@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 // Import Framer Motion
 import { motion, useScroll, useTransform } from "framer-motion";
+// import { Products } from "./Products";
 
 export const About = () => {
   // 1. Create a ref for the outer "runway" container
@@ -20,29 +21,53 @@ export const About = () => {
   // "About Us" fades out
   const aboutOpacity = useTransform(
     scrollYProgress,
-    [0, 0.35,0.65], // As we scroll from 10% to 25%...
+    [0, 0.35,0.45], // As we scroll from 10% to 25%...
     [0.2, 1,0.2] // ...fade from 1 to 0
   );
 
   // "Our Vision" fades in, then out
   const visionOpacity = useTransform(
     scrollYProgress,
-    [ 0.2,0.35,0.75, 0.85], // Fade in (30%-45%), then fade out (45%-60%)
+    [ 0.2,0.35,0.55, 0.85], // Fade in (30%-45%), then fade out (45%-60%)
     [0,0.2, 1, 0.2]
   );
 
   // "Our Mission" fades in
   const missionOpacity = useTransform(
     scrollYProgress,
-    [0.25, 0.75,0.9,1], // As we scroll from 65% to 80%...
+    [0.25, 0.65,0.85,1], // As we scroll from 65% to 80%...
     [0, 0.2,1,1] // ...fade from 0 to 1
   );
-
+  const aboutY = useTransform(
+    scrollYProgress,
+    [0.1,0.55,.7],
+    [0,0,-600]
+  )
+  const visionY = useTransform(
+    scrollYProgress,
+    [0.1,0.55,.7],
+    [0,0,-800]
+  )
+  const missionY = useTransform(
+    scrollYProgress,
+    [0.55,0.55,0.75],
+    [100,0,-450,]
+  )
+  // const productsOpacity =useTransform(
+  //   scrollYProgress,
+  //   [0.85,0.99],
+  //   [0.01,0.05]
+  // )
+  // const productsY =useTransform(
+  //   scrollYProgress,
+  //   [0,0.85,1],
+  //   [0,0,-50]
+  // )
   return (
     // 1. THE "RUNWAY"
     // This outer div provides the scrollable height.
     // We attach our ref to it.
-    <div ref={scrollRef} className="relative h-[300vh] w-full">
+    <div ref={scrollRef} className="relative h-[500vh] w-full flex justify-center">
       {/* 2. YOUR STICKY SECTION */}
       {/* This is your actual 100vh section. It "sticks" to the top
           while the parent div scrolls underneath it. */}   
@@ -56,9 +81,10 @@ export const About = () => {
             We use `absolute` to stack them on top of each other. */}
 
         {/* "About Us" Block */}
+       <div className="relative">
         <motion.div
-          style={{ opacity: aboutOpacity }} // Apply the animated opacity
-          className="max-w-[625px] p-[4px] absolute top-[15%] left-[5%]"
+          style={{ opacity: aboutOpacity ,y:aboutY}} // Apply the animated opacity
+          className="max-w-[625px] p-[4px] absolute top-[120px] left-[5%]"
         >
           <h1 className="text-[48px] mb-[24px]">About Us</h1>
           <p className="text-[24px]">
@@ -71,8 +97,8 @@ export const About = () => {
 
         {/* "Our Vision" Block */}
         <motion.div
-          style={{ opacity: visionOpacity }} // Apply the animated opacity
-          className="max-w-[625px] p-[4px] absolute top-[15%] right-[-50%]"
+          style={{ opacity: visionOpacity , y:visionY }} // Apply the animated opacity
+          className="max-w-[625px] p-[4px] absolute top-[380px] right-[5%]"
         >
           <h1 className="text-[48px] mb-[24px]">Our Vision</h1>
           <p className="text-[24px]">
@@ -81,11 +107,12 @@ export const About = () => {
             transforming industries with smarter, safer innovation.
           </p>
         </motion.div>
+        </div> 
 
         {/* "Our Mission" Block */}
         <motion.div
-          style={{ opacity: missionOpacity }} // Apply the animated opacity
-          className="max-w-[625px] p-[4px] absolute top-[15%] left-[5%]"
+          style={{ opacity: missionOpacity , y:missionY  }} // Apply the animated opacity
+          className="mission-text max-w-[625px] p-[4px] absolute top-[600px] left-[5%]"
         >
           <h1 className="text-[48px] mb-[24px]">Our Mission</h1>
           <p className="text-[24px]">
@@ -96,7 +123,14 @@ export const About = () => {
             transforms vision into impact.
           </p>
         </motion.div>
+
       </section>
+      
+    {/* <motion.div className="absolute bottom-0 flex justify-center"
+    style={{opacity: productsOpacity , y:productsY}}
+    >
+        <Products/>
+        </motion.div> */}
     </div>
   );
 };

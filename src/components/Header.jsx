@@ -183,7 +183,7 @@ export const Header = () => {
       >
        {[
   { id: "about", label: "About" },
-  { id: "products", link:"/survillance" ,label: "Product" },
+  { id: "products" ,label: "Product" },
   { id: "technologies", label: "Technology" },
   { id: "contact", label: "Contact" },
 ].map(({ id, label,link }) => (

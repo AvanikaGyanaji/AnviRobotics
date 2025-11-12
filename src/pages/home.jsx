@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { Header } from "../components/Header";
 import { Herosection } from "../components/Herosection";
 import { About } from "../components/About";
+import { Products } from "../components/Products";
 
 export const Home = () => {
   const heroRef = useRef(null);
@@ -88,13 +89,17 @@ aboutObserver.observe(about);
   return (
     <>
       <Header />
-      <main className="relative">
+      <main className="relative ">
         <section ref={heroRef}>
           <Herosection />
         </section>
 
         <section ref={aboutRef}>
           <About />
+        </section>
+
+        <section>
+          <Products/>
         </section>
 
         {/* Shared fixed gradient */}

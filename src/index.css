@@ -1,5 +1,5 @@
-@tailwind base;
-@tailwind components;
+/* @tailwind base;
+@tailwind components; */
 @tailwind utilities;
 
 @import "tailwindcss";
@@ -224,7 +224,7 @@ font-style: Black;
 }
 @keyframes word3Highlight {
    0% { color: #FEFEFE33; }
-  40% { color: white; }
+  10% { color: white; }
   60% { color: white; }
   
   
@@ -264,19 +264,20 @@ font-style: Black;
   bottom: -180px;
   left: 50%;
   transform: translateX(-50%);
-  width: 750px;
-  height: 220px;
+  width: 350px;
+  height: 260px;
   pointer-events: none;
   opacity: 0;
 
   /* ✅ Balanced blue glow for hero */
   background: radial-gradient(
     ellipse at center top,
-    rgba(1, 4, 108, 0.55) 0%,      /* vivid bright blue */
-    rgba(28, 110, 250, 0.4) 25%,   /* mid transition */
-    rgba(120, 180, 255, 0.18) 55%, /* soft fade */
-    rgba(4, 32, 190, 0.9) 85%,     /* deep blue edge */
-    rgba(0, 0, 0, 1) 100%          /* merge into black for smooth fade */
+  rgba(1, 4, 108, 0.55) 0%,       /* vivid bright blue */
+rgba(28, 110, 250, 0.4) 25%,    /* mid transition */
+rgba(120, 180, 255, 0.18) 55%,  /* soft fade */
+rgba(4, 32, 190, 0.9) 85%,      /* deep blue edge */
+rgba(0, 0, 0, 1) 100%           /* black */
+        /* merge into black for smooth fade */
   );
 
   filter: blur(70px);
@@ -296,6 +297,7 @@ font-style: Black;
   height: 520px;
   bottom: -150px;
   opacity: 1;
+  z-index: 10;
 
   background: radial-gradient(
     ellipse at center top,
@@ -317,12 +319,13 @@ font-style: Black;
   }
   100% {
     opacity: 1;
+    z-index: -10;
     transform: translateY(0) scale(1);
   }
 }
 
 .hero-text{
-  animation:slideup 1s ease-in-out 4.2s forwards;
+  animation:slideup 1s ease-in-out 3.8s forwards;
 }
 @keyframes slideup {
   0% {
@@ -353,10 +356,7 @@ y
 }
 
 /* Keep text above global gradient */
-.about-section > * {
-  position: relative;
-  z-index: 2;
-}
+
 
 
 .navlink {
@@ -397,3 +397,17 @@ y
   }
 }
 
+
+.mission-text{
+  animation: slideUPP 1s ease-in-out forwards;
+}
+@keyframes slideUPP{
+  0%{
+    opacity: 0;
+    transform: translateY(0);
+  }
+  50%{
+    opacity: 0.2;
+    transform: translateY(101px);
+  }
+}
