@@ -183,11 +183,11 @@ export const Header = () => {
       >
        {[
   { id: "about", label: "About" },
-  { id: "products", label: "Product" },
+  { id: "products", link:"/survaillence" ,label: "Product" },
   { id: "technologies", label: "Technology" },
   { id: "contact", label: "Contact" },
-].map(({ id, label }) => (
-  <Link key={id} onClick={() => scrollTo(id)}>
+].map(({ id, label,link }) => (
+  <Link to={link?link:""} key={id} onClick={() => scrollTo(id) } >
     <div
       className={`navlink flex flex-col h-[25px] overflow-hidden transition-all duration-100 ${
         activeSection === id
