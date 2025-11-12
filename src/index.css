@@ -1,5 +1,4 @@
 @import "tailwindcss";
-
 * {
   margin: 0;
   padding: 0;
@@ -8,26 +7,51 @@
 
 /* --- ENABLE SCROLL AFTER INTRO --- */
 body {
-  font-family: Arial, sans-serif;
+  background: #000;
+  overflow: hidden;
   height: 100vh;
   width: 100%;
-  transition: overflow 0.4s ease;
+  font-family: Arial,sans-serif;
+  /* transition: overflow 0.1s ease, height 0.1s ease; */
 }
 
-/* After animation completes, this class allows scrolling */
+/* After intro animation completes → unlock scroll */
 body.scroll-active {
   overflow-y: auto;
   height: auto;
   scroll-behavior: smooth;
 }
+/* --- BODY BACKGROUND CONTROL --- */
+body {
+  background-color: #000;
+  transition: background-color 0.25s linear; /* was 1s */
+}
+
+body.body-white {
+  background-color: #fff;
+}
+
+body.body-black {
+  background-color: #000;
+}
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory; /* This enables snap scrolling */
+  scroll-snap-type: y mandatory;
 }
 
 section {
-  scroll-snap-align: start; /* This tells each section to snap to the top */
+   scroll-snap-align: start;
 }
 
 
@@ -35,28 +59,30 @@ section {
 .header {
   transition: all 0.6s ease;
   z-index: 100;
-  position: fixed;
-  top: 56px;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-inline: 120px;
+  padding-inline: 90px;
+  color: inherit !important;
 }
+.header img,
+.header nav {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+
 
 /* --- LOGOS --- */
 .logo-white {
   opacity: 0;
   transform: translateY(-200px);
   animation:
-    slideDown 2s ease-out forwards,
-    fadeOutLogo 0.3s ease-in-out 4.9s forwards;
+    slideDown 1s ease-out forwards,
+    fadeOutLogo 0.1s ease-in-out 4.5s forwards;
 }
 
 .logo-black {
   opacity: 0;
   animation: fadeInLogo 0.3s ease-in-out 5s forwards;
 }
+
 
 @keyframes slideDown {
   from {
@@ -82,14 +108,33 @@ section {
 /* --- NAVIGATION --- */
 .nav {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-20px);
   animation: showNav 1s ease-in-out 5.3s forwards;
 }
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeDown {
+  animation: fadeDown 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 
 @keyframes showNav {
   0% {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
   100% {
     opacity: 1;
@@ -101,29 +146,33 @@ section {
 .herosection {
   height: 100vh;
   width: 100%;
-  background-color: #121212;
+ 
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  animation: bgTransition 1.5s ease-in-out 3.8s forwards;
+  /* animation: bgTransition 1.5s ease-in-out 3.3s forwards; */
 }
+
 
 /* --- HEADING ANIMATION --- */
 .heading {
   transform: translateY(400px);
-  font-size: 90px;
-  animation: slideAndScale 3.8s ease-out forwards, textToBlack 0.3s ease-in-out 5s forwards;
+  font-size: 80px;
+  animation: slideAndScale 3.4s ease-out forwards, textToBlack 0.3s ease-in-out 3.5s forwards;
   font-weight: bolder;
   color: #FEFEFE33;
   display: inline-block;
   position: relative;
+  font-weight: 900;
+font-style: Black;
 }
 
 /* Slide + scale + color white */
 @keyframes slideAndScale {
   0% {
     opacity: 0;
+    animation-duration: 0.1ms;
     transform: translateY(400px) scale(1);
     color: #FEFEFE33;
   }
@@ -153,7 +202,7 @@ section {
 }
 
 /* --- WORD HIGHLIGHTS --- */
-.word1, .word2, .word3 {
+.word1, .word2 {
   padding-right: 12px;
   display: inline-block;
   animation: wordHighlight 1s ease-in-out forwards;
@@ -161,8 +210,21 @@ section {
 
 .word1 { animation-delay: 1.5s; }
 .word2 { animation-delay: 2s; }
-.word3 { animation-delay: 2.5s; }
 
+
+.word3{
+  padding-right: 12px;
+  display: inline-block;
+  animation: word3Highlight 0.8s ease-in-out 2.8s forwards;
+
+}
+@keyframes word3Highlight {
+   0% { color: #FEFEFE33; }
+  40% { color: white; }
+  60% { color: white; }
+  
+  
+}
 @keyframes wordHighlight {
   0% { color: #FEFEFE33; }
   20% { color: white; }
@@ -178,7 +240,7 @@ section {
   font-weight: bolder;
   opacity: 0;
   color: white;
-  animation: fadeInTM 0.3s ease-in-out 3.4s forwards, tmToBlack 0.3s ease-in-out 5s forwards;
+  animation: fadeInTM 0.3s ease-in-out 2.8s forwards, tmToBlack 0.3s ease-in-out 3.5s forwards;
 }
 
 @keyframes fadeInTM {
@@ -191,29 +253,59 @@ section {
   100% { color: black; }
 }
 
-/* --- BACKGROUND TRANSITION --- */
-@keyframes bgTransition {
-  0% { background-color: #121212; }
-  40% { background-color: #121212; }
-  100% { background-color: white; }
-}
 
 /* --- HERO GRADIENT (exact Anvi Robotics style) --- */
 .hero-gradient {
-  /* Creates a soft top-half circular glow */
+  position: fixed;
+  bottom: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 750px;
+  height: 220px;
+  pointer-events: none;
+  opacity: 0;
+
+  /* ✅ Balanced blue glow for hero */
   background: radial-gradient(
     ellipse at center top,
-    rgba(19, 80, 220, 0.55) 0%,      /* bright blue center */
-    rgba(22, 100, 240, 0.4) 30%,     /* medium blue transition */
-    rgba(120, 180, 255, 0.25) 55%,   /* soft outer blue fade */
-    rgba(255, 255, 255, 0.95) 90%,   /* smooth white fade */
-    rgba(255, 255, 255, 1) 100%      /* merge with white background */
+    rgba(1, 4, 108, 0.55) 0%,      /* vivid bright blue */
+    rgba(28, 110, 250, 0.4) 25%,   /* mid transition */
+    rgba(120, 180, 255, 0.18) 55%, /* soft fade */
+    rgba(4, 32, 190, 0.9) 85%,     /* deep blue edge */
+    rgba(0, 0, 0, 1) 100%          /* merge into black for smooth fade */
   );
-  filter: blur(80px);
-  opacity: 0;
-  animation: showGradient 1.4s ease-in-out 5.2s forwards;
+
+  filter: blur(70px);
+  animation: showGradient 1.3s ease-in-out 3.8s forwards;
+  transition:
+    width 1.3s ease,
+    height 1.3s ease,
+    bottom 1.3s ease,
+    opacity 1.3s ease,
+    filter 1.3s ease,
+    background 1.3s ease;
 }
 
+/* ✨ Expanded state for ABOUT and other sections */
+.hero-gradient.hero-expanded {
+  width: 950px;
+  height: 520px;
+  bottom: -150px;
+  opacity: 1;
+
+  background: radial-gradient(
+    ellipse at center top,
+   rgba(14, 61, 190, 0.65) 0%,
+    rgba(22, 90, 230, 0.5) 25%,
+     rgba(22, 90, 230, 0.5) 55%, 
+     rgba(28, 110, 250, 0.4) 90%,
+      rgb(5, 39, 231) 100%);        /* pure black */
+
+
+  filter: blur(200px);
+}
+
+/* --- Entrance Animation --- */
 @keyframes showGradient {
   0% {
     opacity: 0;
@@ -224,8 +316,9 @@ section {
     transform: translateY(0) scale(1);
   }
 }
+
 .hero-text{
-  animation:slideup 1s ease-in-out 5.1s forwards;
+  animation:slideup 1s ease-in-out 4.2s forwards;
 }
 @keyframes slideup {
   0% {
@@ -238,44 +331,65 @@ section {
     transform: translateY(0);
   }
 }
+y
+/* Base About Section */
+/* --- ABOUT SECTION (clean, no internal gradient) --- */
 .about-section {
   position: relative;
-  background: radial-gradient(
-      circle at bottom center,
-      rgba(0, 29, 61, 0.35) 0%,
-      rgba(0, 13, 26, 0.6) 45%,
-      rgba(0, 0, 0, 1) 100%
-    ),
-    #000;
+  transform-origin: center center;
+  transition:
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 1.2s ease;
   overflow: hidden;
 }
 
+/* Remove internal pseudo-element gradient */
 .about-section::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 950px;
-  height: 520px;
-  background: radial-gradient(
-    circle at center top,
-    rgba(14, 61, 190, 0.45) 0%,
-    rgba(19, 80, 220, 0.25) 25%,
-    rgba(22, 100, 240, 0.15) 40%,
-    rgba(0, 0, 0, 0.95) 80%
-  );
-  filter: blur(90px);
-  opacity: 0.9;
-  pointer-events: none;
-  z-index: 0;
+  content: none; /* completely disables the pseudo-element */
 }
 
+/* Keep text above global gradient */
 .about-section > * {
   position: relative;
   z-index: 2;
 }
-.navlink{
-  height: 80px;
-  animation: slideup 1s ease-in-out ;
+
+
+.navlink {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  padding-inline: 4px;
 }
+
+.navlink span {
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hover animation for non-active links */
+.navlink:hover span {
+  transform: translateY(-100%);
+}
+
+/* Disable hover animation for the active link */
+.navlink.active:hover span {
+  transform: none;
+}
+
+.text-scroll{
+  animation: slideUp 1s ease-in-out 4.2s forwards;
+
+}
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
