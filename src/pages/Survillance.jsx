@@ -144,55 +144,53 @@ export const Survillance = () => {
 
         {/* Section 4 */}
         <div
-  className={`min-h-screen relative bg-black transition-all duration-700 ease-in-out ${
-    stage >= 6 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-  }`}
->
-  {/* Inner padded container */}
-  <div className="px-[60px] py-[60px] flex flex-col items-center justify-start w-full h-full box-border">
-    {/* Heading */}
-    <h2 className="text-[38px] md:text-[60px] font-semibold text-white mb-12 text-center w-full">
-      Our Robot Features
-    </h2>
-
-    {/* First Grid - 5 items */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 w-full max-w-[1200px] mx-auto mb-12">
-      {[
-        { icon: <Cpu size={48} />, text: "Autonomous Navigation" },
-        { icon: <Camera size={48} />, text: "AI Surveillance" },
-        { icon: <Shield size={48} />, text: "Obstacle Detection" },
-        { icon: <AlertTriangle size={48} />, text: "Real-time Alerts" },
-        { icon: <BatteryFull size={48} />, text: "Durable Design" },
-      ].map((item, idx) => (
-        <div
-          key={idx}
-          className="flex flex-col items-center justify-center bg-gray-900 rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+        className={`min-h-screen relative bg-black/70 transition-all duration-700 ease-in-out ${
+            stage >= 6 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
         >
-          {item.icon}
-          <p className="text-white text-center mt-4">{item.text}</p>
-        </div>
-      ))}
-    </div>
+        <div className="w-full px-[50px] py-[60px] flex flex-col items-center justify-center min-h-screen box-border">
+            {/* Heading */}
+            <h2 className="text-[38px] md:text-[60px] font-semibold text-white mb-8 text-center">
+            Our Robot Features
+            </h2>
 
-    {/* Second Grid - 3 items */}
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-[900px] mx-auto">
-      {[
-        { icon: <BatteryFull size={48} />, text: "Long Battery Life" },
-        { icon: <Wifi size={48} />, text: "Remote Monitoring" },
-        { icon: <CloudRain size={48} />, text: "Weather Resistant" },
-      ].map((item, idx) => (
-        <div
-          key={idx}
-          className="flex flex-col items-center justify-center bg-gray-900 rounded-xl p-6 hover:shadow-lg transition-all duration-300"
-        >
-          {item.icon}
-          <p className="text-white text-center mt-4">{item.text}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
+            {/* First Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6 w-full">
+            {[
+                { icon: <Cpu size={48} />, text: "24/7 Autonomous Patrols" },
+                { icon: <Camera size={48} />, text: "AI-Powered Threat Detection" },
+                { icon: <Shield size={48} />, text: "360° Vision & HD Cameras" },
+                { icon: <AlertTriangle size={48} />, text: "Night Vision & Thermal Imaging" },
+                { icon: <BatteryFull size={48} />, text: "Smart Navigation (LiDAR + SLAM)" },
+            ].map((item, idx) => (
+                <div
+                key={idx}
+                className="flex flex-col items-center justify-center bg-white/8 px-12 min-h-[170px] rounded-xl hover:shadow-lg transition-all duration-300"
+                >
+                {item.icon}
+                <p className="text-white text-[16px] text-center mt-2">{item.text}</p>
+                </div>
+            ))}
+            </div>
 
+            {/* Second Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full min-h-[170px]">
+            {[
+                { icon: <BatteryFull size={48} />, text: "Two-Way Communication" },
+                { icon: <Wifi size={48} />, text: "All-Weather Durability" },
+                { icon: <CloudRain size={48} />, text: "Long Battery Life + Auto Charging" },
+            ].map((item, idx) => (
+                <div
+                key={idx}
+                className="flex flex-col items-center justify-center bg-white/8 px-24 py-4 rounded-xl hover:shadow-lg transition-all duration-300"
+                >
+                {item.icon}
+                <p className="text-white text-[16px] text-center mt-2">{item.text}</p>
+                </div>
+            ))}
+            </div>
+        </div>
+      </div>
       </div>
     </div>
   );
