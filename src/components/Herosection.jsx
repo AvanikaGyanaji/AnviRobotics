@@ -40,9 +40,11 @@ export const Herosection = () => {
 
   return (
     <section
+    
       id="herosection"
       className="herosection h-screen w-full flex flex-col justify-center items-center relative overflow-hidden"
     >
+      
       <div className="flex flex-col justify-center items-center text-center">
         <h1 className="heading hero-heading font-bold text-[#FEFEFE33]">
           <span className="word1">Smarter.</span>
@@ -62,8 +64,8 @@ export const Herosection = () => {
       <div className="text-scroll absolute bottom-[10px] opacity-0 flex gap-x-[5px]">
         <h1 className="inline-block">Scroll to Roboverse </h1>
         <div className="h-[20px] overflow-auto scrollbar-hide z-[100] bg-transparent  ">
-          <span className="text-[#888888]"><ChevronsUp /></span>
-          <span className="text-white"><ChevronsUp /></span>
+          <span className="text-[#888888] updown"><ChevronsUp /></span>
+          <span className="text-white updown"><ChevronsUp /></span>
         </div>
       </div>
     </section>

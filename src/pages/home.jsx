@@ -1,9 +1,9 @@
 // Home.jsx
 import React, { useEffect, useRef } from "react";
-import { Header } from "../components/Header";
 import { Herosection } from "../components/Herosection";
 import { About } from "../components/About";
 import { Products } from "../components/Products";
+import { Technology } from "../components/Technology";
 
 export const Home = () => {
   const heroRef = useRef(null);
@@ -88,7 +88,7 @@ aboutObserver.observe(about);
 
   return (
     <>
-      <Header />
+    
       <main className="relative ">
         <section ref={heroRef}>
           <Herosection />
@@ -101,6 +101,15 @@ aboutObserver.observe(about);
         <section>
           <Products/>
         </section>
+
+        <section>
+          <Technology/>
+           </section>
+
+        <section className="h-screen" id="">
+
+        </section>
+
 
         {/* Shared fixed gradient */}
         <div className="hero-gradient fixed bottom-[-180px] left-1/2 -translate-x-1/2 rounded-full pointer-events-none" />

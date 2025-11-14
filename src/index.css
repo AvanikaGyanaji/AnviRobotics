@@ -52,6 +52,7 @@ body.body-black {
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
+  max-width: 2400px;
 }
 
 section {
@@ -65,6 +66,8 @@ section {
   z-index: 100;
   padding-inline: 90px;
   color: inherit !important;
+  max-width: 2400px;
+
 }
 .header img,
 .header nav {
@@ -163,7 +166,7 @@ section {
 .heading {
   transform: translateY(400px);
   font-size: 80px;
-  animation: slideAndScale 3.4s ease-out forwards, textToBlack 0.3s ease-in-out 3.5s forwards;
+  animation: slideAndScale 3.4s ease-out 0s 1 forwards, textToBlack 0.3s ease-in-out 3.5s 1 forwards;
   font-weight: bolder;
   color: #FEFEFE33;
   display: inline-block;
@@ -196,6 +199,7 @@ font-style: Black;
     transform: translateY(0) scale(1);
     opacity: 1;
     color: white;
+
   }
 }
 
@@ -410,4 +414,11 @@ y
     opacity: 0.2;
     transform: translateY(101px);
   }
+}
+@keyframes upDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.updown {
+  animation: upDown 0.8s ease-in-out infinite;
 }
