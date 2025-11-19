@@ -1,197 +1,309 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Cpu, Camera, Shield, AlertTriangle, BatteryFull, Wifi, CloudRain } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Icon } from "@iconify/react";
+import { Section6 } from "../components/Section6";
+import RobotFeatures from "../components/RobotFeatures";
 
 export const Survillance = () => {
+  const containerRef = useRef(null);
+  const section2Ref = useRef(null);
+  const section3Ref = useRef(null);
+  const section4Ref = useRef(null);
+
+  const [scrollY, setScrollY] = useState(0);
   const [stage, setStage] = useState(0);
-  const totalStages = 7; // we have 7 stages now (0–6)
+  const [section2Progress, setSection2Progress] = useState(0); // 0 → 1
+  const [stageScrollCount, setStageScrollCount] = useState(0);
   const isScrolling = useRef(false);
 
+  const SCROLL_THRESHOLD = 3;
+  const maxStages = 4;
+
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  // Update container height dynamically (full scrollable height)
   useEffect(() => {
-    const handleScroll = (e) => {
-      e.preventDefault();
-      if (isScrolling.current) return;
-      isScrolling.current = true;
-
-      // scroll down
-      if (e.deltaY > 0) {
-        setStage((prev) => Math.min(prev + 1, totalStages - 1));
+    const updateHeight = () => {
+      if (containerRef.current) {
+        const height = containerRef.current.scrollHeight - window.innerHeight;
+        setContainerHeight(height > 0 ? height : 0);
       }
-      // scroll up
-      else {
-        setStage((prev) => Math.max(prev - 1, 0));
-      }
-
-      setTimeout(() => {
-        isScrolling.current = false;
-      }, 900); // ensure scroll delay matches animation duration
     };
 
-    window.addEventListener("wheel", handleScroll, { passive: false });
-    return () => window.removeEventListener("wheel", handleScroll);
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
+  // ZOOM transition variables for Section 3 → 4
+  let section3Scale = 1,
+    section3Opacity = 1,
+    section4Scale = 0.85,
+    section4Opacity = 0;
+
+  if (section3Ref.current && section4Ref.current) {
+    const section3Top = section3Ref.current.offsetTop;
+    const section4Top = section4Ref.current.offsetTop;
+
+    if (scrollY >= section3Top && scrollY <= section4Top) {
+      const progress = (scrollY - section3Top) / (section4Top - section3Top);
+      section3Scale = 1 - progress * 0.5;
+      section3Opacity = 1 - progress * 0.2;
+      section4Scale = 0.85 + progress * 0.15;
+      section4Opacity = progress;
+    } else if (scrollY < section3Top) {
+      section3Scale = 1;
+      section3Opacity = 1;
+      section4Scale = 0.85;
+      section4Opacity = 0;
+    } else {
+      section3Scale = 0.5;
+      section3Opacity = 0.8;
+      section4Scale = 1;
+      section4Opacity = 1;
+    }
+  }
+
+  // Handle wheel scroll
+  useEffect(() => {
+    const handleWheel = (e) => {
+      e.preventDefault();
+      if (!containerRef.current || !section2Ref.current) return;
+
+      const section2Top = section2Ref.current.offsetTop;
+      const section2Height = section2Ref.current.offsetHeight;
+      const section2Bottom = section2Top + section2Height;
+
+      let newY = scrollY + e.deltaY;
+
+      // Check if Section 2 is currently in viewport
+      const isSection2InView = scrollY >= section2Top && scrollY < section2Bottom;
+
+      // Section 2 character reveal handling - ONLY when Section 2 is in view
+      const progressIncrement = Math.abs(e.deltaY) / 1000;
+      
+      if (isSection2InView) {
+        // Scrolling down in Section 2
+        if (e.deltaY > 0 && section2Progress < 1) {
+          setSection2Progress(prev => Math.min(prev + progressIncrement, 1));
+          newY = scrollY; // lock scroll
+        }
+        // Scrolling up in Section 2
+        else if (e.deltaY < 0 && section2Progress > 0) {
+          setSection2Progress(prev => Math.max(prev - progressIncrement, 0));
+          newY = scrollY; // lock scroll
+        }
+      }
+      // When entering Section 2 from Section 3 (coming from below, scrolling UP)
+      else if (scrollY >= section2Bottom && newY < section2Bottom && e.deltaY < 0) {
+        setSection2Progress(1); // Start fully revealed
+        newY = section2Bottom - window.innerHeight; // Position at TOP of viewport showing bottom of Section 2
+      }
+      // When entering Section 2 from Section 1 (coming from above, scrolling DOWN)
+      else if (scrollY < section2Top && newY >= section2Top && e.deltaY > 0) {
+        setSection2Progress(0); // Start hidden
+        newY = section2Top; // Position at top of Section 2
+      }
+
+      // Clamp scroll
+      const maxScroll = containerRef.current.scrollHeight - window.innerHeight;
+      if (newY < 0) newY = 0;
+      if (newY > maxScroll) newY = maxScroll;
+
+      setScrollY(newY);
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [scrollY, section2Progress]);
+
+
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black text-white">
-      {/* Background */}
+    <div className="relative w-full h-screen overflow-hidden bg-black">
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800">
+        {/* Background overlay */}
       <img
         src="/survillance/B6.png"
         alt="Robot"
-        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
-          stage >= 2 ? "brightness-[60%] blur-[1px]" : "brightness-100"
-        }`}
+        className="absolute inset-0 w-full h-full object-cover object-center"
       />
+      </div>
 
-      {/* Overlay Tint */}
-      <div
-        className={`absolute inset-0 bg-black transition-opacity duration-700 ease-in-out pointer-events-none ${
-          stage === 0 ? "opacity-0" : stage === 1 ? "opacity-20" : "opacity-40"
-        }`}
-      />
+      <div className="absolute inset-0 bg-black/50 z-0" />
 
-      {/* Scroll Container */}
       <div
-        className="absolute top-0 left-0 w-full transition-transform duration-700 ease-in-out"
-        style={{
-          transform: `translateY(-${
-            stage === 6
-              ? 300
-              : stage >= 5
-              ? 200
-              : stage >= 1
-              ? 100
-              : 0
-          }vh)`,
-        }}
+        ref={containerRef}
+        className="scroll-container absolute left-0 top-0 w-full transition-transform duration-500 ease-out z-10"
+        style={{ transform: `translateY(-${scrollY}px)` }}
       >
         {/* Section 1 */}
-        <div className="h-screen flex flex-col justify-center translate-x-[6vw]">
-          <h1 className="text-[36px] md:text-[56px] font-semibold text-white">
+        <div className="min-h-screen flex flex-col items-start px-[60px] py-[40px]">
+          <h1 className="text-[36px] md:text-[56px] font-arial font-regular text-white">
             Surveillance <br /> Robot
           </h1>
-          <p className="max-w-[420px] text-base md:text-lg leading-7 text-white mt-4">
+          <p className="max-w-[420px] font-dm text-[16px] leading-7 text-[#FEFEFE76] mt-2">
             Revolutionary AI-powered security that never sleeps. Protect your
             property with intelligent, autonomous patrol technology.
           </p>
         </div>
 
         {/* Section 2 */}
-        <div className="h-screen flex flex-col justify-center translate-x-[6vw]">
-          <p className="text-[46px] md:text-[46px] font-light leading-[1.15] text-white max-w-[90vw] transition-all duration-700">
-            <span
-              className={`transition-all duration-700 ease-out ${
-                stage >= 1 ? "text-white opacity-100" : "text-white/40 opacity-40"
-              }`}
-            >
-              Our AI-powered Surveillance Robot redefines modern security and
-              safety.
-            </span>
-            <span
-              className={`transition-all duration-700 ease-out ${
-                stage >= 2 ? "text-white opacity-100" : "text-white/40 opacity-40"
-              }`}
-            >
-              {" "}It offers real-time monitoring with intelligent data analysis.
-            </span>
-            <span
-              className={`transition-all duration-700 ease-out ${
-                stage >= 3 ? "text-white opacity-100" : "text-white/40 opacity-40"
-              }`}
-            >
-              {" "}With autonomous mobility, it ensures seamless and efficient operations.
-            </span>
-            <span
-              className={`transition-all duration-700 ease-out ${
-                stage >= 4 ? "text-white opacity-100" : "text-white/40 opacity-40"
-              }`}
-            >
-              {" "}Designed for reliability, it delivers continuous vigilance and rapid response.
-            </span>
+        <div
+          ref={section2Ref}
+          className="min-h-screen flex flex-col justify-center px-[50px]"
+        >
+          <p className="text-[28px] md:text-[32px] lg:text-[40px] font-regular leading-relaxed text-white break-words">
+            {(() => {
+              const text = "Our AI-powered Surveillance Robot redefines modern security and safety. It offers real-time monitoring with intelligent data analysis. With autonomous mobility, it ensures seamless and efficient operations. Designed for reliability, it delivers continuous vigilance and rapid response.";
+
+              const revealLength = Math.floor(section2Progress * text.length);
+              const visibleText = text.slice(0, revealLength);
+              const hiddenText = text.slice(revealLength);
+
+              return (
+                <>
+                  <span>{visibleText}</span>
+                  <span className="opacity-30">{hiddenText}</span>
+                </>
+              );
+            })()}
           </p>
         </div>
 
         {/* Section 3 */}
         <div
-          className={`h-screen bg-black flex items-center justify-between px-[60px] py-[60px] transition-all duration-700 ease-in-out ${
-            stage >= 5
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          } ${
-            stage === 6
-              ? "scale-[0.5] opacity-70"
-              : "scale-100 opacity-100"
-          }`}
+          ref={section3Ref}
+          className="min-h-screen bg-black flex items-center justify-between px-[60px] py-[60px] transition-all duration-300"
+          style={{ transform: `scale(${section3Scale})`, opacity: section3Opacity }}
         >
           <div className="flex-1 flex justify-end">
-            <img
-              src="/survillance/b31.png"
-              className="w-[457px] h-[496px] object-contain"
-              alt="Surveillance bot side view"
-            />
+            <img src="/survillance/b31.png" className="w-[457px] h-[496px] object-contain" alt="Side view" />
           </div>
-
-          <p className="text-white text-[19px] text-center italic leading-relaxed max-w-[200px] px-4">
-            "We make security smarter, safer, and endlessly vigilant."
+          <p className="text-white text-[30px] text-center font-light leading-relaxed max-w-[274px]">
+            "We Make <span className="text-[#EFEFEF76]">Security Smarter, Safer, And Endlessly Vigilant.</span>"
           </p>
-
           <div className="flex-1 flex justify-start">
-            <img
-              src="/survillance/b32.png"
-              className="w-[457px] h-[496px] object-contain"
-              alt="Surveillance bot front view"
-            />
+            <img src="/survillance/b32.png" className="w-[457px] h-[496px] object-contain" alt="Front view" />
           </div>
         </div>
 
         {/* Section 4 */}
         <div
-        className={`min-h-screen relative bg-black/70 transition-all duration-700 ease-in-out ${
-            stage >= 6 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
+          ref={section4Ref}
+          className="min-h-screen relative bg-black transition-all duration-300 ease-out"
+          style={{ transform: `scale(${section4Scale})`, opacity: section4Opacity }}
         >
-        <div className="w-full px-[50px] py-[60px] flex flex-col items-center justify-center min-h-screen box-border">
-            {/* Heading */}
-            <h2 className="text-[38px] md:text-[60px] font-semibold text-white mb-8 text-center">
-            Our Robot Features
-            </h2>
 
-            {/* First Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6 w-full">
-            {[
-                { icon: <Cpu size={48} />, text: "24/7 Autonomous Patrols" },
-                { icon: <Camera size={48} />, text: "AI-Powered Threat Detection" },
-                { icon: <Shield size={48} />, text: "360° Vision & HD Cameras" },
-                { icon: <AlertTriangle size={48} />, text: "Night Vision & Thermal Imaging" },
-                { icon: <BatteryFull size={48} />, text: "Smart Navigation (LiDAR + SLAM)" },
-            ].map((item, idx) => (
-                <div
-                key={idx}
-                className="flex flex-col items-center justify-center bg-white/8 px-12 min-h-[170px] rounded-xl hover:shadow-lg transition-all duration-300"
-                >
-                {item.icon}
-                <p className="text-white text-[16px] text-center mt-2">{item.text}</p>
-                </div>
-            ))}
-            </div>
-
-            {/* Second Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full min-h-[170px]">
-            {[
-                { icon: <BatteryFull size={48} />, text: "Two-Way Communication" },
-                { icon: <Wifi size={48} />, text: "All-Weather Durability" },
-                { icon: <CloudRain size={48} />, text: "Long Battery Life + Auto Charging" },
-            ].map((item, idx) => (
-                <div
-                key={idx}
-                className="flex flex-col items-center justify-center bg-white/8 px-24 py-4 rounded-xl hover:shadow-lg transition-all duration-300"
-                >
-                {item.icon}
-                <p className="text-white text-[16px] text-center mt-2">{item.text}</p>
-                </div>
-            ))}
-            </div>
+          < RobotFeatures />
         </div>
-      </div>
+
+
+        {/* Section 5 */}
+        <div className="min-h-screen relative bg-black w-full px-[50px] py-[60px]">
+          <h2 className="text-[28px] md:text-[46px] font-semibold text-white mb-8 text-center">
+            Our Robot Solutions
+          </h2>
+          {/* Image Grid Section */}
+          <div className="flex flex-col gap-6">
+          {/* Row 1: Large + Small */}
+          <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
+            {/* Large Card */}
+            <div className="relative group overflow-hidden rounded-2xl shadow-lg h-[351px]">
+              <img
+                loading="lazy"
+                src="/survillance/B6.png"
+                alt="Technological Excellence"
+                className="w-full h-full object-cover"
+              />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+
+                <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                  Cost-Effective Security
+                </p>
+
+                {/*hidden initially, slides in on hover */}
+                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[18px] font-dm max-w-[280px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                  Reduce security personnel cost by up to 60% while maintaining 24/7 coverage
+                </p>
+              </div>
+            </div>
+
+            {/* Small Card */}
+            <div className="relative z-10 overflow-hidden rounded-2xl group shadow-lg h-[351px]">
+              <img
+                loading="lazy"
+                src="/survillance/A10.png"
+                alt="Strategic Focus"
+                className="w-full h-full object-cover"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+
+                <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                  Smart Sentinel
+                </p>
+                {/* hidden initially, slides in on hover */}
+                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[230px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                  Keep human security personnel out of potentially dangerous situations
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Row 2: Small + Large */}
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6">
+            {/* Small Card */}
+            <div className="relative overflow-hidden rounded-2xl group shadow-lg h-[351px]">
+              <img
+                loading="lazy"
+                src="/survillance/F4.png"
+                alt="Collaborative Approach"
+                className="w-full h-full object-cover"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+
+                <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                  Visible Detterence
+                </p>
+
+                {/* hidden initially, slides in on hover */}
+                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                  Advanced robotic presence deters criminal activity before it starts
+                </p>
+              </div>
+            </div>
+
+            {/* Large Card */}
+            <div className="relative overflow-hidden group rounded-2xl shadow-lg h-[351px]">
+              <img
+                loading="lazy"
+                src="/survillance/G6.png"
+                alt="Impact-Driven Solutions"
+                className="w-full h-full object-cover group-hover:scale-[1.05] transition-all duration-300"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+
+                <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                  Scalable Security
+                </p>
+
+                {/*hidden initially, slides in on hover */}
+                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[18px] font-dm max-w-[280px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                  Easily expand your security coverage across multiple locations
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        {/* Section 6 */}
+        <Section6 scrollY={scrollY} />
+
       </div>
     </div>
   );
-};
+}
