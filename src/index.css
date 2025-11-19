@@ -1,5 +1,5 @@
-@tailwind base;
-@tailwind components;
+/* @tailwind base;
+@tailwind components; */
 @tailwind utilities;
 
 @import "tailwindcss";
@@ -12,8 +12,8 @@
 /* --- ENABLE SCROLL AFTER INTRO --- */
 body {
   background: #000;
-  overflow: hidden;
-  height: 100vh;
+  /* overflow: hidden; */
+  height:auto;
   width: 100%;
   font-family: Arial,sans-serif;
   /* transition: overflow 0.1s ease, height 0.1s ease; */
@@ -28,16 +28,9 @@ body.scroll-active {
 /* --- BODY BACKGROUND CONTROL --- */
 body {
   background-color: #000;
-  transition: background-color 0.25s linear; /* was 1s */
-}
+  }
 
-body.body-white {
-  background-color: #fff;
-}
 
-body.body-black {
-  background-color: #000;
-}
 
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -52,6 +45,7 @@ body.body-black {
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
+  max-width: 2400px;
 }
 
 section {
@@ -65,6 +59,8 @@ section {
   z-index: 100;
   padding-inline: 90px;
   color: inherit !important;
+  max-width: 2400px;
+
 }
 .header img,
 .header nav {
@@ -73,20 +69,9 @@ section {
 
 
 
-/* --- LOGOS --- */
-.logo-white {
-  opacity: 0;
-  transform: translateY(-200px);
-  animation:
-    slideDown 1s ease-out forwards,
-    fadeOutLogo 0.1s ease-in-out 4.5s forwards;
+.logo{
+  animation:slideDown 1s ease-in-out forwards;
 }
-
-.logo-black {
-  opacity: 0;
-  animation: fadeInLogo 0.3s ease-in-out 5s forwards;
-}
-
 
 @keyframes slideDown {
   from {
@@ -99,15 +84,6 @@ section {
   }
 }
 
-@keyframes fadeOutLogo {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes fadeInLogo {
-  0% { opacity: 0; transform: translateY(-5px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
 
 /* --- NAVIGATION --- */
 .nav {
@@ -157,13 +133,26 @@ section {
   position: relative;
   /* animation: bgTransition 1.5s ease-in-out 3.3s forwards; */
 }
+.video-Herosection {
+  opacity: 0;
+}
+
+.show-video {
+  animation: showVideo 0.7s ease-in-out forwards;
+}
+
+@keyframes showVideo {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 
 
 /* --- HEADING ANIMATION --- */
 .heading {
   transform: translateY(400px);
   font-size: 80px;
-  animation: slideAndScale 3.4s ease-out forwards, textToBlack 0.3s ease-in-out 3.5s forwards;
+  animation: slideAndScale 3.4s ease-out 0s 1 forwards ;
   font-weight: bolder;
   color: #FEFEFE33;
   display: inline-block;
@@ -196,14 +185,11 @@ font-style: Black;
     transform: translateY(0) scale(1);
     opacity: 1;
     color: white;
+
   }
 }
 
-/* --- TEXT COLOR TRANSITION TO BLACK --- */
-@keyframes textToBlack {
-  0% { color: white; }
-  100% { color: black; }
-}
+
 
 /* --- WORD HIGHLIGHTS --- */
 .word1, .word2 {
@@ -224,7 +210,7 @@ font-style: Black;
 }
 @keyframes word3Highlight {
    0% { color: #FEFEFE33; }
-  40% { color: white; }
+  10% { color: white; }
   60% { color: white; }
   
   
@@ -244,7 +230,7 @@ font-style: Black;
   font-weight: bolder;
   opacity: 0;
   color: white;
-  animation: fadeInTM 0.3s ease-in-out 2.8s forwards, tmToBlack 0.3s ease-in-out 3.5s forwards;
+  animation: fadeInTM 0.3s ease-in-out 2.8s forwards;
 }
 
 @keyframes fadeInTM {
@@ -264,23 +250,25 @@ font-style: Black;
   bottom: -180px;
   left: 50%;
   transform: translateX(-50%);
-  width: 750px;
-  height: 220px;
+  width: 350px;
+  height: 260px;
   pointer-events: none;
   opacity: 0;
 
   /* ✅ Balanced blue glow for hero */
   background: radial-gradient(
     ellipse at center top,
-    rgba(1, 4, 108, 0.55) 0%,      /* vivid bright blue */
-    rgba(28, 110, 250, 0.4) 25%,   /* mid transition */
-    rgba(120, 180, 255, 0.18) 55%, /* soft fade */
-    rgba(4, 32, 190, 0.9) 85%,     /* deep blue edge */
-    rgba(0, 0, 0, 1) 100%          /* merge into black for smooth fade */
+  rgba(1, 4, 108, 0.55) 0%,       /* vivid bright blue */
+rgba(28, 110, 250, 0.4) 25%,    /* mid transition */
+rgba(120, 180, 255, 0.18) 55%,  /* soft fade */
+rgba(4, 32, 190, 0.9) 85%,      /* deep blue edge */
+rgba(0, 0, 0, 1) 100%           /* black */
+        /* merge into black for smooth fade */
   );
 
   filter: blur(70px);
-  animation: showGradient 1.3s ease-in-out 3.8s forwards;
+  animation: showGradient 0.3s ease-in-out 3.8s forwards;
+  animation-iteration-count: 1;
   transition:
     width 1.3s ease,
     height 1.3s ease,
@@ -288,6 +276,7 @@ font-style: Black;
     opacity 1.3s ease,
     filter 1.3s ease,
     background 1.3s ease;
+
 }
 
 /* ✨ Expanded state for ABOUT and other sections */
@@ -296,6 +285,7 @@ font-style: Black;
   height: 520px;
   bottom: -150px;
   opacity: 1;
+  z-index: -10;
 
   background: radial-gradient(
     ellipse at center top,
@@ -312,17 +302,21 @@ font-style: Black;
 /* --- Entrance Animation --- */
 @keyframes showGradient {
   0% {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
+    opacity: 1;
+    z-index: -20;
+    transform: translate(-50%, 40px) scale(0.95);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    z-index: -20;
+    transform: translate(-50%, 0) scale(1);
   }
 }
 
+
+
 .hero-text{
-  animation:slideup 1s ease-in-out 4.2s forwards;
+  animation:slideup 1s ease-in-out 3.8s forwards;
 }
 @keyframes slideup {
   0% {
@@ -353,10 +347,7 @@ y
 }
 
 /* Keep text above global gradient */
-.about-section > * {
-  position: relative;
-  z-index: 2;
-}
+
 
 
 .navlink {
@@ -397,3 +388,31 @@ y
   }
 }
 
+
+.mission-text{
+  animation: slideUPP 1s ease-in-out forwards;
+}
+@keyframes slideUPP{
+  0%{
+    opacity: 0;
+    transform: translateY(0);
+  }
+  50%{
+    opacity: 0.2;
+    transform: translateY(101px);
+  }
+}
+@keyframes upDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.updown {
+  animation: upDown 0.8s ease-in-out infinite;
+}
+@font-face {
+  font-family: 'TransitDisplay';
+  src: url('./assets/fonts/TransitDisplayDEMO-KCFonts.ttf') format('truetype');
+  font-weight: 400;
+  font-style: Regular;
+  font-display: swap; 
+}

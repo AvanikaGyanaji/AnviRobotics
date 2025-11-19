@@ -1,104 +1,130 @@
 // Home.jsx
 import React, { useEffect, useRef } from "react";
-import { Header } from "../components/Header";
 import { Herosection } from "../components/Herosection";
 import { About } from "../components/About";
+import { Products } from "../components/Products";
+import { Technology } from "../components/Technology";
+import { Corevalues } from "../components/Corevalues";
+import { Journey } from "../components/Journey";
+import { ContactUs } from "../components/ContactUs";
 
 export const Home = () => {
   const heroRef = useRef(null);
   const aboutRef = useRef(null);
 
-  useEffect(() => {
-    const hero = heroRef.current;
-    const about = aboutRef.current;
-    const gradient = document.querySelector(".hero-gradient");
-    if (!hero || !about || !gradient) return;
+useEffect(() => {
+  const hero = heroRef.current;
+  const about = aboutRef.current;
+  const gradient = document.querySelector(".hero-gradient");
+  if (!hero || !about || !gradient) return;
 
-    // Helper to set body classes safely
-    const setBodyWhite = () => {
-      document.body.classList.add("body-white");
-      document.body.classList.remove("body-black");
-    };
-    const setBodyBlack = () => {
-      document.body.classList.add("body-black");
-      document.body.classList.remove("body-white");
-    };
+  let observersEnabled = false;
 
-   // 1️⃣ HERO OBSERVER — 20% visible → white
-const heroObserver = new IntersectionObserver(
-  ([entry]) => {
-    if (document.body.dataset.introDone !== "true") return;
+  // ⭐ Delay observer activation to avoid wrong initial triggers
+  setTimeout(() => {
+    observersEnabled = true;
+  }, 150);
 
-    if (entry.intersectionRatio >= 0.2) {
-      // Hero 20% visible → white immediately
-      setBodyWhite();
-    } else {
-      // Less than 20% visible → black
-      setBodyBlack();
+  const setBodyWhite = () => {
+    document.body.classList.add("body-white");
+    document.body.classList.remove("body-black");
+  };
+
+  const setBodyBlack = () => {
+    document.body.classList.add("body-black");
+    document.body.classList.remove("body-white");
+  };
+
+  // HERO OBSERVER
+  const heroObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (!observersEnabled) return;
+      if (document.body.dataset.introDone !== "true") return;
+
+      if (entry.intersectionRatio >= 0.2) {
+        setBodyWhite();
+      } else {
+        setBodyBlack();
+      }
+    },
+    {
+      threshold: Array.from({ length: 101 }, (_, i) => i / 100),
     }
-  },
-  {
-    threshold: Array.from({ length: 101 }, (_, i) => i / 100),
-  }
-);
-heroObserver.observe(hero);
+  );
 
-// 2️⃣ ABOUT OBSERVER — 20% visible → black immediately
-const aboutObserver = new IntersectionObserver(
-  ([entry]) => {
-    if (document.body.dataset.introDone !== "true") return;
+  heroObserver.observe(hero);
 
-    if (entry.intersectionRatio >= 0.2) {
-      // About enters 20% → black background immediately
-      setBodyBlack();
-    } else {
-      // If About drops below 20%, hero observer takes over for white
-      // (no need to manually revert)
+  // ABOUT OBSERVER
+  const aboutObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (!observersEnabled) return;
+      if (document.body.dataset.introDone !== "true") return;
+
+      if (entry.intersectionRatio >= 0.2) {
+        setBodyBlack();
+      }
+    },
+    {
+      threshold: Array.from({ length: 101 }, (_, i) => i / 100),
     }
-  },
-  {
-    threshold: Array.from({ length: 101 }, (_, i) => i / 100),
-  }
-);
-aboutObserver.observe(about);
+  );
 
+  aboutObserver.observe(about);
 
-    // 3) gradient sizing (same as before): compact when hero mostly visible, expanded otherwise
-    const gradientObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (document.body.dataset.introDone !== "true") return;
+  // GRADIENT OBSERVER
+  const gradientObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (!observersEnabled) return;
+      if (document.body.dataset.introDone !== "true") return;
 
-        if (entry.intersectionRatio >= 0.6) {
-          gradient.classList.remove("hero-expanded");
-        } else {
-          gradient.classList.add("hero-expanded");
-        }
-      },
-      { threshold: Array.from({ length: 101 }, (_, i) => i / 100) }
-    );
-    gradientObserver.observe(hero);
+      if (entry.intersectionRatio >= 0.6) {
+        gradient.classList.remove("hero-expanded");
+      } else {
+        gradient.classList.add("hero-expanded");
+      }
+    },
+    {
+      threshold: Array.from({ length: 101 }, (_, i) => i / 100),
+    }
+  );
 
-    return () => {
-      heroObserver.disconnect();
-      aboutObserver.disconnect();
-      gradientObserver.disconnect();
-    };
-  }, []);
+  gradientObserver.observe(hero);
+
+  return () => {
+    heroObserver.disconnect();
+    aboutObserver.disconnect();
+    gradientObserver.disconnect();
+  };
+}, []);
 
   return (
     <>
-      <Header />
-      <main className="relative">
-        <section ref={heroRef}>
-          <Herosection />
-        </section>
+    
+      <main className="relative ">
+       <div ref={heroRef}>
+  <Herosection />
+</div>
 
-        <section ref={aboutRef}>
-          <About />
-        </section>
+<div ref={aboutRef}>
+  <About />
+</div>
+
+<Products />
+
+<Technology />
+
+<Corevalues/>     
+
+<Journey/>
+
+<ContactUs/>
 
         {/* Shared fixed gradient */}
-        <div className="hero-gradient fixed bottom-[-180px] left-1/2 -translate-x-1/2 rounded-full pointer-events-none" />
+<div
+  className="hero-gradient fixed bottom-[-180px] pointer-events-none"
+  style={{ left: "50%", transform: "translate(-50%, 0)" }}
+/>
+
       </main>
     </>
   );
