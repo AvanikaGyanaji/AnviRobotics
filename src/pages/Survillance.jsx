@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Icon } from "@iconify/react";
 import { Section6 } from "../components/Section6";
 import RobotFeatures from "../components/RobotFeatures";
 
@@ -136,7 +135,7 @@ export const Survillance = () => {
         style={{ transform: `translateY(-${scrollY}px)` }}
       >
         {/* Section 1 */}
-        <div className="min-h-screen flex flex-col items-start px-[60px] py-[40px]">
+        <div className="min-h-screen flex flex-col items-start px-[60px] py-[150px]">
           <h1 className="text-[36px] md:text-[56px] font-arial font-regular text-white">
             Surveillance <br /> Robot
           </h1>
