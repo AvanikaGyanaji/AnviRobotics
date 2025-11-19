@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
 @tailwind base;
 @tailwind components; 
 @tailwind utilities;
@@ -9,46 +9,38 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* HTML */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  max-width: 2440px;
+  margin: auto;
+}
 
-/* --- ENABLE SCROLL AFTER INTRO --- */
+/* Body */
 body {
   background: #000;
   /* overflow: hidden; */
   height:auto;
   width: 100%;
   font-family: 'DM Sans' ,Arial,sans-serif;
-  /* transition: overflow 0.1s ease, height 0.1s ease; */
+ 
 }
 
-/* After intro animation completes → unlock scroll */
 body.scroll-active {
   overflow-y: auto;
   height: auto;
   scroll-behavior: smooth;
 }
-/* --- BODY BACKGROUND CONTROL --- */
-body {
-  background-color: #000;
-  }
-
-
-
-
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
-
 .scrollbar-hide {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-  max-width: 2400px;
-}
-
+/* SECTION */
 section {
    scroll-snap-align: start;
 }
@@ -60,15 +52,13 @@ section {
   z-index: 100;
   padding-inline: 90px;
   color: inherit !important;
-  max-width: 2400px;
+  max-width: 2440px;
 
 }
 .header img,
 .header nav {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
-
-
 
 .logo{
   animation:slideDown 1s ease-in-out forwards;
@@ -85,12 +75,12 @@ section {
   }
 }
 
-
 /* --- NAVIGATION --- */
 .nav {
   opacity: 0;
   transform: translateY(-20px);
   animation: showNav 1s ease-in-out 5.3s forwards;
+  font-family: "DM Sans,Arial";
 }
 @keyframes fadeDown {
   0% {
@@ -106,12 +96,9 @@ section {
     transform: translateY(0);
   }
 }
-
 .animate-fadeDown {
   animation: fadeDown 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
-
 @keyframes showNav {
   0% {
     opacity: 0;
@@ -122,6 +109,8 @@ section {
     transform: translateY(0);
   }
 }
+
+
 
 /* --- HERO SECTION --- */
 .herosection {
@@ -149,7 +138,7 @@ section {
 
 
 
-/* --- HEADING ANIMATION --- */
+/* ---HERO SECTION HEADING ANIMATION --- */
 .heading {
   transform: translateY(400px);
   font-size: 80px;
@@ -159,6 +148,7 @@ section {
   display: inline-block;
   position: relative;
   font-weight: 900;
+  font-family: Arial, sans-serif;
 font-style: Black;
 }
 
@@ -192,7 +182,7 @@ font-style: Black;
 
 
 
-/* --- WORD HIGHLIGHTS --- */
+/* ---HERO SECTION WORD HIGHLIGHTS --- */
 .word1, .word2 {
   padding-right: 12px;
   display: inline-block;
@@ -314,8 +304,6 @@ rgba(0, 0, 0, 1) 100%           /* black */
   }
 }
 
-
-
 .hero-text{
   animation:slideup 1s ease-in-out 3.8s forwards;
 }
@@ -330,9 +318,23 @@ rgba(0, 0, 0, 1) 100%           /* black */
     transform: translateY(0);
   }
 }
-y
-/* Base About Section */
+
+
+
 /* --- ABOUT SECTION (clean, no internal gradient) --- */
+.about-heading {
+  font-size: clamp(28px, 4vw, 48px);
+  font-style: normal;
+  font-weight: 400; /* "Regular" */
+  font-family: Arial;
+}
+
+.about-content {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 400;
+font-family: 'DM Sans', sans-serif;
+}
+
 .about-section {
   position: relative;
   transform-origin: center center;
@@ -419,3 +421,13 @@ y
 }.scroll-container {
   scroll-behavior: smooth;
 }
+
+/* PRODUCTS */
+/* .robotype{
+  font-family: "Space Gortesk";
+} */
+
+
+
+
+/* Footer */

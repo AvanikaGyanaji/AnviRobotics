@@ -1,116 +1,32 @@
-// import { useRef, useEffect, useState } from "react";
-// import { motion, useScroll, useTransform } from "framer-motion";
-
-// function lerpColor(color1, color2, t) {
-//   const c1 = parseInt(color1.slice(1), 16);
-//   const c2 = parseInt(color2.slice(1), 16);
-
-//   const r1 = (c1 >> 16) & 0xff, g1 = (c1 >> 8) & 0xff, b1 = c1 & 0xff;
-//   const r2 = (c2 >> 16) & 0xff, g2 = (c2 >> 8) & 0xff, b2 = c2 & 0xff;
-
-//   const r = Math.round(r1 + (r2 - r1) * t);
-//   const g = Math.round(g1 + (g2 - g1) * t);
-//   const b = Math.round(b1 + (b2 - b1) * t);
-
-//   return `rgb(${r},${g},${b})`;
-// }
-
-// export const Journey = () => {
-//   const sectionRef = useRef(null);
-//   const svgWrapperRef = useRef(null);
-//   const [svgWidth, setSvgWidth] = useState(2000);
-
-//   useEffect(() => {
-//     if (!svgWrapperRef.current) return;
-
-//     const svgEl = svgWrapperRef.current.querySelector("div");
-//     if (svgEl) {
-//       const bbox = svgEl.getBoundingClientRect();
-//       setSvgWidth(bbox.width);
-//     }
-//   }, []);
-
-//   const { scrollYProgress } = useScroll({
-//     target: sectionRef,
-//     offset: ["start start", "end end"],
-//   });
-
-//   const xMovement = useTransform(
-//     scrollYProgress,
-//     [0, 1],
-//     ["0px", `-${svgWidth - window.innerWidth}px`]
-//   );
-
-//   // 🔥 Animate Path Colors on Scroll
-// useEffect(() => {
-//   if (!svgWrapperRef.current) return;
-
-//   // the fill rectangle inside masked group
-//   const rect = svgWrapperRef.current.querySelector("g[mask] rect");
-
-//   if (!rect) {
-//     console.warn("No fill rect found inside masked group!");
-//     return;
-//   }
-
-//   // This rect should grow to full SVG width
-//   const FULL_WIDTH = svgWidth; // auto-measured from your SVG
-//   rect.setAttribute("width", 0); // ensure start from 0
-
-//   const unsub = scrollYProgress.on("change", (progress) => {
-//     const t = Math.min(Math.max(progress, 0), 1); // clamp
-
-//     // convert scroll % to pixel width
-//     const newWidth = FULL_WIDTH * t;
-
-//     rect.setAttribute("width", newWidth);
-//   });
-
-//   return () => unsub();
-// }, [scrollYProgress, svgWidth]);
-
-//   return (
-//     <>
-//       <section ref={sectionRef} className="relative w-full h-[800vh]">
-//         <div className="sticky top-[20%] flex justify-center z-10 ">
-//           <h1 className="text-[48px] text-white">Our Journey Timeline</h1>
-//         </div>
-
-//         <div className="sticky top-[35%] overflow-hidden w-full">
-//           <motion.div
-//             ref={svgWrapperRef}
-//             style={{ x: xMovement }}
-//             className="inline-block"
-//             dangerouslySetInnerHTML={{ 
-//           __html: `
-//       <div style="padding: 0 50px;">
-            
-        
-//       </div>
-//     `
-             
-//             }}
-//           />
-//         </div>
-//       </section>
-//     </>
-//   );
-// };       
-      
-  import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+
+function lerpColor(color1, color2, t) {
+  const c1 = parseInt(color1.slice(1), 16);
+  const c2 = parseInt(color2.slice(1), 16);
+
+  const r1 = (c1 >> 16) & 0xff, g1 = (c1 >> 8) & 0xff, b1 = c1 & 0xff;
+  const r2 = (c2 >> 16) & 0xff, g2 = (c2 >> 8) & 0xff, b2 = c2 & 0xff;
+
+  const r = Math.round(r1 + (r2 - r1) * t);
+  const g = Math.round(g1 + (g2 - g1) * t);
+  const b = Math.round(b1 + (b2 - b1) * t);
+
+  return `rgb(${r},${g},${b})`;
+}
 
 export const Journey = () => {
   const sectionRef = useRef(null);
   const svgWrapperRef = useRef(null);
   const [svgWidth, setSvgWidth] = useState(2000);
 
-  // Measure width of SVG
   useEffect(() => {
     if (!svgWrapperRef.current) return;
-    const svg = svgWrapperRef.current.querySelector("div");
-    if (svg) {
-      setSvgWidth(svg.getBoundingClientRect().width);
+
+    const svgEl = svgWrapperRef.current.querySelector("div");
+    if (svgEl) {
+      const bbox = svgEl.getBoundingClientRect();
+      setSvgWidth(bbox.width);
     }
   }, []);
 
@@ -119,46 +35,56 @@ export const Journey = () => {
     offset: ["start start", "end end"],
   });
 
-  // Horizontal translation
   const xMovement = useTransform(
     scrollYProgress,
     [0, 1],
     ["0px", `-${svgWidth - window.innerWidth}px`]
   );
 
-  // Fill animation: rect width grows
-  useEffect(() => {
-    if (!svgWrapperRef.current) return;
+  // 🔥 Animate Path Colors on Scroll
+useEffect(() => {
+  if (!svgWrapperRef.current) return;
 
-    const rect = svgWrapperRef.current.querySelector("g[mask] rect");
-    if (!rect) return;
+  // the fill rectangle inside masked group
+  const rect = svgWrapperRef.current.querySelector("g[mask] rect");
 
-    rect.setAttribute("width", 0);
+  if (!rect) {
+    console.warn("No fill rect found inside masked group!");
+    return;
+  }
 
-    const unsub = scrollYProgress.on("change", (v) => {
-      rect.setAttribute("width", svgWidth * v);
-    });
+  // This rect should grow to full SVG width
+  const FULL_WIDTH = svgWidth; // auto-measured from your SVG
+  rect.setAttribute("width", 0); // ensure start from 0
 
-    return () => unsub();
-  }, [scrollYProgress, svgWidth]);
+  const unsub = scrollYProgress.on("change", (progress) => {
+    const t = Math.min(Math.max(progress, 0), 1); // clamp
+
+    // convert scroll % to pixel width
+    const newWidth = FULL_WIDTH * t;
+
+    rect.setAttribute("width", newWidth);
+  });
+
+  return () => unsub();
+}, [scrollYProgress, svgWidth]);
 
   return (
-    <section ref={sectionRef} className="relative w-full h-[800vh]">
+    <>
+      <section id="journey" ref={sectionRef} className="relative w-full h-[800vh]">
+        <div className="sticky top-[20%] flex justify-center z-10 ">
+          <h1 className="text-[48px] text-white">Our Journey Timeline</h1>
+        </div>
 
-      <div className="sticky top-[20%] flex justify-center z-10">
-        <h1 className="text-[48px] text-white">Our Journey Timeline</h1>
-      </div>
-
-      <div className="sticky top-[35%] overflow-hidden w-full">
-        <motion.div
-          ref={svgWrapperRef}
-          style={{ x: xMovement }}
-          className="inline-block"
-          dangerouslySetInnerHTML={{
-            __html: `
-              <div style="padding: 0 50px;">
-
-               <svg width="3273" height="500" viewBox="0 0 3273 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="sticky top-[35%] overflow-hidden w-full">
+          <motion.div
+            ref={svgWrapperRef}
+            style={{ x: xMovement }}
+            className="inline-block"
+            dangerouslySetInnerHTML={{ 
+          __html: `
+      <div style="padding: 0 50px;">
+                         <svg width="3273" height="500" viewBox="0 0 3273 500" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="3273" height="500" fill="black" fill-opacity="0.2"/>
 <path d="M2585.3 219.353V96.5019" stroke="url(#paint0_linear_1841_14119)" stroke-width="1.22851" stroke-linecap="square" stroke-dasharray="9.83 9.83"/>
 <rect x="2578.78" y="229.553" width="9.21381" height="9.21381" rx="4.6069" transform="rotate(-45 2578.78 229.553)" fill="#152329"/>
@@ -234,12 +160,19 @@ export const Journey = () => {
 </defs>
 </svg>
 
-              </div>
-            `,
-          }}
-        />
+          
+        
       </div>
-
-    </section>
+    `
+             
+            }}
+          />
+        </div>
+      </section>
+    </>
   );
-};
+};       
+      
+ 
+
+ 

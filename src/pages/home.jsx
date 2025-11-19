@@ -7,6 +7,7 @@ import { Technology } from "../components/Technology";
 import { Corevalues } from "../components/Corevalues";
 import { Journey } from "../components/Journey";
 import { ContactUs } from "../components/ContactUs";
+import { Footer } from "../components/Footer";
 
 export const Home = () => {
   const heroRef = useRef(null);
@@ -118,6 +119,8 @@ useEffect(() => {
 <Journey/>
 
 <ContactUs/>
+
+<Footer/>
 
         {/* Shared fixed gradient */}
 <div

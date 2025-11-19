@@ -254,7 +254,7 @@ export const Technology = () => {
   const lable9 = useTransform(scrollYProgress, [0.80, 0.88, 0.95], ["500%", "-200%", "-300%"]);
 
   return (
-    <section id="technology" ref={scrollRef} className="relative w-full h-[1500vh]">
+    <section id="technology" ref={scrollRef} className="relative w-full h-[1000vh]">
       <div className="sticky top-[120px] flex justify-center">
 
         <motion.div style={{ height: backgroundHeight, width: backgroundWIdth }} className="w-full rounded-[32px] relative overflow-hidden">
