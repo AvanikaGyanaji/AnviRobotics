@@ -17,10 +17,7 @@ export const ContactUs =()=>{
                         <a href="" className="flex items-center pb-[30px]" ><span className="inline-block pr-[40px]"><Clock/></span>Working Hours: Mon–Sat, 9:30 AM – 6:30 PM</a>
 
                     </div>
-                    <div>
-                        
-
-                    </div>
+                    
 
                 </div>
             </div>
