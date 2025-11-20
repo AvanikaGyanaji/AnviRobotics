@@ -23,8 +23,8 @@ body {
   /* overflow: hidden; */
   height:auto;
   width: 100%;
-  font-family: 'DM Sans' ,Arial,sans-serif;
- 
+  font-family: Arial,sans-serif;
+  /* transition: overflow 0.1s ease, height 0.1s ease; */
 }
 
 body.scroll-active {
@@ -32,6 +32,15 @@ body.scroll-active {
   height: auto;
   scroll-behavior: smooth;
 }
+/* --- BODY BACKGROUND CONTROL --- */
+body {
+  background-color: #000;
+  }
+
+
+
+
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
