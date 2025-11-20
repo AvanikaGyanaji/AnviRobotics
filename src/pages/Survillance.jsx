@@ -1,25 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Section6 } from "../components/Section6";
 import RobotFeatures from "../components/RobotFeatures";
+import { Section6 } from "../components/Section6";
 
-export const Survillance = () => {
+
+export const Survillance=() =>{
   const containerRef = useRef(null);
   const section2Ref = useRef(null);
   const section3Ref = useRef(null);
   const section4Ref = useRef(null);
 
   const [scrollY, setScrollY] = useState(0);
-  const [stage, setStage] = useState(0);
-  const [section2Progress, setSection2Progress] = useState(0); // 0 → 1
-  const [stageScrollCount, setStageScrollCount] = useState(0);
-  const isScrolling = useRef(false);
-
-  const SCROLL_THRESHOLD = 3;
-  const maxStages = 4;
-
+  const [section2Progress, setSection2Progress] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
 
-  // Update container height dynamically (full scrollable height)
+  // Update container height dynamically
   useEffect(() => {
     const updateHeight = () => {
       if (containerRef.current) {
@@ -31,6 +25,18 @@ export const Survillance = () => {
     updateHeight();
     window.addEventListener("resize", updateHeight);
     return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
+  // Track scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // ZOOM transition variables for Section 3 → 4
@@ -62,78 +68,77 @@ export const Survillance = () => {
     }
   }
 
-  // Handle wheel scroll
+  // Handle wheel scroll with Section 2 locking
   useEffect(() => {
     const handleWheel = (e) => {
-      e.preventDefault();
       if (!containerRef.current || !section2Ref.current) return;
 
       const section2Top = section2Ref.current.offsetTop;
       const section2Height = section2Ref.current.offsetHeight;
       const section2Bottom = section2Top + section2Height;
 
-      let newY = scrollY + e.deltaY;
+      const currentScroll = window.scrollY;
+      const isSection2InView = currentScroll >= section2Top && currentScroll < section2Bottom;
 
-      // Check if Section 2 is currently in viewport
-      const isSection2InView = scrollY >= section2Top && scrollY < section2Bottom;
-
-      // Section 2 character reveal handling - ONLY when Section 2 is in view
       const progressIncrement = Math.abs(e.deltaY) / 1000;
-      
+
       if (isSection2InView) {
         // Scrolling down in Section 2
         if (e.deltaY > 0 && section2Progress < 1) {
+          e.preventDefault();
           setSection2Progress(prev => Math.min(prev + progressIncrement, 1));
-          newY = scrollY; // lock scroll
+          return;
         }
         // Scrolling up in Section 2
         else if (e.deltaY < 0 && section2Progress > 0) {
+          e.preventDefault();
           setSection2Progress(prev => Math.max(prev - progressIncrement, 0));
-          newY = scrollY; // lock scroll
+          return;
+        }
+        // Allow normal scroll when fully revealed/hidden
+        else if ((e.deltaY > 0 && section2Progress >= 1) || (e.deltaY < 0 && section2Progress <= 0)) {
+          // Normal scroll will happen
+          return;
         }
       }
-      // When entering Section 2 from Section 3 (coming from below, scrolling UP)
-      else if (scrollY >= section2Bottom && newY < section2Bottom && e.deltaY < 0) {
-        setSection2Progress(1); // Start fully revealed
-        newY = section2Bottom - window.innerHeight; // Position at TOP of viewport showing bottom of Section 2
+      // When entering Section 2 from Section 3 (scrolling UP)
+      else if (currentScroll >= section2Bottom && e.deltaY < 0) {
+        const newScroll = currentScroll + e.deltaY;
+        if (newScroll < section2Bottom) {
+          e.preventDefault();
+          setSection2Progress(1);
+          window.scrollTo({ top: section2Top, behavior: 'auto' });
+        }
       }
-      // When entering Section 2 from Section 1 (coming from above, scrolling DOWN)
-      else if (scrollY < section2Top && newY >= section2Top && e.deltaY > 0) {
-        setSection2Progress(0); // Start hidden
-        newY = section2Top; // Position at top of Section 2
+      // When entering Section 2 from Section 1 (scrolling DOWN)
+      else if (currentScroll < section2Top && e.deltaY > 0) {
+        const newScroll = currentScroll + e.deltaY;
+        if (newScroll >= section2Top) {
+          e.preventDefault();
+          setSection2Progress(0);
+          window.scrollTo({ top: section2Top, behavior: 'auto' });
+        }
       }
-
-      // Clamp scroll
-      const maxScroll = containerRef.current.scrollHeight - window.innerHeight;
-      if (newY < 0) newY = 0;
-      if (newY > maxScroll) newY = maxScroll;
-
-      setScrollY(newY);
     };
 
     window.addEventListener("wheel", handleWheel, { passive: false });
     return () => window.removeEventListener("wheel", handleWheel);
   }, [scrollY, section2Progress]);
 
-
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black">
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800">
-        {/* Background overlay */}
-      <img
-        src="/survillance/B6.png"
-        alt="Robot"
-        className="absolute inset-0 w-full h-full object-cover object-center"
-      />
+    <div className="relative w-full bg-black">
+      {/* Fixed Background */}
+      <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 z-0">
+        <img
+          src="/survillance/B6.png"
+          alt="Robot"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      <div className="absolute inset-0 bg-black/50 z-0" />
-
-      <div
-        ref={containerRef}
-        className="scroll-container absolute left-0 top-0 w-full transition-transform duration-500 ease-out z-10"
-        style={{ transform: `translateY(-${scrollY}px)` }}
-      >
+      {/* Scrollable Content */}
+      <div ref={containerRef} className="relative z-10">
         {/* Section 1 */}
         <div className="min-h-screen flex flex-col items-start px-[60px] py-[150px]">
           <h1 className="text-[36px] md:text-[56px] font-arial font-regular text-white">
@@ -191,10 +196,8 @@ export const Survillance = () => {
           className="min-h-screen relative bg-black transition-all duration-300 ease-out"
           style={{ transform: `scale(${section4Scale})`, opacity: section4Opacity }}
         >
-
-          < RobotFeatures />
+          <RobotFeatures />
         </div>
-
 
         {/* Section 5 */}
         <div className="min-h-screen relative bg-black w-full px-[50px] py-[60px]">
@@ -301,7 +304,6 @@ export const Survillance = () => {
 
         {/* Section 6 */}
         <Section6 scrollY={scrollY} />
-
       </div>
     </div>
   );

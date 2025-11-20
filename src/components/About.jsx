@@ -158,7 +158,7 @@ export const About = () => {
 
   return (
     // OUTER RUNWAY: tall element that provides scroll height
-    <section id="about" ref={scrollRef} className="relative w-full h-[500vh]">
+    <section id="about" ref={scrollRef} className="relative w-full h-[1200vh]">
       {/* STICKY VIEWPORT: this child is the 100vh view that stays in place */}
       <div className="sticky top-0 h-screen w-full overflow-hidden text-white">
         {/* ABOUT US */}
@@ -166,8 +166,8 @@ export const About = () => {
           style={{ opacity: aboutOpacity, y: aboutY }}
           className="max-w-[625px] p-4 absolute top-[120px] left-[5%]"
         >
-          <h1 className="text-[48px] mb-[24px]">About Us</h1>
-          <p className="text-[24px]">
+          <h1 className=" mb-[24px] about-heading">About Us</h1>
+          <p className=" about-content">
             Excellence at Every Step. We blend advanced <br />
             engineering with real-world application to deliver <br />
             reliable, scalable robotics that perform seamlessly fast, <br />
@@ -180,8 +180,8 @@ export const About = () => {
           style={{ opacity: visionOpacity, y: visionY }}
           className="max-w-[625px] p-4 absolute top-[380px] right-[5%]"
         >
-          <h1 className="text-[48px] mb-[24px]">Our Vision</h1>
-          <p className="text-[24px]">
+          <h1 className=" mb-[24px] about-heading">Our Vision</h1>
+          <p className=" about-content">
             Pioneering change and powering possibilities we’re <br />
             shaping a future where robotics empowers people, <br />
             transforming industries with smarter, safer innovation.
@@ -193,8 +193,8 @@ export const About = () => {
           style={{ opacity: missionOpacity, y: missionY }}
           className="max-w-[625px] p-4 absolute top-[600px] left-[5%]"
         >
-          <h1 className="text-[48px] mb-[24px]">Our Mission</h1>
-          <p className="text-[24px]">
+          <h1 className=" mb-[24px] about-heading">Our Mission</h1>
+          <p className=" about-content">
             Driving a sustainable future through intelligent robotics
             <br />
             where innovation meets reliability, and engineering

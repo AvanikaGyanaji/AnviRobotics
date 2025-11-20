@@ -184,41 +184,39 @@ export const Header = () => {
       </div>
 
       {/* NAV */}
-      <nav
-        className={`flex gap-x-[22px] text-lg font-medium transition-all duration-500 ${
-          showNav
-            ? "animate-fadeDown opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-7"
+    <nav
+  className={`flex gap-x-[22px] overflow-hidden text-lg font-medium transition-all duration-500 ${
+    showNav ? "animate-fadeDown opacity-100 translate-y-0" : "opacity-0 -translate-y-7"
+  }`}
+>
+  {[
+    { id: "about", label: "About" },
+    { id: "products", label: "Products" },
+    { id: "technology", label: "Technology" },
+    { id: "contact", label: "Contact" },
+  ].map(({ id, label }) => {
+    const isActive = activeSection === id;
+
+    return (
+      <div
+        key={id}
+        onClick={() => goToSection(id)}
+        className={`flex flex-col h-[35px] gap-y-[5px] cursor-pointer transition-transform duration-300 ${
+          isActive ? "translate-y-0" : "hover:-translate-y-[35px]"
         }`}
       >
-        {/* About */}
-        <div onClick={() => goToSection("about")} className="cursor-pointer">
-          <span style={{ color: activeSection === "about" ? "#fff" : "#888" }}>
-            About
-          </span>
-        </div>
+        {/* Top text */}
+        <span className={`${isActive ? "text-white" : "text-[#888888]"}`}>
+          {label}
+        </span>
 
-        {/* Products (ONLY A SECTION → NO LINK, NO ROUTE) */}
-        <div onClick={() => goToSection("products")} className="cursor-pointer">
-          <span style={{ color: activeSection === "products" ? "#fff" : "#888" }}>
-            Products
-          </span>
-        </div>
+        {/* Bottom text — Always White */}
+        <span className="text-white">{label}</span>
+      </div>
+    );
+  })}
+</nav>
 
-        {/* Technology */}
-        <div onClick={() => goToSection("technology")} className="cursor-pointer">
-          <span style={{ color: activeSection === "technology" ? "#fff" : "#888" }}>
-            Technology
-          </span>
-        </div>
-
-        {/* Contact */}
-        <div onClick={() => goToSection("contact")} className="cursor-pointer">
-          <span style={{ color: activeSection === "contact" ? "#fff" : "#888" }}>
-            Contact
-          </span>
-        </div>
-      </nav>
     </header>
   );
 };
