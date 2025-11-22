@@ -10,6 +10,8 @@ export const Products = () => {
   const { scrollYProgress } = useScroll({
     target: scrollRef,
     offset: ["start start", "end end"],
+    // offset: ["start end", "end start"],
+
   });
 
   // Card animations (EXACT like your UI)
@@ -29,11 +31,11 @@ export const Products = () => {
   const text3Opacity = useTransform(scrollYProgress, [0.66, 0.76, 0.8], [0, 1, 1]);
 
   const allContentOpacity = useTransform(scrollYProgress, [0, 0.1], [0.4, 1]);
-  const bottomsec = useTransform(scrollYProgress, [0.05, 0.1], [420, 30]);
-  const bottomsecopacity = useTransform(scrollYProgress, [0.05, 0.1], [1, 0]);
+  const bottomsec = useTransform(scrollYProgress, [0.05, 0.1], ["55%", "0%"]);
+  const bottomsecopacity = useTransform(scrollYProgress, [0.05, 0.1], [1, 0.2]);
 
   return (
-    <section id="products" ref={scrollRef} className="relative w-full h-[1200vh]">
+    <section id="products" ref={scrollRef} className="relative w-full h-[300vh]">
       
       {/* 🟩 Sticky viewport (correct structure) */}
       <div className="sticky top-[50px] min-h-screen flex flex-col justify-center overflow-hidden">
@@ -120,13 +122,15 @@ export const Products = () => {
               </motion.div>
             </div>
 
+
+          </div>
+
+          
             {/* Bottom Fade Section */}
             <motion.div
               style={{ opacity: bottomsecopacity, height: bottomsec }}
-              className="absolute bottom-[-100px] bg-black w-full"
+              className="absolute bottom-[0px] bg-black w-full"
             />
-
-          </div>
         </motion.div>
       </div>
     </section>

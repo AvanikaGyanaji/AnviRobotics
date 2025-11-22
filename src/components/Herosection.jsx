@@ -1,84 +1,5 @@
 import { useEffect } from "react";
 import { ChevronsUp } from "lucide-react";
-
-// export const Herosection = () => {
-//   // useEffect(() => {
-//   //   // Always start at the top
-//   //   window.scrollTo({ top: 0, behavior: "instant" });
-
-//   //   // Prevent browser restoring scroll position
-//   //   if ("scrollRestoration" in window.history) {
-//   //     window.history.scrollRestoration = "manual";
-//   //   }
-
-//   //   // ⭐ REQUIRED FLAG FOR OBSERVERS
-//   //   document.body.dataset.introDone = "false";
-
-//   //   // 🔒 BLOCK SCROLL DURING INTRO
-//   //   document.body.style.overflow = "hidden";
-//   //   document.body.style.height = "100vh";
-
-//   //   // ⏳ UNLOCK AFTER INTRO (4s) + mark done
-//   //   const unlock = setTimeout(() => {
-//   //     document.body.style.overflow = "auto";
-//   //     document.body.style.height = "auto";
-
-//   //     // ⭐ Tell Home.jsx observers to start working
-//   //     document.body.dataset.introDone = "true";
-//   //   }, 4000);
-
-//   //   return () => clearTimeout(unlock);
-//   // }, []);
-
-// useEffect(() => {
-//   const introPlayed = sessionStorage.getItem("introPlayed");
-//   const html = document.documentElement;
-//   const body = document.body;
-
-//   // Prevent scroll restoration
-//   if ("scrollRestoration" in window.history) {
-//     window.history.scrollRestoration = "manual";
-//   }
-
-//   if (!introPlayed) {
-//     // Always start at top
-//     window.scrollTo(0, 0);
-
-//     // FULL LOCK
-//     html.style.overflow = "hidden";
-//     html.style.height = "100vh";      // ⭐ needed
-//     html.style.scrollSnapType = "none"; // ⭐ needed
-
-//     body.style.overflow = "hidden";
-//     body.style.height = "100vh";
-
-//     body.dataset.introDone = "false";
-
-//     const unlock = setTimeout(() => {
-//       html.style.overflow = "";
-//       html.style.height = "";
-//       html.style.scrollSnapType = "";  // restore snap
-
-//       body.style.overflow = "";
-//       body.style.height = "";
-
-//       body.dataset.introDone = "true";
-//       sessionStorage.setItem("introPlayed", "true");
-//     }, 4000);
-
-//     return () => clearTimeout(unlock);
-//   }
-
-//   // If already played
-//   html.style.overflow = "";
-//   html.style.height = "";
-//   html.style.scrollSnapType = "";
-
-//   body.style.overflow = "";
-//   body.style.height = "";
-//   body.dataset.introDone = "true";
-// }, []);
-
 export const Herosection = () => {
 
   // 🔒 IMMEDIATE SCROLL LOCK (executed before paint)
@@ -161,10 +82,13 @@ export const Herosection = () => {
 
       <div className="text-scroll absolute bottom-[10px] opacity-0 flex gap-x-[5px]">
         <h1 className="inline-block text-white">Scroll to Roboverse</h1>
-        <div className="h-[20px] overflow-auto scrollbar-hide z-[100] bg-transparent">
-          <span className="text-[#888888] updown"><ChevronsUp /></span>
-          <span className="text-white updown"><ChevronsUp /></span>
-        </div>
+        <div className="indicator h-[20px] w-[20px] overflow-hidden   z-[100] bg-transparent">
+  <div className="icons">
+    <span className="text-[#888888]"><ChevronsUp /></span>
+    <span className="text-white "><ChevronsUp /></span>
+  </div>
+</div>
+
       </div>
     </section>
   );

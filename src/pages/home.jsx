@@ -13,122 +13,106 @@ export const Home = () => {
   const heroRef = useRef(null);
   const aboutRef = useRef(null);
 
-useEffect(() => {
-  const hero = heroRef.current;
-  const about = aboutRef.current;
-  const gradient = document.querySelector(".hero-gradient");
-  if (!hero || !about || !gradient) return;
+  useEffect(() => {
+    const hero = heroRef.current;
+    const about = aboutRef.current;
+    const gradient = document.querySelector(".hero-gradient");
+    if (!hero || !about || !gradient) return;
 
-  let observersEnabled = false;
+    let observersEnabled = false;
+    setTimeout(() => (observersEnabled = true), 150);
 
-  // ⭐ Delay observer activation to avoid wrong initial triggers
-  setTimeout(() => {
-    observersEnabled = true;
-  }, 150);
+    const setBodyWhite = () => {
+      document.body.classList.add("body-white");
+      document.body.classList.remove("body-black");
+    };
+    const setBodyBlack = () => {
+      document.body.classList.add("body-black");
+      document.body.classList.remove("body-white");
+    };
 
-  const setBodyWhite = () => {
-    document.body.classList.add("body-white");
-    document.body.classList.remove("body-black");
-  };
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!observersEnabled) return;
+        if (document.body.dataset.introDone !== "true") return;
 
-  const setBodyBlack = () => {
-    document.body.classList.add("body-black");
-    document.body.classList.remove("body-white");
-  };
+        if (entry.intersectionRatio >= 0.2) setBodyWhite();
+        else setBodyBlack();
+      },
+      { threshold: Array.from({ length: 101 }, (_, i) => i / 100) }
+    );
+    heroObserver.observe(hero);
 
-  // HERO OBSERVER
-  const heroObserver = new IntersectionObserver(
-    ([entry]) => {
-      if (!observersEnabled) return;
-      if (document.body.dataset.introDone !== "true") return;
+    const aboutObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!observersEnabled) return;
+        if (document.body.dataset.introDone !== "true") return;
 
-      if (entry.intersectionRatio >= 0.2) {
-        setBodyWhite();
-      } else {
-        setBodyBlack();
-      }
-    },
-    {
-      threshold: Array.from({ length: 101 }, (_, i) => i / 100),
-    }
-  );
+        if (entry.intersectionRatio >= 0.2) setBodyBlack();
+      },
+      { threshold: Array.from({ length: 101 }, (_, i) => i / 100) }
+    );
+    aboutObserver.observe(about);
 
-  heroObserver.observe(hero);
+    const gradientObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!observersEnabled) return;
+        if (document.body.dataset.introDone !== "true") return;
 
-  // ABOUT OBSERVER
-  const aboutObserver = new IntersectionObserver(
-    ([entry]) => {
-      if (!observersEnabled) return;
-      if (document.body.dataset.introDone !== "true") return;
+        gradient.classList.toggle(
+          "hero-expanded",
+          entry.intersectionRatio < 0.6
+        );
+      },
+      { threshold: Array.from({ length: 101 }, (_, i) => i / 100) }
+    );
+    gradientObserver.observe(hero);
 
-      if (entry.intersectionRatio >= 0.2) {
-        setBodyBlack();
-      }
-    },
-    {
-      threshold: Array.from({ length: 101 }, (_, i) => i / 100),
-    }
-  );
-
-  aboutObserver.observe(about);
-
-  // GRADIENT OBSERVER
-  const gradientObserver = new IntersectionObserver(
-    ([entry]) => {
-      if (!observersEnabled) return;
-      if (document.body.dataset.introDone !== "true") return;
-
-      if (entry.intersectionRatio >= 0.6) {
-        gradient.classList.remove("hero-expanded");
-      } else {
-        gradient.classList.add("hero-expanded");
-      }
-    },
-    {
-      threshold: Array.from({ length: 101 }, (_, i) => i / 100),
-    }
-  );
-
-  gradientObserver.observe(hero);
-
-  return () => {
-    heroObserver.disconnect();
-    aboutObserver.disconnect();
-    gradientObserver.disconnect();
-  };
-}, []);
+    return () => {
+      heroObserver.disconnect();
+      aboutObserver.disconnect();
+      gradientObserver.disconnect();
+    };
+  }, []);
 
   return (
-    <>
-    
-      <main className="relative ">
-       <div ref={heroRef}>
-  <Herosection />
-</div>
+    <main className="snap-container relative">
+      {/* SNAP SECTIONS */}
+      <section ref={heroRef} className="snap-section">
+        <Herosection />
+      </section>
 
-<div ref={aboutRef}>
-  <About />
-</div>
+      <section ref={aboutRef} className="snap-section">
+        <About />
+      </section>
 
-<Products />
+      <section className="snap-section">
+        <Products />
+      </section>
 
-<Technology />
+      <section className="snap-section">
+        <Technology />
+      </section>
 
-<Corevalues/>     
+      <section className="snap-section">
+        <Corevalues />
+      </section>
 
-<Journey/>
+      <section className="snap-section">
+        <Journey />
+      </section>
 
-<ContactUs/>
+      <section className="snap-section">
+        <ContactUs />
+      </section>
 
-<Footer/>
+      <Footer />
 
-        {/* Shared fixed gradient */}
-<div
-  className="hero-gradient fixed bottom-[-180px] pointer-events-none"
-  style={{ left: "50%", transform: "translate(-50%, 0)" }}
-/>
-
-      </main>
-    </>
+      {/* Fixed background gradient */}
+      <div
+        className="hero-gradient fixed bottom-[-180px] pointer-events-none"
+        style={{ left: "50%", transform: "translate(-50%,0)" }}
+      />
+    </main>
   );
 };

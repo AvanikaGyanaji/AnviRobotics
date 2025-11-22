@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import { Journey } from "./Journey";
 
 export const Corevalues = () => {
   const trackRef = useRef(null);
@@ -47,10 +48,10 @@ export const Corevalues = () => {
       <section
         id="Corevalues"
         ref={sectionRef}
-        className="h-screen relative w-full"
+        className="min-h-screen place-content-center w-full"
       >
-        <div className="absolute top-[15%] flex flex-col justify-center items-center w-full bg-[#00000033]">
-          <h1 className="text-[48px] text-white">Our Core Values</h1>
+        <div className="flex flex-col justify-center items-center w-full bg-[#00000033]">
+          <h1 className="text-[48px] text-white font-[Arial] " >Our Core Values</h1>
 
           {/* Wrapper */}
           <div className="relative w-full overflow-hidden mt-6">
@@ -98,6 +99,7 @@ export const Corevalues = () => {
         
 
       </section>
+     
       
 
       <style>{`

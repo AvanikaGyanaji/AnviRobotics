@@ -1,16 +1,4 @@
-
-
-// export const Form =()=>{
-//     return(
-//     <>
-//     <form>
-//         <input type="text"/>
-//         <input type="email"/>
-//         <input type="number"/>
-//     </form>
-//     </>)
-
-// }
+import React from "react";
 export const Form = () => {
   return (
     <form className="w-full  max-w-[450px] mx-auto flex flex-col gap-4 mt-10">
@@ -57,7 +45,7 @@ export const Form = () => {
 
       {/* Submit Button */}
       <button
-        type="submit"
+       
         className="w-full py-4 bg-black text-white text-[16px] rounded-xl mt-4"
       >
         Submit

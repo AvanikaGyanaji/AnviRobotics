@@ -12,9 +12,23 @@
 /* HTML */
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory; */
   max-width: 2440px;
   margin: auto;
+}
+
+
+.snap-container {
+  
+  
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.snap-section {
+
+  scroll-snap-align: start;
+  
 }
 
 /* Body */
@@ -38,6 +52,19 @@ body {
   }
 
 
+body::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+}
+body.scroll-active {
+  overflow-y: auto;
+  height: auto;
+  scroll-behavior: smooth;
+}
 
 
 
@@ -242,6 +269,29 @@ font-style: Black;
   0% { color: white; }
   100% { color: black; }
 }
+
+
+/* HERO SECTION ICONS UP DOWN  */
+.indicator {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.icons {
+  display: flex;
+  flex-direction: column; /* STACK vertically */
+  gap: 0; /* make sure no gap */
+  animation: UpDown 1.5s ease-in-out infinite;
+}
+
+@keyframes UpDown {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-30px); } 
+  100% { transform: translateY(0px); }
+}
+
+
 
 
 /* --- HERO GRADIENT (exact Anvi Robotics style) --- */

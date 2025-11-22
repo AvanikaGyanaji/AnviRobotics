@@ -42,47 +42,50 @@ export const Journey = () => {
   );
 
   // 🔥 Animate Path Colors on Scroll
-useEffect(() => {
-  if (!svgWrapperRef.current) return;
+  useEffect(() => {
+    if (!svgWrapperRef.current) return;
 
-  // the fill rectangle inside masked group
-  const rect = svgWrapperRef.current.querySelector("g[mask] rect");
+    // the fill rectangle inside masked group
+    const rect = svgWrapperRef.current.querySelector("g[mask] rect");
 
-  if (!rect) {
-    console.warn("No fill rect found inside masked group!");
-    return;
-  }
+    if (!rect) {
+      console.warn("No fill rect found inside masked group!");
+      return;
+    }
 
-  // This rect should grow to full SVG width
-  const FULL_WIDTH = svgWidth; // auto-measured from your SVG
-  rect.setAttribute("width", 0); // ensure start from 0
+    // This rect should grow to full SVG width
+    const FULL_WIDTH = svgWidth; // auto-measured from your SVG
+    rect.setAttribute("width", 0); // ensure start from 0
 
-  const unsub = scrollYProgress.on("change", (progress) => {
-    const t = Math.min(Math.max(progress, 0), 1); // clamp
+    const unsub = scrollYProgress.on("change", (progress) => {
+      const t = Math.min(Math.max(progress, 0), 1); // clamp
 
-    // convert scroll % to pixel width
-    const newWidth = FULL_WIDTH * t;
+      // convert scroll % to pixel width
+      const newWidth = FULL_WIDTH * t;
 
-    rect.setAttribute("width", newWidth);
-  });
+      rect.setAttribute("width", newWidth);
+    });
 
-  return () => unsub();
-}, [scrollYProgress, svgWidth]);
+    return () => unsub();
+  }, [scrollYProgress, svgWidth]);
 
   return (
     <>
-      <section id="journey" ref={sectionRef} className="relative w-full h-[800vh]">
-        <div className="sticky top-[20%] flex justify-center z-10 ">
+      <section id="journey" ref={sectionRef} className="relative w-full h-[300vh] ">
+        {/* <div className="sticky top-[20%] flex justify-center z-10 ">
           <h1 className="text-[48px] text-white">Our Journey Timeline</h1>
-        </div>
+        </div> */}
 
-        <div className="sticky top-[35%] overflow-hidden w-full">
+        <div className="sticky top-[100px] overflow-hidden w-full">
+          <div className="flex justify-center">
+            <h1 className="text-[48px] text-white">Our Journey Timeline</h1>
+          </div>
           <motion.div
             ref={svgWrapperRef}
             style={{ x: xMovement }}
             className="inline-block"
-            dangerouslySetInnerHTML={{ 
-          __html: `
+            dangerouslySetInnerHTML={{
+              __html: `
       <div style="padding: 0 50px;">
                          <svg width="3273" height="500" viewBox="0 0 3273 500" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="3273" height="500" fill="black" fill-opacity="0.2"/>
@@ -159,20 +162,17 @@ useEffect(() => {
 </linearGradient>
 </defs>
 </svg>
-
-          
-        
       </div>
     `
-             
+
             }}
           />
         </div>
       </section>
     </>
   );
-};       
-      
- 
+};
 
- 
+
+
+
