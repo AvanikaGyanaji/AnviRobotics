@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap');
+
+
 @tailwind base;
 @tailwind components; 
 @tailwind utilities;
@@ -492,5 +494,6 @@ font-family: 'DM Sans', sans-serif;
 /* Footer */
 
 p {
-  font-family: "DM Sans";
+  font-family: "Dm Sans", sans-serif !important;
 }
+
