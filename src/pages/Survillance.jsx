@@ -138,7 +138,7 @@ export const Survillance=() =>{
       </div>
 
       {/* Scrollable Content */}
-      <div ref={containerRef} className="relative z-10">
+      <div ref={containerRef} className="surveillance relative z-10">
         {/* Section 1 */}
         <div className="min-h-screen flex flex-col items-start px-[60px] py-[150px]">
           <h1 className="text-[36px] md:text-[56px] font-arial font-regular text-white">
@@ -153,9 +153,9 @@ export const Survillance=() =>{
         {/* Section 2 */}
         <div
           ref={section2Ref}
-          className="min-h-screen flex flex-col justify-center px-[50px]"
+          className="min-h-screen flex flex-col justify-center px-[60px]"
         >
-          <p className="text-[28px] md:text-[32px] lg:text-[40px] font-regular leading-relaxed text-white break-words">
+          <p className="text-[28px] md:text-[32px] lg:text-[40px] font-regular text-center leading-10 text-white break-words">
             {(() => {
               const text = "Our AI-powered Surveillance Robot redefines modern security and safety. It offers real-time monitoring with intelligent data analysis. With autonomous mobility, it ensures seamless and efficient operations. Designed for reliability, it delivers continuous vigilance and rapid response.";
 
@@ -220,7 +220,7 @@ export const Survillance=() =>{
               {/* Overlay */}
               <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
 
-                <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                <p className="text-[16px] font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
                   Cost-Effective Security
                 </p>
 
