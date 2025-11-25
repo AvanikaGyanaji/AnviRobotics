@@ -91,7 +91,7 @@ export const Products = () => {
                 </motion.div>
 
                 <motion.div
-                  onClick={() => navigate("/survillance")}
+                  onClick={() => navigate("/surveillance")}
                   style={{ opacity: text2Opacity }}
                   className="robotype absolute bottom-2 w-full text-center cursor-pointer text-[#ffffff54] text-[22px]"
                 >

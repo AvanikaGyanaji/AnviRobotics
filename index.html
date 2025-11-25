@@ -1,18 +1,130 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/anvi.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anvi Robotics</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <!-- Charset & Viewport -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://anvirobotics.com">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon/32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon/48x48.png" sizes="48x48" type="image/png">
+  <link rel="icon" href="/favicon/192x192.png" sizes="192x192" type="image/png">
+
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="/favicon/180x180.png" sizes="180x180">
+
+  <!-- Primary SEO -->
+  <title>Anvi Robotics | Smarter. Faster. Limitless™ AI Robotics</title>
+  <meta name="description"
+    content="Anvi Robotics is a global AI and robotics company building humanoid, semi-humanoid, and AI-powered surveillance robots. We empower enterprises with autonomous navigation, LiDAR + SLAM, and intelligent control dashboards for smarter, safer, and faster operations." />
+  <meta name="keywords"
+    content="Anvi Robotics, AI robotics, humanoid robot, semi-humanoid robot, surveillance robot, autonomous navigation, LiDAR, SLAM, AI-powered security, industrial automation, Hyderabad robotics, India robotics startup" />
+  <meta name="author" content="Anvi Robotics" />
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- Schema.org Image -->
+  <meta itemprop="image" content="https://anvirobotics.com/logos/anvi_black.png" />
+
+  <!-- Open Graph (Facebook/LinkedIn) -->
+  <meta property="og:title" content="Anvi Robotics | Smarter. Faster. Limitless™" />
+  <meta property="og:description"
+    content="Empowering enterprises with AI-driven robotics that learn, adapt, and excel. From humanoid and semi-humanoid robots to AI-powered surveillance systems, Anvi Robotics delivers smarter, safer, and faster automation." />
+  <meta property="og:image" content="https://anvirobotics.com/logos/anvi_black.png" />
+  <meta property="og:url" content="https://anvirobotics.com" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Anvi Robotics | Smarter. Faster. Limitless™" />
+  <meta name="twitter:description"
+    content="Global AI & robotics company building humanoid, semi-humanoid, and surveillance robots with autonomous navigation and intelligent control dashboards." />
+  <meta name="twitter:image" content="https://anvirobotics.com/logos/anvi_black.png" />
+
+  <!-- Fonts (Optimized & Minimal) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- META SEO (Structured Data) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Anvi Robotics",
+      "url": "https://anvirobotics.com",
+      "logo": "https://anvirobotics.com/logos/anvi_black.png",
+      "description": "Anvi Robotics is a global robotics and AI company specializing in humanoid, semi-humanoid, and AI-powered surveillance robots. With advanced autonomous navigation, LiDAR and sensor fusion, SLAM, and intelligent control dashboards, Anvi empowers industries with smarter, safer, and faster automation.",
+      "founders": [
+        {
+          "@type": "Person",
+          "name": "Psv Kisshhan"
+        }
+      ],
+      "foundingDate": "2021",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1st Floor, Modern Profound Tech Park, White Field Rd, Kondapur, Whitefields, Madhapur",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "postalCode": "500084",
+        "addressCountry": "IN"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "info@anvi.co",
+          "availableLanguage": ["en"],
+          "hoursAvailable": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "09:30",
+            "closes": "18:30"
+          }
+        }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/anvirobotics",
+        "https://twitter.com/anvirobotics",
+        "https://www.instagram.com/anvi_robotics/"
+      ]
+    }
+  </script>
+
+  <!-- Google Analytics -->
+  <meta name="google-site-verification" content="59WabmNoU5PIS1nWB0EYRkx0GEOFbjwd7IWXuYDjgHY" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3V3SZVZJN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-P3V3SZVZJN');
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
