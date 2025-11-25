@@ -155,7 +155,7 @@ export const Survillance=() =>{
           ref={section2Ref}
           className="min-h-screen flex flex-col justify-center px-[60px]"
         >
-          <p className="text-[28px] md:text-[32px] lg:text-[40px] font-regular text-center leading-12 text-white break-words">
+          <p className="text-[28px] md:text-[32px] lg:text-[40px] font-regular text-center leading-8 lg:leading-12 text-white break-words">
             {(() => {
               const text = "Our AI-powered Surveillance Robot redefines modern security and safety. It offers real-time monitoring with intelligent data analysis. With autonomous mobility, it ensures seamless and efficient operations. Designed for reliability, it delivers continuous vigilance and rapid response.";
 
