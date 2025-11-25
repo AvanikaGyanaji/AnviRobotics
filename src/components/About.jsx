@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export const About = () => {
@@ -6,7 +6,7 @@ export const About = () => {
   // not the sticky child. Framer's useScroll will then give progress
   // as the runway travels through the viewport.
   const scrollRef = useRef(null);
-  console.log("ScrollREf in About: ", scrollRef);
+  // console.log("ScrollREf in About: ", scrollRef);
 
   const { scrollYProgress } = useScroll({
     target: scrollRef,
@@ -22,9 +22,9 @@ export const About = () => {
   const visionY = useTransform(scrollYProgress, [0.1, 0.55, 0.7], [0, 0, -800]);
   const missionY = useTransform(scrollYProgress, [0.55, 0.55, 0.75], [100, 0, -450]);
 
-  useEffect(() => {
-    console.log("ScrollRef ============= : ", scrollRef.current);
-  }, [scrollRef]);
+  // useEffect(() => {
+  //   console.log("ScrollRef ============= : ", scrollRef.current);
+  // }, [scrollRef]);
 
   return (
     // OUTER RUNWAY: tall element that provides scroll height

@@ -4,27 +4,27 @@ const cards = [
   {
     title: "Commercial & Industrial",
     desc: "Warehouses, factories, and corporate facilities",
-    img: "/survillance/b31.png",
+    img: "/surveillance/b31.png",
   },
   {
     title: "Public Safety",
     desc: "Parks, transit stations, and government buildings",
-    img: "/survillance/G6.png",
+    img: "/surveillance/G6.png",
   },
   {
     title: "Residential",
     desc: "Gated communities and residential complexes",
-    img: "/survillance/F4.png",
+    img: "/surveillance/F4.png",
   },
   {
     title: "Retail & Malls",
     desc: "Shopping centers and retail environments",
-    img: "/survillance/B6.png",
+    img: "/surveillance/B6.png",
   },
   {
     title: "Agriculture & Large properties",
     desc: "Farms, vineyards, and expansive outdoor areas",
-    img: "/survillance/A10.png",
+    img: "/surveillance/A10.png",
   },
 ];
 

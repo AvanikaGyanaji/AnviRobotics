@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import RobotFeatures from "../components/RobotFeatures";
 import { Section6 } from "../components/Section6";
 
-
-export const Survillance=() =>{
+const Surveillance = () => {
   const containerRef = useRef(null);
   const section2Ref = useRef(null);
   const section3Ref = useRef(null);
@@ -32,10 +31,10 @@ export const Survillance=() =>{
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
-    
+
     window.addEventListener("scroll", handleScroll);
     handleScroll();
-    
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -78,7 +77,8 @@ export const Survillance=() =>{
       const section2Bottom = section2Top + section2Height;
 
       const currentScroll = window.scrollY;
-      const isSection2InView = currentScroll >= section2Top && currentScroll < section2Bottom;
+      const isSection2InView =
+        currentScroll >= section2Top && currentScroll < section2Bottom;
 
       const progressIncrement = Math.abs(e.deltaY) / 1000;
 
@@ -86,17 +86,20 @@ export const Survillance=() =>{
         // Scrolling down in Section 2
         if (e.deltaY > 0 && section2Progress < 1) {
           e.preventDefault();
-          setSection2Progress(prev => Math.min(prev + progressIncrement, 1));
+          setSection2Progress((prev) => Math.min(prev + progressIncrement, 1));
           return;
         }
         // Scrolling up in Section 2
         else if (e.deltaY < 0 && section2Progress > 0) {
           e.preventDefault();
-          setSection2Progress(prev => Math.max(prev - progressIncrement, 0));
+          setSection2Progress((prev) => Math.max(prev - progressIncrement, 0));
           return;
         }
         // Allow normal scroll when fully revealed/hidden
-        else if ((e.deltaY > 0 && section2Progress >= 1) || (e.deltaY < 0 && section2Progress <= 0)) {
+        else if (
+          (e.deltaY > 0 && section2Progress >= 1) ||
+          (e.deltaY < 0 && section2Progress <= 0)
+        ) {
           // Normal scroll will happen
           return;
         }
@@ -107,7 +110,7 @@ export const Survillance=() =>{
         if (newScroll < section2Bottom) {
           e.preventDefault();
           setSection2Progress(1);
-          window.scrollTo({ top: section2Top, behavior: 'auto' });
+          window.scrollTo({ top: section2Top, behavior: "auto" });
         }
       }
       // When entering Section 2 from Section 1 (scrolling DOWN)
@@ -116,7 +119,7 @@ export const Survillance=() =>{
         if (newScroll >= section2Top) {
           e.preventDefault();
           setSection2Progress(0);
-          window.scrollTo({ top: section2Top, behavior: 'auto' });
+          window.scrollTo({ top: section2Top, behavior: "auto" });
         }
       }
     };
@@ -130,7 +133,7 @@ export const Survillance=() =>{
       {/* Fixed Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 z-0">
         <img
-          src="/survillance/B6.png"
+          src="/surveillance/B6.png"
           alt="Robot"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
@@ -157,7 +160,8 @@ export const Survillance=() =>{
         >
           <p className="text-[28px] md:text-[32px] lg:text-[40px] font-regular text-center leading-8 lg:leading-12 text-white break-words">
             {(() => {
-              const text = "Our AI-powered Surveillance Robot redefines modern security and safety. It offers real-time monitoring with intelligent data analysis. With autonomous mobility, it ensures seamless and efficient operations. Designed for reliability, it delivers continuous vigilance and rapid response.";
+              const text =
+                "Our AI-powered Surveillance Robot redefines modern security and safety. It offers real-time monitoring with intelligent data analysis. With autonomous mobility, it ensures seamless and efficient operations. Designed for reliability, it delivers continuous vigilance and rapid response.";
 
               const revealLength = Math.floor(section2Progress * text.length);
               const visibleText = text.slice(0, revealLength);
@@ -177,16 +181,31 @@ export const Survillance=() =>{
         <div
           ref={section3Ref}
           className="min-h-screen bg-black flex items-center justify-between px-[60px] py-[60px] transition-all duration-300"
-          style={{ transform: `scale(${section3Scale})`, opacity: section3Opacity }}
+          style={{
+            transform: `scale(${section3Scale})`,
+            opacity: section3Opacity,
+          }}
         >
           <div className="flex-1 flex justify-end">
-            <img src="/survillance/b31.png" className="w-[457px] h-[496px] object-contain" alt="Side view" />
+            <img
+              src="/surveillance/b31.png"
+              className="w-[457px] h-[496px] object-contain"
+              alt="Side view"
+            />
           </div>
           <p className="text-white text-[30px] text-center font-light leading-relaxed max-w-[274px]">
-            "We Make <span className="text-[#EFEFEF76]">Security Smarter, Safer, And Endlessly Vigilant.</span>"
+            "We Make{" "}
+            <span className="text-[#EFEFEF76]">
+              Security Smarter, Safer, And Endlessly Vigilant.
+            </span>
+            "
           </p>
           <div className="flex-1 flex justify-start">
-            <img src="/survillance/b32.png" className="w-[457px] h-[496px] object-contain" alt="Front view" />
+            <img
+              src="/surveillance/b32.png"
+              className="w-[457px] h-[496px] object-contain"
+              alt="Front view"
+            />
           </div>
         </div>
 
@@ -194,7 +213,10 @@ export const Survillance=() =>{
         <div
           ref={section4Ref}
           className="min-h-screen relative bg-black transition-all duration-300 ease-out"
-          style={{ transform: `scale(${section4Scale})`, opacity: section4Opacity }}
+          style={{
+            transform: `scale(${section4Scale})`,
+            opacity: section4Opacity,
+          }}
         >
           <RobotFeatures />
         </div>
@@ -206,100 +228,100 @@ export const Survillance=() =>{
           </h2>
           {/* Image Grid Section */}
           <div className="flex flex-col gap-6">
-          {/* Row 1: Large + Small */}
-          <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
-            {/* Large Card */}
-            <div className="relative group overflow-hidden rounded-2xl shadow-lg h-[351px]">
-              <img
-                loading="lazy"
-                src="/survillance/B6.png"
-                alt="Technological Excellence"
-                className="w-full h-full object-cover"
-              />
+            {/* Row 1: Large + Small */}
+            <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
+              {/* Large Card */}
+              <div className="relative group overflow-hidden rounded-2xl shadow-lg h-[351px]">
+                <img
+                  loading="lazy"
+                  src="/surveillance/B6.png"
+                  alt="Technological Excellence"
+                  className="w-full h-full object-cover"
+                />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+                {/* Overlay */}
+                <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+                  <p className="text-[16px] font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                    Cost-Effective Security
+                  </p>
 
-                <p className="text-[16px] font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
-                  Cost-Effective Security
-                </p>
+                  {/*hidden initially, slides in on hover */}
+                  <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[18px] font-dm max-w-[280px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                    Reduce security personnel cost by up to 60% while
+                    maintaining 24/7 coverage
+                  </p>
+                </div>
+              </div>
 
-                {/*hidden initially, slides in on hover */}
-                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[18px] font-dm max-w-[280px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
-                  Reduce security personnel cost by up to 60% while maintaining 24/7 coverage
-                </p>
+              {/* Small Card */}
+              <div className="relative z-10 overflow-hidden rounded-2xl group shadow-lg h-[351px]">
+                <img
+                  loading="lazy"
+                  src="/surveillance/A10.png"
+                  alt="Strategic Focus"
+                  className="w-full h-full object-cover"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+                  <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                    Smart Sentinel
+                  </p>
+                  {/* hidden initially, slides in on hover */}
+                  <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[230px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                    Keep human security personnel out of potentially dangerous
+                    situations
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Small Card */}
-            <div className="relative z-10 overflow-hidden rounded-2xl group shadow-lg h-[351px]">
-              <img
-                loading="lazy"
-                src="/survillance/A10.png"
-                alt="Strategic Focus"
-                className="w-full h-full object-cover"
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+            {/* Row 2: Small + Large */}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6">
+              {/* Small Card */}
+              <div className="relative overflow-hidden rounded-2xl group shadow-lg h-[351px]">
+                <img
+                  loading="lazy"
+                  src="/surveillance/F4.png"
+                  alt="Collaborative Approach"
+                  className="w-full h-full object-cover"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+                  <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                    Visible Detterence
+                  </p>
 
-                <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
-                  Smart Sentinel
-                </p>
-                {/* hidden initially, slides in on hover */}
-                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[230px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
-                  Keep human security personnel out of potentially dangerous situations
-                </p>
+                  {/* hidden initially, slides in on hover */}
+                  <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                    Advanced robotic presence deters criminal activity before it
+                    starts
+                  </p>
+                </div>
+              </div>
+
+              {/* Large Card */}
+              <div className="relative overflow-hidden group rounded-2xl shadow-lg h-[351px]">
+                <img
+                  loading="lazy"
+                  src="/surveillance/G6.png"
+                  alt="Impact-Driven Solutions"
+                  className="w-full h-full object-cover group-hover:scale-[1.05] transition-all duration-300"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+                  <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                    Scalable Security
+                  </p>
+
+                  {/*hidden initially, slides in on hover */}
+                  <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[18px] font-dm max-w-[280px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                    Easily expand your security coverage across multiple
+                    locations
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-
-          {/* Row 2: Small + Large */}
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6">
-            {/* Small Card */}
-            <div className="relative overflow-hidden rounded-2xl group shadow-lg h-[351px]">
-              <img
-                loading="lazy"
-                src="/survillance/F4.png"
-                alt="Collaborative Approach"
-                className="w-full h-full object-cover"
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
-
-                <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
-                  Visible Detterence
-                </p>
-
-                {/* hidden initially, slides in on hover */}
-                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
-                  Advanced robotic presence deters criminal activity before it starts
-                </p>
-              </div>
-            </div>
-
-            {/* Large Card */}
-            <div className="relative overflow-hidden group rounded-2xl shadow-lg h-[351px]">
-              <img
-                loading="lazy"
-                src="/survillance/G6.png"
-                alt="Impact-Driven Solutions"
-                className="w-full h-full object-cover group-hover:scale-[1.05] transition-all duration-300"
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
-
-                <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
-                  Scalable Security
-                </p>
-
-                {/*hidden initially, slides in on hover */}
-                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[18px] font-dm max-w-[280px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
-                  Easily expand your security coverage across multiple locations
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
         </div>
 
         {/* Section 6 */}
@@ -307,4 +329,6 @@ export const Survillance=() =>{
       </div>
     </div>
   );
-}
+};
+
+export default Surveillance;

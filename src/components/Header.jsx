@@ -30,7 +30,7 @@ export const Header = () => {
 
   // ⭐ When on surveillance page → freeze highlight to Products
   useEffect(() => {
-    if (location.pathname === "/survillance") {
+    if (location.pathname === "/surveillance") {
       setActiveSection("products");
     }
   }, [location.pathname]);
@@ -57,8 +57,6 @@ export const Header = () => {
 
       if (current !== activeSection) setActiveSection(current);
     };
-
-  
 
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -104,13 +102,18 @@ export const Header = () => {
       `}
     >
       <div className="logo relative w-[110px] h-[70px]">
-        <img src="/logos/anvi_white.png" className="absolute inset-0 object-contain" />
+        <img
+          src="/logos/anvi_white.png"
+          className="absolute inset-0 object-contain"
+        />
       </div>
 
       {/* NAV */}
       <nav
         className={`flex gap-x-[22px] overflow-hidden text-lg font-medium transition-all duration-500 ${
-          showNav ? "animate-fadeDown opacity-100 translate-y-0" : "opacity-0 -translate-y-7"
+          showNav
+            ? "animate-fadeDown opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-7"
         }`}
       >
         {[
