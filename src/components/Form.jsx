@@ -34,13 +34,18 @@ export const Form = () => {
     Message: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    FullName: false,
+    Email: false,
+    PhNo: false,
+  });
   const [loading, setLoading] = useState(false);
   const [serverMsg, setServerMsg] = useState("");
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
 
+    // clear error for that field when user types
     if (errors[field] && value.trim()) {
       setErrors((prev) => ({ ...prev, [field]: false }));
     }
@@ -49,14 +54,19 @@ export const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newErrors = {};
-    if (!formData.FullName.trim()) newErrors.FullName = true;
-    if (!formData.Email.trim()) newErrors.Email = true;
-    if (!formData.PhNo.trim()) newErrors.PhNo = true;
+    const newErrors = {
+      FullName: !formData.FullName.trim(),
+      Email: !formData.Email.trim(),
+      PhNo: !formData.PhNo.trim(),
+    };
 
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length > 0) return;
+    // if any field is true => some error exists
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
+      return;
+    }
 
+    setErrors({ FullName: false, Email: false, PhNo: false });
     setLoading(true);
     setServerMsg("");
 
@@ -65,10 +75,10 @@ export const Form = () => {
     sendData.append("Email", formData.Email);
     sendData.append("PhNo", formData.PhNo);
     sendData.append("Message", formData.Message);
-    sendData.append("Website", "AnviRobotics.com"); 
+    sendData.append("Website", "AnviRobotics.com");
 
-    // console.log("sendData : ", formData);
     const result = await doMailFunc(mailBackendUrls.contact, sendData);
+
     setServerMsg(
       typeof result.message === "string"
         ? result.message
@@ -76,7 +86,6 @@ export const Form = () => {
     );
 
     if (result.success) {
-      setLoading(false);
       setFormData({
         FullName: "",
         Email: "",
@@ -84,17 +93,22 @@ export const Form = () => {
         Message: "",
       });
     }
+
+    // ✅ make sure loading stops even on error
+    setLoading(false);
   };
 
   useEffect(() => {
     if (serverMsg) {
       const timer = setTimeout(() => {
         setServerMsg("");
-      }, 5000); // 5 seconds
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
   }, [serverMsg]);
+
+  const isSuccessMsg = serverMsg.toLowerCase().includes("success");
 
   return (
     <>
@@ -180,9 +194,7 @@ export const Form = () => {
       {serverMsg && (
         <p
           className={`text-center text-[16px] mt-2 font-semibold capitalize ${
-            serverMsg.toLowerCase().includes("successfully!")
-              ? "text-green-600"
-              : "text-red-500"
+            isSuccessMsg ? "text-green-600" : "text-red-500"
           }`}
         >
           {serverMsg}
