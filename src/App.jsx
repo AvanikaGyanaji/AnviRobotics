@@ -5,6 +5,7 @@ import './App.css'
 import { Home } from "./pages/home";
 import { Survillance } from "./pages/Survillance";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
  const App = () => {
   return(
@@ -18,7 +19,7 @@ import { Header } from "./components/Header";
         <Route path="/" element={<Home/>} />
         <Route path="/survillance" element={<Survillance />} />
       </Routes>
-      
+       <Footer/>
     </Router>
      
     </>

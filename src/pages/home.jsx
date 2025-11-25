@@ -106,7 +106,7 @@ export const Home = () => {
         <ContactUs />
       </section>
 
-      <Footer />
+    
 
       {/* Fixed background gradient */}
       <div

@@ -58,6 +58,8 @@ export const Header = () => {
       if (current !== activeSection) setActiveSection(current);
     };
 
+  
+
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, [location.pathname, activeSection]);

@@ -50,7 +50,7 @@ export const Corevalues = () => {
         ref={sectionRef}
         className="min-h-screen place-content-center w-full"
       >
-        <div className="flex flex-col justify-center items-center w-full bg-[#00000033]">
+        <div className="flex flex-col justify-center items-center w-full bg-[#00000033] py-[50px] ">
           <h1 className="text-[48px] text-white font-[Arial] " >Our Core Values</h1>
 
           {/* Wrapper */}

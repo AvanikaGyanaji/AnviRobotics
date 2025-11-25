@@ -34,7 +34,7 @@ export const About = () => {
         {/* ABOUT US */}
         <motion.div
           style={{ opacity: aboutOpacity, y: aboutY }}
-          className="max-w-[625px] p-4 absolute top-[120px] left-[5%]"
+          className="max-w-[650px] p-4 absolute top-[120px] left-[5%]"
         >
           <h1 className=" mb-[24px] about-heading">About Us</h1>
           <p className=" about-content">
@@ -48,7 +48,7 @@ export const About = () => {
         {/* OUR VISION */}
         <motion.div
           style={{ opacity: visionOpacity, y: visionY }}
-          className="max-w-[625px] p-4 absolute top-[380px] right-[5%]"
+          className="max-w-[650px] p-4 absolute top-[380px] right-[5%]"
         >
           <h1 className=" mb-[24px] about-heading">Our Vision</h1>
           <p className=" about-content">
@@ -61,7 +61,7 @@ export const About = () => {
         {/* OUR MISSION */}
         <motion.div
           style={{ opacity: missionOpacity, y: missionY }}
-          className="max-w-[625px] p-4 absolute top-[600px] left-[5%]"
+          className="max-w-[650px] p-4 absolute top-[600px] left-[5%]"
         >
           <h1 className=" mb-[24px] about-heading">Our Mission</h1>
           <p className=" about-content">
