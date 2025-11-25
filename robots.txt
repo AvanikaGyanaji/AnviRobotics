@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://anvirobotics.com/sitemap.xmls
+Sitemap: https://anvirobotics.com/sitemap.xml

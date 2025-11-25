@@ -125,6 +125,7 @@ export const Form = () => {
             }`}
             placeholder="Name"
             value={formData.FullName}
+            required
             onChange={(e) => handleChange("FullName", e.target.value)}
           />
           {errors.FullName && (
@@ -142,6 +143,7 @@ export const Form = () => {
               errors.Email ? "border border-red-500" : ""
             }`}
             placeholder="Email"
+            required
             value={formData.Email}
             onChange={(e) => handleChange("Email", e.target.value)}
           />
@@ -161,6 +163,7 @@ export const Form = () => {
             className={`w-full p-4 rounded-xl bg-white outline-none text-[15px] ${
               errors.PhNo ? "border border-red-500" : ""
             }`}
+            required
             placeholder="Phone Number"
             value={formData.PhNo}
             onChange={(e) => handleChange("PhNo", e.target.value)}
@@ -177,6 +180,7 @@ export const Form = () => {
           rows="5"
           className="w-full p-4 rounded-xl bg-white outline-none text-[15px] resize-none"
           placeholder="Message"
+          required
           value={formData.Message}
           onChange={(e) => handleChange("Message", e.target.value)}
         />
