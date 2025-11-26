@@ -77,7 +77,7 @@ export const Section6 = () => {
       className="w-full min-h-screen bg-black flex flex-col items-center justify-center px-6 lg:px-[150px] md:py-[60px] overflow-hidden"
     >
       {/* Title */}
-      <h1 className="text-[28px] md:text-[32px] font-semibold text-white lg:mb-12 text-center">
+      <h1 className="text-[24px] md:text-[28px] lg:text-[32px] font-semibold text-white lg:mb-12 text-center">
         Perfect For Any Environment
       </h1>
 

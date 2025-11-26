@@ -1,4 +1,3 @@
-
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -15,7 +14,6 @@ export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Measure header height dynamically
   useEffect(() => {
     if (headerRef.current) {
       setHeaderHeight(headerRef.current.offsetHeight);
@@ -30,10 +28,9 @@ export const Header = () => {
     return () => (document.body.style.overflow = "auto");
   }, [mobileMenu]);
 
-  // Delay navbar reveal animation on first load
+  // Delay navbar reveal animation
   useEffect(() => {
     const alreadyShown = sessionStorage.getItem("headerAnimationDone");
-
     if (!alreadyShown) {
       const timer = setTimeout(() => {
         setShowNav(true);
@@ -43,34 +40,28 @@ export const Header = () => {
     } else setShowNav(true);
   }, []);
 
-  // Surveillance page highlight override
+  // Highlight override for surveillance page
   useEffect(() => {
     if (location.pathname === "/surveillance") {
       setActiveSection("products");
     }
   }, [location.pathname]);
 
-  // Scroll spy
+  // Scroll spy on home page
   useEffect(() => {
     if (location.pathname !== "/") return;
-
     const sections = Array.from(document.querySelectorAll("section[id]"));
-
     const onScroll = () => {
       const position = window.scrollY + window.innerHeight / 2;
       let current = activeSection;
-
       sections.forEach((sec) => {
         const rect = sec.getBoundingClientRect();
         const top = rect.top + window.scrollY;
         const bottom = top + sec.offsetHeight;
-
         if (position >= top && position <= bottom) current = sec.id;
       });
-
       if (current !== activeSection) setActiveSection(current);
     };
-
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, [location.pathname, activeSection]);
@@ -78,7 +69,6 @@ export const Header = () => {
   // Navigate to section
   const goToSection = (id) => {
     setMobileMenu(false);
-
     if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
@@ -89,17 +79,14 @@ export const Header = () => {
     }
   };
 
-  // Header hide on scroll down, show on scroll up
+  // Header hide/show on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
-
-      if (currentScroll > lastScrollY) setShowHeader(false);
-      else setShowHeader(true);
-
+      if (currentScroll > lastScrollY && currentScroll > 50) setShowHeader(false); // hide down
+      else setShowHeader(true); // show up
       setLastScrollY(currentScroll <= 0 ? 0 : currentScroll);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);

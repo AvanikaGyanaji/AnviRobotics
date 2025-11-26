@@ -8,7 +8,6 @@ import { ScrollToTop } from "./hooks/ScrollToTop";
 import "./App.css";
 import { Home } from "./pages/home";
 import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
 import Surveillance from "./pages/Surveillance";
 
 const App = () => {
@@ -22,7 +21,6 @@ const App = () => {
           <Route path="/surveillance" element={<Surveillance />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        <Footer />
       </Router>
     </>
   );

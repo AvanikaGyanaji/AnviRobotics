@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import RobotFeatures from "../components/RobotFeatures";
 import { Section6 } from "../components/Section6";
+import { Footer } from "../components/Footer";
 
 const Surveillance = () => {
   const containerRef = useRef(null);
@@ -130,20 +131,23 @@ const Surveillance = () => {
 
   return (
     <div className="relative w-full bg-black">
-      {/* Fixed Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 z-0">
-        <img
-          src="/surveillance/B6.png"
-          alt="Robot"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
+      
+      {/* Wrapper for Sections 1–4 only */}
+      <div ref={containerRef} className="relative overflow-hidden">
 
-      {/* Scrollable Content */}
-      <div ref={containerRef} className="surveillance relative z-10">
-        {/* Section 1 */}
-        <div className="min-h-screen flex flex-col items-start px-[60px] py-[150px]">
+        {/* Fixed background active only in this wrapper */}
+        <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 z-0">
+          <img
+            src="/surveillance/B6.png"
+            alt="Robot"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+        {/* Sections 1–4 */}
+        <div ref={containerRef} className="relative z-10">
+          <div className="min-h-screen flex flex-col items-start px-[60px] py-[150px]">
           <h1 className="text-[36px] md:text-[56px] font-arial font-regular text-white">
             Surveillance <br /> Robot
           </h1>
@@ -158,7 +162,7 @@ const Surveillance = () => {
           ref={section2Ref}
           className="min-h-screen flex flex-col justify-center px-[60px]"
         >
-          <p className="text-[28px] md:text-[32px] lg:text-[40px] font-regular text-center leading-8 lg:leading-12 text-white break-words">
+          <p className="text-[24px] md:text-[28px] lg:text-[32px] font-regular leading-8 lg:leading-10 text-white break-words">
             {(() => {
               const text =
                 "Our AI-powered Surveillance Robot redefines modern security and safety. It offers real-time monitoring with intelligent data analysis. With autonomous mobility, it ensures seamless and efficient operations. Designed for reliability, it delivers continuous vigilance and rapid response.";
@@ -180,34 +184,48 @@ const Surveillance = () => {
         {/* Section 3 */}
         <div
           ref={section3Ref}
-          className="min-h-screen bg-black flex items-center justify-between px-[60px] py-[60px] transition-all duration-300"
-          style={{
-            transform: `scale(${section3Scale})`,
-            opacity: section3Opacity,
-          }}
+          className="
+            min-h-screen bg-black 
+            flex flex-col md:flex-row 
+            items-center justify-between 
+            px-6 md:px-12 lg:px-[60px] 
+            py-10 md:py-[60px] 
+            gap-10 md:gap-0 
+            transition-all duration-300
+          "
+          style={{ transform: `scale(${section3Scale})`, opacity: section3Opacity }}
         >
-          <div className="flex-1 flex justify-end">
+          {/* Left Image */}
+          <div className="flex-1 flex justify-center md:justify-end">
             <img
               src="/surveillance/b31.png"
-              className="w-[457px] h-[496px] object-contain"
+              className="w-[320px] h-[200px] md:w-[380px] md:h-[220px] lg:w-[457px] lg:h-[496px] object-cover"
               alt="Side view"
             />
           </div>
-          <p className="text-white text-[30px] text-center font-light leading-relaxed max-w-[274px]">
-            "We Make{" "}
-            <span className="text-[#EFEFEF76]">
-              Security Smarter, Safer, And Endlessly Vigilant.
-            </span>
+
+          {/* Center Text */}
+          <p
+            className="
+              text-white 
+              text-[14px] md:text-[20px] lg:text-[30px] 
+              text-center font-light leading-relaxed 
+              max-w-[90%] px-20 md:px-0 md:max-w-[300px]
             "
+          >
+            "We Make <span className="text-[#EFEFEF76]">Security Smarter, Safer, And Endlessly Vigilant.</span>"
           </p>
-          <div className="flex-1 flex justify-start">
+
+          {/* Right Image */}
+          <div className="flex-1 flex justify-center md:justify-start">
             <img
               src="/surveillance/b32.png"
-              className="w-[457px] h-[496px] object-contain"
+              className="w-[320px] h-[200px] md:w-[380px] md:h-[220px] lg:w-[457px] lg:h-[496px] object-cover"
               alt="Front view"
             />
           </div>
         </div>
+
 
         {/* Section 4 */}
         <div
@@ -221,9 +239,14 @@ const Surveillance = () => {
           <RobotFeatures />
         </div>
 
-        {/* Section 5 */}
-        <div className="min-h-screen relative bg-black w-full px-[50px] py-[60px]">
-          <h2 className="text-[28px] md:text-[46px] font-semibold text-white mb-8 text-center">
+        </div>
+
+      </div>
+
+      {/* Sections 5–6 will scroll normally with NO fixed background */}
+      <div className="relative bg-black z-0">
+        <div className="min-h-screen relative bg-black w-full px-[50px] py-[50px]">
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-white mb-10 text-center">
             Our Robot Solutions
           </h2>
           {/* Image Grid Section */}
@@ -239,19 +262,19 @@ const Surveillance = () => {
                   className="w-full h-full object-cover"
                 />
 
-                {/* Overlay */}
-                <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
-                  <p className="text-[16px] font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
-                    Cost-Effective Security
-                  </p>
+              {/* Overlay */}
+              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
 
-                  {/*hidden initially, slides in on hover */}
-                  <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[18px] font-dm max-w-[280px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
-                    Reduce security personnel cost by up to 60% while
-                    maintaining 24/7 coverage
-                  </p>
-                </div>
+                <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                  Cost-Effective Security
+                </p>
+
+                {/*hidden initially, slides in on hover */}
+                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[280px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                  Reduce security personnel cost by up to 60% while maintaining 24/7 coverage
+                </p>
               </div>
+            </div>
 
               {/* Small Card */}
               <div className="relative z-10 overflow-hidden rounded-2xl group shadow-lg h-[351px]">
@@ -299,36 +322,38 @@ const Surveillance = () => {
                 </div>
               </div>
 
-              {/* Large Card */}
-              <div className="relative overflow-hidden group rounded-2xl shadow-lg h-[351px]">
-                <img
-                  loading="lazy"
-                  src="/surveillance/G6.png"
-                  alt="Impact-Driven Solutions"
-                  className="w-full h-full object-cover group-hover:scale-[1.05] transition-all duration-300"
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
-                  <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
-                    Scalable Security
-                  </p>
+            {/* Large Card */}
+            <div className="relative overflow-hidden group rounded-2xl shadow-lg h-[351px]">
+              <img
+                loading="lazy"
+                src="/surveillance/G6.png"
+                alt="Impact-Driven Solutions"
+                className="w-full h-full object-cover group-hover:scale-[1.05] transition-all duration-300"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
 
-                  {/*hidden initially, slides in on hover */}
-                  <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[18px] font-dm max-w-[280px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
-                    Easily expand your security coverage across multiple
-                    locations
-                  </p>
-                </div>
+                <p className="text-[14px] font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                  Scalable Security
+                </p>
+
+                {/*hidden initially, slides in on hover */}
+                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[230px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                  Easily expand your security coverage across multiple locations
+                </p>
               </div>
             </div>
           </div>
         </div>
+        </div>
 
         {/* Section 6 */}
         <Section6 scrollY={scrollY} />
+        <Footer/>
       </div>
     </div>
   );
+
 };
 
 export default Surveillance;
