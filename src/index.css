@@ -91,7 +91,6 @@ section {
   padding-inline: 90px;
   color: inherit !important;
   max-width: 2440px;
-
 }
 .header img,
 .header nav {
@@ -152,7 +151,7 @@ section {
 
 /* --- HERO SECTION --- */
 .herosection {
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
  
   display: flex;
@@ -179,7 +178,7 @@ section {
 /* ---HERO SECTION HEADING ANIMATION --- */
 .heading {
   transform: translateY(400px);
-  font-size: 80px;
+  /* font-size: 80px; */
   animation: slideAndScale 3.4s ease-out 0s 1 forwards ;
   font-weight: bolder;
   color: #FEFEFE33;
@@ -187,7 +186,27 @@ section {
   position: relative;
   font-weight: 900;
   font-family: Arial, sans-serif;
-font-style: Black;
+  /* font-style: Black; */
+  padding-inline: 10px;
+}
+@media (max-width:499px) {
+  .heading {
+    font-size: clamp(24px, 5vw, 56px);
+    font-weight: 900;
+  }
+}
+
+@media (min-width:498px) and  (max-width:768px) {
+  .heading {
+    font-size: clamp(27px, 6vw, 65px);
+    font-weight: 900;
+  }
+}
+
+@media (min-width:769px) {
+  .heading {
+    font-size:  clamp(27px, 6vw, 80px);
+  }
 }
 
 /* Slide + scale + color white */
@@ -232,7 +251,7 @@ font-style: Black;
 
 
 .word3{
-  padding-right: 12px;
+  /* padding-right: px; */
   display: inline-block;
   animation: word3Highlight 0.8s ease-in-out 2.8s forwards;
 
@@ -252,16 +271,32 @@ font-style: Black;
 
 /* --- TM SYMBOL --- */
 .tm {
-  position: absolute;
-  top: 12px;
-  right: -49px;
-  font-size: 64px;
+ 
+  
   font-weight: bolder;
   opacity: 0;
   color: white;
   animation: fadeInTM 0.3s ease-in-out 2.8s forwards;
 }
 
+@media (max-width:526px) {
+  .tm {
+    font-size: 20px;
+    font-weight: bolder;
+  }
+}
+@media (min-width:526px) and  (max-width:768px) {
+  .tm {
+    font-size: 34px;
+    font-weight: bolder;
+  }
+}
+@media (min-width:769px) and (max-width:1200px) {
+  .tm {
+    font-size: 44px;
+    font-weight: bolder;
+  }
+}
 @keyframes fadeInTM {
   from { opacity: 0; transform: translateY(0px); }
   to { opacity: 1; transform: translateY(0); }
@@ -367,6 +402,25 @@ rgba(0, 0, 0, 1) 100%           /* black */
 
 .hero-text{
   animation:slideup 1s ease-in-out 3.8s forwards;
+
+}
+@media (max-width:525px) {
+  .hero-text {
+    font-size: 14px;
+    max-width: 350px;
+  }
+}
+@media (min-width:526px) and (max-width:768px) {
+  .hero-text {
+    font-size: 16px;
+    max-width: 450px;
+  }
+}
+@media (min-width:769px) and (max-width:1200px) {
+  .hero-text {
+    font-size: 18px;
+    max-width: 450px;
+  }
 }
 @keyframes slideup {
   0% {
@@ -379,6 +433,7 @@ rgba(0, 0, 0, 1) 100%           /* black */
     transform: translateY(0);
   }
 }
+
 
 
 

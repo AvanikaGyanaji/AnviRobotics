@@ -54,7 +54,7 @@ export const Herosection = () => {
   return (
     <section
       id="herosection"
-      className="herosection h-screen w-full flex flex-col justify-center items-center relative overflow-hidden"
+      className="herosection w-full flex flex-col justify-center items-center relative overflow-hidden"
     ><div className="absolute inset-0 w-full h-full overflow-hidden z-[-20]">
   <video
     className="w-full h-full object-cover video-Herosection "
@@ -66,17 +66,16 @@ export const Herosection = () => {
   />
 </div>
 
-      <div className="flex flex-col justify-center items-center text-center">
+      <div className="flex flex-col justify-center items-center text-center px-[1vw]">
         <h1 className="heading hero-heading font-bold text-[#FEFEFE33]">
           <span className="word1">Smarter.</span>
           <span className="word2 pr-1">Faster.</span>
-          <span className="word3 pr-1">Limitless</span>
-          <span className="tm">™</span>
+          <span className="word3 pr-1 relative">Limitless</span>
+          <span className="tm xs:text-[20px] md:text-[64px] lg:text-[80px] absolute">™</span>
         </h1>
 
-        <p className="hero-text text-white flex flex-col justify-center items-center gap-y-[4px] text-[18px] font-[DM Sans] opacity-0">
-          <span>Empowering Enterprises with AI-driven robotics that learn, adapt,</span>
-          <span>and excel at every task.</span>
+        <p className="hero-text text-white flex flex-col justify-center items-center gap-y-[4px] max-w-[450px] font-[DM Sans] opacity-0">
+        Empowering Enterprises with AI-driven robotics that learn, adapt, and excel at every task.
         </p>
       </div>
 

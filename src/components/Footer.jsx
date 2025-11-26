@@ -21,7 +21,7 @@ export const Footer = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex h-[24px] overflow-hidden gap-x-[80px] mt-[16px] text-[18px] font-[DM Sans]"
+          className="flex  md:flex-row flex-col h-[24px] overflow-hidden gap-x-[80px] mt-[16px] text-[18px] font-[DM Sans]"
         >
 
           <div onClick={() => scrollTo("about")} className="hover:translate-y-[-28px] transition-transform duration-500 cursor-pointer">
