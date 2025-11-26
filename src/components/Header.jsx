@@ -15,18 +15,8 @@ export const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight);
-    }
+    if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
   }, []);
-
-  // Lock/unlock scroll when mobile menu opens
-  useEffect(() => {
-    if (mobileMenu) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "auto";
-
-    return () => (document.body.style.overflow = "auto");
-  }, [mobileMenu]);
 
   // Delay navbar reveal animation
   useEffect(() => {
@@ -104,11 +94,9 @@ export const Header = () => {
       <header
         ref={headerRef}
         className={`
-          fixed top-0 left-0 w-full flex justify-between items-center pt-[20px]
-          px-6 lg:px-[120px] z-[2000]
-          transition-all duration-300
-          bg-black md:bg-transparent
-          ${showHeader ? "top-0" : `-top-[${headerHeight}px]`}
+          fixed left-0 w-full flex justify-between items-center pt-[20px] px-6 lg:px-[120px] z-[2000]
+          transition-transform duration-300 bg-black md:bg-transparent
+          ${showHeader ? "translate-y-0" : "-translate-y-full"}
         `}
       >
         <div className="logo relative w-[110px] h-[70px]">
@@ -119,7 +107,7 @@ export const Header = () => {
         <nav
           className={`
             hidden md:flex gap-x-[22px] overflow-hidden text-lg font-medium transition-all duration-500
-            ${showNav ? "animate-fadeDown opacity-100" : "opacity-0 -translate-y-7"}
+            ${showNav ? "animate-fadeDown opacity-100 translate-y-0" : "opacity-0 -translate-y-7"}
           `}
         >
           {navLinks.map(({ id, label }) => {
@@ -133,9 +121,7 @@ export const Header = () => {
                   ${isActive ? "translate-y-0" : "hover:-translate-y-[35px]"}
                 `}
               >
-                <span className={`${isActive ? "text-white" : "text-[#888888]"}`}>
-                  {label}
-                </span>
+                <span className={`${isActive ? "text-white" : "text-[#888888]"}`}>{label}</span>
                 <span className="text-white">{label}</span>
               </div>
             );
@@ -143,31 +129,20 @@ export const Header = () => {
         </nav>
 
         {/* HAMBURGER / X */}
-        <button
-          className="md:hidden text-white z-[3001]"
-          onClick={() => setMobileMenu(!mobileMenu)}
-        >
+        <button className="md:hidden text-white z-[3001]" onClick={() => setMobileMenu(!mobileMenu)}>
           {mobileMenu ? <X size={32} /> : <Menu size={32} />}
         </button>
       </header>
 
-      {/* MOBILE DROPDOWN — NO GAP (dynamic top) */}
+      {/* MOBILE DROPDOWN */}
       <div
         style={{ top: headerHeight }}
-        className={`
-          fixed left-0 w-full bg-black  z-[1500]
-          overflow-hidden transition-all duration-300
-          ${mobileMenu ? "max-h-[40vh] py-6" : "max-h-0 py-0"}
-          md:hidden
-        `}
+        className={`fixed left-0 w-full bg-black z-[1500] overflow-hidden transition-all duration-300
+          ${mobileMenu ? "max-h-[40vh] py-6" : "max-h-0 py-0"} md:hidden`}
       >
         <div className="flex flex-col items-center gap-5 text-xl text-[#888888] px-6">
           {navLinks.map(({ id, label }) => (
-            <div
-              key={id}
-              onClick={() => goToSection(id)}
-              className="cursor-pointer"
-            >
+            <div key={id} onClick={() => goToSection(id)} className="cursor-pointer">
               {label}
             </div>
           ))}
