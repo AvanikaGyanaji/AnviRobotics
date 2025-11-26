@@ -16,8 +16,8 @@ export const Footer = () => {
   };
 
   return (
-    <section className="w-full bg-[#00000060] pt-10 pb-8">
-      <div className="max-w-[1280px] mx-auto px-6 flex flex-col gap-12">
+    <footer className="w-full bg-[#00000060] pt-10 pb-8">
+      <div className="w-full max-w-[1600px] mx-auto flex flex-col gap-12">
         {/* ---------- GRID LAYOUT ---------- */}
         <div className="grid grid-cols-2 md:grid-cols-1 place-items-center gap-10 text-white">
           {/* ---------- COLUMN 1: LOGO + SOCIAL ---------- */}
@@ -29,7 +29,7 @@ export const Footer = () => {
 
             {/* SOCIAL ICONS */}
             <div className="flex justify-center align-middle gap-6 mt-4">
-              <a href="https://www.instagram.com/" target="_blank">
+              <a href="https://www.instagram.com/anvi_robotics" target="_blank">
                 <img
                   className="w-full max-w-[80px] object-contain object-center"
                   src="/images/Instagram.png"
@@ -116,12 +116,12 @@ export const Footer = () => {
 
           <Link
             to={""}
-            className="text-[#ffffff72] cursor-pointer underline underline-offset-2 hover:underline-offset-4"
+            className="text-[#ffffff72] cursor-pointer px-3 md:px-6 underline underline-offset-2 hover:underline-offset-4"
           >
             Privacy Policy
           </Link>
         </div>
       </div>
-    </section>
+    </footer>
   );
 };

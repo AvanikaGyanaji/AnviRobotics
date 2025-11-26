@@ -105,9 +105,8 @@ export const Home = () => {
       <section className="snap-section">
         <ContactUs />
       </section>
-
     
-
+      <Footer />
       {/* Fixed background gradient */}
       <div
         className="hero-gradient fixed bottom-[-180px] pointer-events-none"
