@@ -1,67 +1,125 @@
-import { MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
+const FooterPagesLinks = [
+  { label: "About", link: "about" },
+  { label: "Products", link: "products" },
+  { label: "Technology", link: "technology" },
+  { label: "Contact", link: "contact" },
+];
 
 export const Footer = () => {
   const scrollTo = (id) => {
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="h-[350px] bg-[#00000060]">
-      <div className="flex flex-col justify-center items-center pt-[10px] mx-auto">
-        
-        <img className="max-w-[110px] max-h-[80px]" src="/logos/anvi_white.png" />
+    <section className="w-full bg-[#00000060] pt-10 pb-8">
+      <div className="max-w-[1280px] mx-auto px-6 flex flex-col gap-12">
+        {/* ---------- GRID LAYOUT ---------- */}
+        <div className="grid grid-cols-2 md:grid-cols-1 place-items-center gap-10 text-white">
+          {/* ---------- COLUMN 1: LOGO + SOCIAL ---------- */}
+          <div className="flex flex-col justify-center items-center md:items-start gap-4">
+            <img
+              className="max-w-[200px] max-h-[80px] self-center"
+              src="/logos/anvi_white.png"
+            />
 
-        {/* ✨ Animated Nav Links */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.6 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex  md:flex-row flex-col h-[24px] overflow-hidden gap-x-[80px] mt-[16px] text-[18px] font-[DM Sans]"
-        >
+            {/* SOCIAL ICONS */}
+            <div className="flex justify-center align-middle gap-6 mt-4">
+              <a href="https://www.instagram.com/" target="_blank">
+                <img
+                  className="w-full max-w-[80px] object-contain object-center"
+                  src="/images/Instagram.png"
+                />
+              </a>
 
-          <div onClick={() => scrollTo("about")} className="hover:translate-y-[-28px] transition-transform duration-500 cursor-pointer">
-            <p className="text-[#888888]">About</p>
-            <p className="text-[#ffffff]">About</p>
+              <a
+                href="https://www.linkedin.com/company/anvirobotics/"
+                target="_blank"
+              >
+                <img
+                  className="w-full max-w-[60px] object-contain object-center"
+                  src="/images/Linkedin.png"
+                />
+              </a>
+            </div>
           </div>
 
-          <div onClick={() => scrollTo("products")} className="hover:translate-y-[-28px] transition-transform duration-500 cursor-pointer">
-            <p className="text-[#888888]">Products</p>
-            <p className="text-[#ffffff]">Products</p>
+          {/* ---------- COLUMN 2: QUICK LINKS ---------- */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="grid max-md:grid-cols-1 md:grid-cols-4 gap-5 text-center md:text-left place-items-center md:place-items-start"
+          >
+            {FooterPagesLinks.map((each) => (
+              <div
+                key={each.label}
+                onClick={() => scrollTo(each.link)}
+                className="group h-[24px] overflow-hidden cursor-pointer"
+              >
+                <div className="transition-transform duration-500 group-hover:-translate-y-[24px]">
+                  <p className="text-[#888888]">{each.label}</p>
+                  <p className="text-[#fff]">{each.label}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* ---------- COLUMN 3: ADDRESS ---------- */}
+          <div className="flex flex-col col-span-full items-center md:items-center gap-4 text-center md:text-left">
+            <div className="flex justify-center md:justify-start items-start gap-3">
+              <MapPin className="w-[20px]" />
+
+              <a
+                href="https://maps.app.goo.gl/AmueWvvHFZcgitgE9"
+                target="_blank"
+                className="text-[#ffffffb5] leading-6 cursor-pointer"
+              >
+                Anvi Robotics, 1st Floor, Modern Profound Tech Park,
+                <br />
+                White Field Rd, Kondapur, Whitefields, Madhapur,
+                <br />
+                Hyderabad, Telangana 500084
+              </a>
+            </div>
+
+            {/* EMAIL */}
+            <div className="flex justify-center md:justify-start items-start gap-3">
+              <Mail className="w-[18px]" />
+              <a
+                href="mailto:info@anvi.co"
+                target="_blank"
+                className="text-[#ffffff] no-underline cursor-pointer hover:underline hover:underline-offset-2"
+              >
+                info@anvi.co
+              </a>
+            </div>
           </div>
-
-          <div onClick={() => scrollTo("technology")} className="hover:translate-y-[-28px] transition-transform duration-500 cursor-pointer">
-            <p className="text-[#888888]">Technology</p>
-            <p className="text-[#ffffff]">Technology</p>
-          </div>
-
-          <div onClick={() => scrollTo("contact")} className="hover:translate-y-[-28px] transition-transform duration-500 cursor-pointer">
-            <p className="text-[#888888]">Contact</p>
-            <p className="text-[#ffffff]">Contact</p>
-          </div>
-
-        </motion.div>
-
-        <div className="flex gap-x-[25px] mx-auto justify-center mt-[30px]">
-         <a href="https://www.instagram.com/" target="_blank">   <img className="w-[60px] h-[15px]" src="/images/Instagram.png"/></a>
-         <a href="https://www.linkedin.com/company/anvirobotics/" target="_blank">   <img className="w-[60px] h-[15px]" src="/images/Linkedin.png"/></a>
-
         </div>
 
+        {/* ---------- BOTTOM BAR ---------- */}
+        <div className="w-full border-t border-[#ffffff60] pt-4 text-white text-sm flex flex-row justify-between text-center md:text-left gap-3">
+          <p className="text-[#ffffff72]">© 2025 anvi.co</p>
 
-        <div className="flex justify-center items-center gap-x-[10px] mx-auto mt-[30px] text-white">
-            <MapPin/>
-            <a href="https://maps.app.goo.gl/AmueWvvHFZcgitgE9" target="_blank" className="text-[#ffffff60]">Anvi Robotics,1st Floor, Modern Profound tech Park,<br/> White Field Rd, Kondapur, Whitefields, Madhapur, <br/>Hyderabad, Telangana 500084</a>
-        </div>
+          {/* <a
+            className="hover:underline"
+            href="mailto:info@anvi.co"
+            target="_blank"
+          >
+            info@anvi.co
+          </a> */}
 
-        <div className="mt-[30px] border-t-[1px] border-[#ffffff60] text-white flex justify-between w-[100%] px-[120px] pt-[5px]">
-           <p className="text-[#ffffff72]">©2025 anvi.co</p>
-           <a className="" href="mailto:info@anvi.co"   target="_blank">info@anvi.co</a>
-           <p className="text-[#ffffff72]">Privacy Policy</p>
+          <Link
+            to={""}
+            className="text-[#ffffff72] cursor-pointer underline underline-offset-2 hover:underline-offset-4"
+          >
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </section>
