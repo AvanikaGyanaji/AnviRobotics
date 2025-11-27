@@ -218,7 +218,7 @@ export const Products = () => {
         >
           {/* Title */}
           <div className="w-full max-w-[90%] m-auto md:w-full text-left md:text-center px-4 mb-12">
-            <h1 className="about-heading text-white">Our Products</h1>
+            <h2 className="about-heading text-white">Our Products</h2>
             <p className="about-content md:max-w-[80%] max-md:mt-[24px] mx-auto text-[#ffffff90]">
               From AI-powered surveillance to intelligent humanoids, Anvi
               Robotics delivers cutting-edge products designed for smarter,
