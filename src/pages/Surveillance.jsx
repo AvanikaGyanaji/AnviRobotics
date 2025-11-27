@@ -147,7 +147,7 @@ const Surveillance = () => {
 
         {/* Sections 1–4 */}
         <div ref={containerRef} className="relative z-10">
-          <div className="min-h-screen flex flex-col items-start px-[60px] py-[150px]">
+          <div className="min-h-screen flex flex-col items-start px-4 sm:px-8 md:px-[60px] py-[150px]">
           <h1 className="text-[36px] md:text-[56px] font-arial font-regular text-white">
             Surveillance <br /> Robot
           </h1>
@@ -160,7 +160,7 @@ const Surveillance = () => {
         {/* Section 2 */}
         <div
           ref={section2Ref}
-          className="min-h-screen flex flex-col justify-center px-[60px]"
+          className="min-h-screen flex flex-col justify-center px-4 sm:px-8 md:px-[60px]"
         >
           <p className="text-[24px] md:text-[28px] lg:text-[32px] font-regular leading-8 lg:leading-10 text-white break-words">
             {(() => {
@@ -245,7 +245,7 @@ const Surveillance = () => {
 
       {/* Sections 5–6 will scroll normally with NO fixed background */}
       <div className="relative bg-black z-0">
-        <div className="min-h-screen relative bg-black w-full px-[50px] py-[50px]">
+        <div className="min-h-screen relative bg-black w-full px-4 sm:px-8 md:px-[50px] py-[50px]">
           <h2 className="text-[24px] md:text-[32px] font-semibold text-white mb-10 text-center">
             Our Robot Solutions
           </h2>
@@ -270,7 +270,7 @@ const Surveillance = () => {
                 </p>
 
                 {/*hidden initially, slides in on hover */}
-                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[280px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
                   Reduce security personnel cost by up to 60% while maintaining 24/7 coverage
                 </p>
               </div>
@@ -290,7 +290,7 @@ const Surveillance = () => {
                     Smart Sentinel
                   </p>
                   {/* hidden initially, slides in on hover */}
-                  <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[230px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                  <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
                     Keep human security personnel out of potentially dangerous
                     situations
                   </p>
@@ -305,17 +305,17 @@ const Surveillance = () => {
                 <img
                   loading="lazy"
                   src="/surveillance/F4.png"
-                  alt="Collaborative Approach"
+                  alt="Visible Deterrence"
                   className="w-full h-full object-cover"
                 />
                 {/* Overlay */}
                 <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
-                  <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                  <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform max-sm:-translate-y-0 md:group-hover:translate-y-[-280px]">
                     Visible Detterence
                   </p>
 
                   {/* hidden initially, slides in on hover */}
-                  <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                  <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
                     Advanced robotic presence deters criminal activity before it
                     starts
                   </p>
@@ -328,7 +328,7 @@ const Surveillance = () => {
                 loading="lazy"
                 src="/surveillance/G6.png"
                 alt="Impact-Driven Solutions"
-                className="w-full h-full object-cover group-hover:scale-[1.05] transition-all duration-300"
+                className="w-max h-full object-cover group-hover:scale-[1.05] transition-all duration-300"
               />
               {/* Overlay */}
               <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
@@ -338,7 +338,7 @@ const Surveillance = () => {
                 </p>
 
                 {/*hidden initially, slides in on hover */}
-                <p className="absolute bottom-4 right-4 text-[#FFFFFFE5] text-[14px] font-dm max-w-[230px] max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[100px] group-hover:opacity-100 opacity-0">
+                <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
                   Easily expand your security coverage across multiple locations
                 </p>
               </div>
