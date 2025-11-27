@@ -1,8 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronsUp } from "lucide-react";
-export const Herosection = () => {
+import { scrollToTarget } from "../hooks/ScrollToTarget";
 
-  // 🔒 IMMEDIATE SCROLL LOCK (executed before paint)
+export const Herosection = () => {
+  const scrollHeight = useRef(0);
+  const [hasScrolledToId, setHasScrolledToId] = useState(false);
+  const SCROLL_DURATION = 400;
+
   if (typeof window !== "undefined") {
     const introPlayed = sessionStorage.getItem("introPlayed");
     if (!introPlayed) {
@@ -51,43 +55,79 @@ export const Herosection = () => {
     body.dataset.introDone = "true";
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      scrollHeight.current = window.scrollY;
+      const aboutUsElement = document.getElementById("about");
+
+      // Check threshold (10px) AND if navigation has NOT occurred yet
+      if (scrollHeight.current > 5 && !hasScrolledToId) {
+        if (aboutUsElement) {
+          // 🎯 MODIFICATION: Call the custom function with duration
+          scrollToTarget(aboutUsElement, SCROLL_DURATION);
+
+          // Mark as complete to prevent repetition
+          setHasScrolledToId(true);
+          // console.log(`Smoothly navigated to 'about' over ${SCROLL_DURATION}ms.`);
+        }
+      }
+      // Reset logic: allow scrolling again if user returns to the top
+      else if (scrollHeight.current < 5 && hasScrolledToId) {
+        setHasScrolledToId(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [hasScrolledToId]);
+
   return (
     <section
       id="herosection"
       className="herosection w-full flex flex-col justify-center items-center relative overflow-hidden"
-    ><div className="absolute inset-0 w-full h-full overflow-hidden z-[-20]">
-  <video
-    className="w-full h-full object-cover video-Herosection "
-    src="/anvirobotics.mp4"
-    autoPlay
-    loop
-    muted
-    playsInline
-  />
-</div>
+    >
+      <div className="absolute inset-0 w-full h-full overflow-hidden z-[-20]">
+        <video
+          className="w-full h-full object-cover video-Herosection "
+          src="/anvirobotics.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      </div>
 
       <div className="flex flex-col justify-center items-center text-center px-[1vw]">
         <h1 className="heading hero-heading font-bold text-[#FEFEFE33]">
           <span className="word1">Smarter.</span>
           <span className="word2 pr-1">Faster.</span>
           <span className="word3 pr-1 relative">Limitless</span>
-          <span className="tm xs:text-[20px] md:text-[64px] lg:text-[80px] absolute">™</span>
+          <span className="tm xs:text-[20px] md:text-[64px] lg:text-[80px] absolute">
+            ™
+          </span>
         </h1>
 
         <p className="hero-text text-white flex flex-col justify-center items-center gap-y-[4px] max-w-[450px] font-[DM Sans] opacity-0">
-        Empowering Enterprises with AI-driven robotics that learn, adapt, and excel at every task.
+          Empowering Enterprises with AI-driven robotics that learn, adapt, and
+          excel at every task.
         </p>
       </div>
 
       <div className="text-scroll absolute bottom-[10px] opacity-0 flex gap-x-[5px]">
         <h1 className="inline-block text-white">Scroll to Roboverse</h1>
         <div className="indicator h-[20px] w-[20px] overflow-hidden   z-[100] bg-transparent">
-  <div className="icons">
-    <span className="text-[#888888]"><ChevronsUp /></span>
-    <span className="text-white "><ChevronsUp /></span>
-  </div>
-</div>
-
+          <div className="icons">
+            <span className="text-[#888888]">
+              <ChevronsUp />
+            </span>
+            <span className="text-white ">
+              <ChevronsUp />
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );
