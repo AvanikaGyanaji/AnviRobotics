@@ -118,28 +118,93 @@ export const Journey = () => {
     return () => unsub();
   }, [scrollYProgress]); // Removed svgWidth from dependency array since it's hardcoded now
 
-  return (
-    <>
-      <section
-        id="journey"
-        ref={sectionRef}
-        className="relative w-full h-[300vh] "
-      >
-        <div className="sticky top-[100px] overflow-hidden w-full">
-          <div className="flex justify-center">
-            <h1 className="text-[48px] text-white">Our Journey Timeline</h1>
-          </div>
+//   return (
+//     <>
+//       <section
+//         id="journey"
+//         ref={sectionRef}
+//         className="relative w-full h-[250vh] bg-[#f5f5f5] "
+//       >
+//         <div className="sticky top-[100px] overflow-hidden w-full">
+//           <div className="flex justify-center">
+//             <h1 className="text-[48px] text-black">Our Journey Timeline</h1>
+//           </div>
+//           <motion.div
+//             ref={svgWrapperRef}
+//             style={{ x: xMovement }}
+//             // Added padding here for visual offset instead of complicating xMovement/SVG structure
+//             className="inline-block bg-black rounded-[28px] overflow-auto w-[90%] mx-auto "
+//             dangerouslySetInnerHTML={{
+//               __html: svgCode,
+//             }}
+//           />
+//         </div>
+//       </section>
+//     </>
+//   );
+// };
+return (
+  <>
+    <section
+      id="journey"
+      ref={sectionRef}
+      className="relative w-full h-[250vh] bg-[#eff0f0] pb-[100px] light-bg-trigger"
+    >
+      {/* Sticky container that stays fixed while page scrolls */}
+      <div className="sticky top-[100px] w-full">
+
+        {/* Title */}
+        <div className="flex  mb-6 px-[20px] md:justify-center">
+          <h2 className=" md:text-center text-start about-heading text-black">Our Journey Timeline</h2>
+        </div>
+
+        {/* Outer fixed black rounded container */}
+        <div className="w-[95%] mx-auto bg-black rounded-[28px] overflow-hidden relative">
+
+          {/* GRADIENT LIKE CONTACT-US */}
+          <div
+            className="
+              absolute 
+              bottom-0 
+              left-1/2 
+              -translate-x-1/2
+              w-[600px] 
+              h-[350px] 
+              opacity-60
+              pointer-events-none
+              blur-[120px]
+              z-[1]
+            "
+            style={{
+              background: `radial-gradient(
+                ellipse at center,
+                rgba(0, 151, 178, 0.45) 0%,
+                rgba(51, 188, 209, 0.35) 25%,
+                rgba(102, 211, 226, 0.22) 50%,
+                rgba(0, 90, 106, 0.18) 70%,
+                rgba(0, 0, 0, 1) 100%
+              )`,
+            }}
+          />
+
+          {/* INNER SCROLLING SVG WRAPPER */}
           <motion.div
             ref={svgWrapperRef}
             style={{ x: xMovement }}
-            // Added padding here for visual offset instead of complicating xMovement/SVG structure
-            className="inline-block "
+            className="
+              w-max
+              overflow-visible
+              inline-block
+              relative
+              z-[5]         /* ensures SVG stays above gradient */
+            "
             dangerouslySetInnerHTML={{
               __html: svgCode,
             }}
           />
         </div>
-      </section>
-    </>
-  );
+      </div>
+    </section>
+  </>
+);
 };

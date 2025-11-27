@@ -1,76 +1,486 @@
 
+// import { motion, useScroll, useTransform } from "framer-motion";
+// import React, { useRef } from "react";
 
-import React, { useRef } from "react";
+// export const Technology = () => {
+//   const scrollRef = useRef(null);
+
+//   const { scrollYProgress } = useScroll({
+//     target: scrollRef,
+//     offset: ["start end", "end start"],
+//   });
+
+//   // ─────────────────────────────────────────────
+//   // VIDEO — START LATE AFTER FULL SECTION IS VISIBLE
+//   const videoRiseY = useTransform(
+//     scrollYProgress,
+//     [0.05,0.09, 0.15, 0.25],
+//     ["0%", "0%","-50%", "-100%"]
+//   );
+
+
+//   // ─────────────────────────────────────────────
+//   // TOP "OUR TECHNOLOGY" TEXT — ONLY AFTER VIDEO SETTLES
+//   const topTextY = useTransform(scrollYProgress, [0.3, 0.4], [0, -300]);
+  
+
+//   // ─────────────────────────────────────────────
+//   // AUTONOMOUS NAVIGATION TEXT — AFTER TOP TEXT GOES UP
+//   const divUP = useTransform(scrollYProgress, [0.4, 0.55], ["200%", "-50%"]);
+//   const divOpacity = useTransform(scrollYProgress, [0.4, 0.55,0.73], [0, 1,0]);
+
+//    // AUTONOMOUS NAVIGATION TEXT — AFTER TOP TEXT GOES UP
+//   const div1UP = useTransform(scrollYProgress, [0.7, 0.75], ["400%", "-50%"]);
+//   const div1Opacity = useTransform(scrollYProgress, [0.7, 0.75], [0, 1]);
+//   const div1scale = useTransform(scrollYProgress, [0.7, 0.75], [0.8, 1]);
+
+//   // ─────────────────────────────────────────────
+//   // BLACK CONTAINER RESIZE
+//   const backgroundHeight = useTransform(
+//     scrollYProgress,
+//     [0.40, 0.55, 0.59, 0.65, 0.75],
+//     ["100vh", "100vh", "95vh", "90vh", "80vh"]
+//   );
+
+//   const backgroundWIdth = useTransform(
+//     scrollYProgress,
+//     [0.40, 0.55, 0.59,0.65, 0.75],
+//     ["100%", "100%", "95%","90%", "80%"]
+//   );
+//   const backgroundradius = useTransform(
+//     scrollYProgress,
+//     [0.54,0.55],[0,32]
+//   );
+
+//   // ─────────────────────────────────────────────
+//   // REMAINING LABEL ANIMATIONS AND DASHBOARD AS-IS
+//   // const controlDiv = useTransform(scrollYProgress, [0.75, 0.82, 0.90], [500, -50, -140]);
+//   // const controlDivOpacity = useTransform(scrollYProgress, [0.75, 0.82, 0.90], [0, 1, 1]);
+//   // const items = useTransform(scrollYProgress, [0.82, 0.88], ["-180%", "0%"]);
+//   // const size = useTransform(scrollYProgress, [0.88, 0.94, 1], ["44px", "32px", "30px"]);
+//   // const bordercolor = useTransform(scrollYProgress, [0.90, 1], ["#000", "#fff"]);
+
+//   const lable1 = useTransform(scrollYProgress, [0.50, 0.60, 0.65], ["500%", "-1200%", "-3400%"]);
+//   const lable2 = useTransform(scrollYProgress, [0.50, 0.60, 0.65], ["500%", "-600%", "-3400%"]);
+//   const lable3 = useTransform(scrollYProgress, [0.55, 0.68, 0.73], ["500%", "-1200%", "-3400%"]);
+//   const lable4 = useTransform(scrollYProgress, [0.55, 0.68, 0.73], ["500%", "-600%", "-2400%"]);
+
+//   const lable5 = useTransform(scrollYProgress, [0.75, 0.79, 0.85], ["500%", "-890%", "-2400%"]);
+//   const lable6 = useTransform(scrollYProgress, [0.75, 0.79, 0.85], ["500%", "-400%", "-2400%"]);
+//   const lable7 = useTransform(scrollYProgress, [0.8, 0.85, 0.9], ["500%", "-800%", "-1250%"]);
+//   const lable8 = useTransform(scrollYProgress, [0.8, 0.85, 0.9], ["500%", "-400%", "-710%"]);
+//   const lable9 = useTransform(scrollYProgress, [0.8, 0.85, 0.9], ["500%", "-200%", "-400%"]);
+
+//   return (
+//     <section id="technology" ref={scrollRef} className="relative w-full h-[800vh] bg-[#eff0f0]">
+
+//       {/* Sticky Fullscreen Container */}
+//       <div className="sticky top-0 h-screen w-full flex justify-center items-center">
+
+//         {/* Black Main Container */}
+//         <motion.div
+//           style={{ height: backgroundHeight, width: backgroundWIdth ,borderRadius:backgroundradius }}
+//           className="bg-black relative overflow-hidden h-full w-full"
+//         >
+
+//           {/* VIDEO RISING FROM BOTTOM */}
+//           <motion.div
+//             style={{ y: videoRiseY }}
+//             className="absolute left-0 top-full w-full h-full overflow-hidden z-[1]"
+//           >
+//             <video
+//               className="w-full h-full object-cover"
+//               src="/anvirobotics.mp4"
+//               autoPlay
+//               loop
+//               muted
+//               playsInline
+//             />
+//           </motion.div>
+
+//           {/* OUR TECHNOLOGY TEXT */}
+//           <motion.div
+//             style={{ y: topTextY }}
+//             className="absolute top-[100px] w-full text-center z-[10]"
+//           >
+//             <h1 className="text-[44px] text-white font-bold">Our Technology</h1>
+//             <p className="text-[24px] text-white mt-2 w-[80%] mx-auto">
+//               Blending AI, precision engineering, and automation we build robots that deliver 
+//               unmatched power endurance, and intelligence.
+//             </p>
+//           </motion.div>
+
+//           {/* AUTONOMOUS NAVIGATION TEXT */}
+//           <motion.div
+//             style={{ y: divUP, opacity: divOpacity }}
+//             className="absolute left-1/2 top-1/2 w-full text-center z-[10]"
+//           >
+//             <div className="-translate-x-1/2">
+//               <h1 className="text-[44px] font-black text-white">Autonomous Navigation</h1>
+//               <p className="text-[24px] text-white mt-2">How it works</p>
+//             </div>
+//           </motion.div>
+
+//           {/* LABELS + DASHBOARD (No changes) */}
+//           <motion.h1 style={{ y: lable1 }} className="absolute left-[15%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• LiDAR And Sensor Fusion</motion.h1>
+//           <motion.h1 style={{ y: lable2 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• SLAM (Simultaneous Localization and Mapping)</motion.h1>
+
+//           <motion.h1 style={{ y: lable3 }} className="absolute left-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• AI-Driven Pathfinding</motion.h1>
+//           <motion.h1 style={{ y: lable4 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Dynamic Obstacle Avoidance</motion.h1>
+
+//            <motion.div
+//             style={{ y: div1UP, opacity: div1Opacity }}
+//             className="absolute left-1/2 top-1/2 w-full text-center z-[10]"
+//           >
+//             <div className="-translate-x-1/2">
+//               <h1 className="text-[44px] font-black text-white">The Control Dashboard</h1>
+//               <p className="text-[24px] text-white mt-2">Innovation</p>
+//             </div>
+//           </motion.div>
+
+//           <motion.h1 style={{ y: lable5 }} className="absolute left-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Real-Time Fleet Oversight</motion.h1>
+//           <motion.h1 style={{ y: lable6 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Actionable Insights & Alerts</motion.h1>
+//           <motion.h1 style={{ y: lable7 }} className="absolute left-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Intuitive Control & Customization</motion.h1>
+//           <motion.h1 style={{ y: lable8 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Data & Analytics</motion.h1>
+//           <motion.h1 style={{ y: lable9 }} className="absolute left-[40%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Customization</motion.h1>
+//         </motion.div>
+//       </div>
+//     </section>
+//   );
+// // };
+
+// import { motion, useScroll, useTransform } from "framer-motion";
+// import React, { useRef, useState, useEffect } from "react";
+
+// export const Technology = () => {
+//   const scrollRef = useRef(null);
+
+//   // Detect Mobile
+//   const [isMobile, setIsMobile] = useState(false);
+//   useEffect(() => {
+//     const update = () => setIsMobile(window.innerWidth < 768);
+//     update();
+//     window.addEventListener("resize", update);
+//     return () => window.removeEventListener("resize", update);
+//   }, []);
+
+//   // Always call hooks
+//   const { scrollYProgress } = useScroll({
+//     target: scrollRef,
+//     offset: ["start end", "end start"],
+//   });
+
+//   // Shared animations (video + headings)
+//   const videoRiseY = useTransform(scrollYProgress, [0.05, 0.09, 0.15, 0.25], ["0%", "0%", "-50%", "-100%"]);
+//   const topTextY = useTransform(scrollYProgress, [0.3, 0.4], [0, -250]);
+//   const navY = useTransform(scrollYProgress, [0.4, 0.55,0.65,0.7], ["120%", "0%","0%","-550%"]);
+//   const navOpacity = useTransform(scrollYProgress, [0.42, 0.55,7], [0, 1,0]);
+
+//   const dashY = useTransform(scrollYProgress, [0.63, 0.75], ["120%", "-50%"]);
+//   const dashOpacity = useTransform(scrollYProgress, [0.65, 0.75], [0, 1]);
+
+//   // DESKTOP LABEL ANIMATIONS - untouched
+//   const backgroundHeight = useTransform(scrollYProgress, [0.4, 0.55, 0.59, 0.65, 0.75], ["100vh", "100vh", "95vh", "90vh", "80vh"]);
+//   const backgroundWidth = useTransform(scrollYProgress, [0.4, 0.55, 0.59, 0.65, 0.75], ["100%", "100%", "95%", "90%", "80%"]);
+//   const backgroundRadius = useTransform(scrollYProgress, [0.54, 0.55], [0, 32]);
+
+//   // MOBILE LABEL ANIMATIONS - modified for better effect
+//   const backgroundHeight1 = useTransform(scrollYProgress, [0.4, 0.55, 0.59, 0.65, 0.75], ["100vh", "98vh", "97vh", "96vh", "95vh"]);
+//   const backgroundWidth1 = useTransform(scrollYProgress, [0.4, 0.55, 0.59, 0.65, 0.75], ["100%", "99.5%", "99%", "99%", "99%"]);
+//   const backgroundRadius2 = useTransform(scrollYProgress, [0.54, 0.55], [0, 32]);
+
+//   const l1 = useTransform(scrollYProgress, [0.5, 0.6, 0.65], ["500%", "-1200%", "-3400%"]);
+//   const l2 = useTransform(scrollYProgress, [0.5, 0.6, 0.65], ["500%", "-600%", "-3400%"]);
+//   const l3 = useTransform(scrollYProgress, [0.55, 0.68, 0.73], ["500%", "-1200%", "-3400%"]);
+//   const l4 = useTransform(scrollYProgress, [0.55, 0.68, 0.73], ["500%", "-600%", "-2400%"]);
+//   const l5 = useTransform(scrollYProgress, [0.75, 0.79, 0.85], ["500%", "-890%", "-2400%"]);
+//   const l6 = useTransform(scrollYProgress, [0.75, 0.79, 0.85], ["500%", "-400%", "-2400%"]);
+//   const l7 = useTransform(scrollYProgress, [0.8, 0.85, 0.9], ["500%", "-800%", "-1250%"]);
+//   const l8 = useTransform(scrollYProgress, [0.8, 0.85, 0.9], ["500%", "-400%", "-710%"]);
+//   const l9 = useTransform(scrollYProgress, [0.8, 0.85, 0.9], ["500%", "-200%", "-400%"]);
+
+//   // ─────────────────────────────────────────────
+//   // MOBILE UI — FULL BLOCK SCROLL (correct behavior)
+//   // ─────────────────────────────────────────────
+// if (isMobile) {
+//   return (
+//     <section ref={scrollRef} className="relative w-full h-[800vh] bg-[#eff0f0]">
+//       <div className="sticky top-0 h-screen w-full flex justify-center items-center">
+
+//         {/* MOBILE — shrink width + corner radius only */}
+//         <motion.div
+//           style={{
+//             height: "100%",          // full height
+//             width: backgroundWidth,  // animate width
+//             borderRadius: backgroundRadius, // animate corners
+//           }}
+//           className="bg-black relative overflow-hidden"
+//         >
+
+//           {/* VIDEO */}
+//           <motion.div style={{ y: videoRiseY }} className="absolute top-full left-0 w-full h-full">
+//             <video
+//               className="w-full h-full object-cover"
+//               src="/anvirobotics.mp4"
+//               autoPlay loop muted playsInline
+//             />
+//           </motion.div>
+
+//           {/* OUR TECHNOLOGY */}
+//           <motion.div
+//             style={{ y: topTextY }}
+//             className="absolute top-[100px] w-full text-center text-white px-6"
+//           >
+//             <h1 className="text-[32px] font-bold">Our Technology</h1>
+//             <p className="text-[16px] mt-2 opacity-85">
+//               Blending AI and robotics to deliver powerful intelligence.
+//             </p>
+//           </motion.div>
+
+//           {/* AUTONAV */}
+//           <motion.div
+//             style={{ y: navY, opacity: navOpacity }}
+//             className="absolute left-0 top-[180px] w-full text-white px-6"
+//           >
+//             <h2 className="text-[26px] font-bold mb-3">Autonomous Navigation</h2>
+
+//             <div className="space-y-3 text-[16px]">
+//               <Label text="• LiDAR And Sensor Fusion" />
+//               <Label text="• SLAM Mapping" />
+//               <Label text="• AI-Driven Pathfinding" />
+//               <Label text="• Dynamic Obstacle Avoidance" />
+//             </div>
+//           </motion.div>
+
+//           {/* DASHBOARD */}
+//           <motion.div
+//             style={{ y: dashY, opacity: dashOpacity }}
+//             className="absolute left-0 top-[380px] w-full text-white px-6"
+//           >
+//             <h2 className="text-[26px] font-bold mb-3">The Control Dashboard</h2>
+
+//             <div className="flex flex-col gap-y-3 text-[16px]">
+//               <Label text="• Real-Time Fleet Oversight" />
+//               <Label text="• Actionable Insights & Alerts" />
+//               <Label text="• Intuitive Control & Customization" />
+//               <Label text="• Data & Analytics" />
+//               <Label text="• Customization" />
+//             </div>
+//           </motion.div>
+
+//         </motion.div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
+//   // ─────────────────────────────────────────────
+//   // DESKTOP (UNTOUCHED ORIGINAL)
+//   // ─────────────────────────────────────────────
+//   return (
+//     <section id="technology" ref={scrollRef} className="relative w-full h-[800vh] bg-[#eff0f0]">
+//       <div className="sticky top-0 h-screen w-full flex justify-center items-center">
+//       <motion.div
+//   style={
+//     isMobile
+//       ? { 
+//           height: backgroundHeight1,          // mobile = full height
+//           width: backgroundWidth1,  // mobile = shrink width
+//           borderRadius: backgroundRadius2 // mobile = animate corner radius
+//         }
+//       : { 
+//           height: backgroundHeight, 
+//           width: backgroundWidth, 
+//           borderRadius: backgroundRadius 
+//         }
+//   }
+//   className="bg-black relative overflow-hidden"
+// >
+
+
+//           {/* VIDEO */}
+//           <motion.div style={{ y: videoRiseY }} className="absolute left-0 top-full w-full h-full overflow-hidden z-[1]">
+//             <video className="w-full h-full object-cover" src="/anvirobotics.mp4" autoPlay loop muted playsInline />
+//           </motion.div>
+
+//           {/* OUR TECHNOLOGY */}
+//           <motion.div style={{ y: topTextY }} className="absolute top-[100px] w-full text-center z-[10]">
+//             <h1 className="text-[44px] text-white font-bold">Our Technology</h1>
+//             <p className="text-[24px] text-white mt-2 w-[80%] mx-auto">
+//               Blending AI, precision engineering, and robotics for unmatched power and intelligence.
+//             </p>
+//           </motion.div>
+
+//           {/* AUTONAV */}
+//           <motion.div style={{ y: navY, opacity: navOpacity }} className="absolute left-1/2 top-1/2 w-full text-center z-[10]">
+//             <div className="-translate-x-1/2">
+//               <h1 className="text-[44px] font-black text-white">Autonomous Navigation</h1>
+//               <p className="text-[24px] text-white mt-2">How it works</p>
+//             </div>
+//           </motion.div>
+
+//           {/* LABELS */}
+//           <motion.h1 style={{ y: l1 }} className="absolute left-[15%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• LiDAR And Sensor Fusion</motion.h1>
+//           <motion.h1 style={{ y: l2 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• SLAM (Simultaneous Localization and Mapping)</motion.h1>
+//           <motion.h1 style={{ y: l3 }} className="absolute left-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• AI-Driven Pathfinding</motion.h1>
+//           <motion.h1 style={{ y: l4 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Dynamic Obstacle Avoidance</motion.h1>
+
+//           {/* CONTROL DASH */}
+//           <motion.div style={{ y: dashY, opacity: dashOpacity }} className="absolute left-1/2 top-1/2 w-full text-center z-[10]">
+//             <div className="-translate-x-1/2">
+//               <h1 className="text-[44px] font-black text-white">The Control Dashboard</h1>
+//               <p className="text-[24px] text-white mt-2">Innovation</p>
+//             </div>
+//           </motion.div>
+
+//           <motion.h1 style={{ y: l5 }} className="absolute left-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Real-Time Fleet Oversight</motion.h1>
+//           <motion.h1 style={{ y: l6 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Actionable Insights & Alerts</motion.h1>
+//           <motion.h1 style={{ y: l7 }} className="absolute left-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Intuitive Control & Customization</motion.h1>
+//           <motion.h1 style={{ y: l8 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Data & Analytics</motion.h1>
+//           <motion.h1 style={{ y: l9 }} className="absolute left-[40%] bottom-[-80px] bg-white text-black px-4 py-2 rounded-md z-[20]">• Customization</motion.h1>
+
+//         </motion.div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// const Label = ({ text }) => (
+//   <div  className="bg-white  text-black px-4 py-2 mb-[10px] rounded-md text-[14px] shadow-sm">
+//     {text}
+//   </div>
+// );
 import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
 
 export const Technology = () => {
   const scrollRef = useRef(null);
 
+  // Detect Mobile
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth < 768);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  // One scrollYProgress for both desktop & mobile
   const { scrollYProgress } = useScroll({
     target: scrollRef,
     offset: ["start end", "end start"],
   });
 
-  // ─────────────────────────────────────────────
-  // TOP TEXT CONTAINER ANIMATION
-  const topTextOpacity = useTransform(scrollYProgress, [0.05, 0.15], [0.2, 1]);
-  const topTextY = useTransform(scrollYProgress, [0.20, 0.35], [0, -300]);
+  // 🔥 SEND HEADER THEME EVENTS BASED ON SCROLL POSITION
+  useEffect(() => {
+    return scrollYProgress.on("change", (v) => {
+      // When the black container is covering the top area
+      const blackBoxActive = v > 0.38 && v < 0.92;
 
-  // ─────────────────────────────────────────────
-  // BACKGROUND VIDEO ANIMATION
-  const videoOpacity = useTransform(scrollYProgress, [0.02, 0.18, 0.32], [0, 0, 1]);
-  const videoScale = useTransform(scrollYProgress, [0.02, 0.32], [0.8, 1]);
+      window.dispatchEvent(
+        new CustomEvent("header-theme-change", {
+          detail: { dark: blackBoxActive }, // true = white text/logo
+        })
+      );
+    });
+  }, [scrollYProgress]);
 
+  // Shared intro animations
+  const videoRiseY = useTransform(
+    scrollYProgress,
+    [0.05, 0.09, 0.15, 0.25],
+    ["0%", "0%", "-50%", "-100%"]
+  );
+
+  const topTextY = useTransform(scrollYProgress, [0.3, 0.4], [0, -250]);
+
+  const navY = useTransform(
+    scrollYProgress,
+    [0.4, 0.55, 0.65, 0.7],
+    ["120%", "0%", "0%", "-550%"]
+  );
+  const navOpacity = useTransform(scrollYProgress, [0.42, 0.55], [0, 1]);
+
+  const dashY = useTransform(scrollYProgress, [0.63, 0.75], ["120%", "-50%"]);
+  const dashOpacity = useTransform(scrollYProgress, [0.65, 0.75], [0, 1]);
+
+  // DESKTOP — keep original animations
   const backgroundHeight = useTransform(
     scrollYProgress,
-    [0.30, 0.40, 0.50, 0.60, 0.70, 0.75, 0.80, 0.87, 0.92],
-    ["75vh","85vh","75vh","60vh","65vh","85vh","75vh","75vh","65vh"]
+    [0.4, 0.55, 0.59, 0.65, 0.75],
+    ["100vh", "100vh", "95vh", "90vh", "80vh"]
   );
-
-  const backgroundWIdth = useTransform(
+  const backgroundWidth = useTransform(
     scrollYProgress,
-    [0.50, 0.60, 0.70],
-    ["100%", "90%", "80%"]
+    [0.4, 0.55, 0.59, 0.65, 0.75],
+    ["100%", "100%", "95%", "90%", "80%"]
+  );
+  const backgroundRadius = useTransform(
+    scrollYProgress,
+    [0.54, 0.55],
+    [0, 32]
   );
 
-  // ─────────────────────────────────────────────
-  // CENTER DIV ANIMATION
-  const divUP = useTransform(scrollYProgress, [0.22, 0.40], ["500%", "-80%"]);
-  const divOpacity = useTransform(scrollYProgress, [0.22, 0.40], [0, 1]);
+  // MOBILE — only WIDTH + RADIUS should animate
+  const mobileWidth = useTransform(
+    scrollYProgress,
+    [0.4, 0.55, 0.65],
+    ["100%", "97%", "95%"]
+  );
+  const mobileHeight = useTransform(
+    scrollYProgress,
+    [0.4, 0.55, 0.65],
+    ["100%", "97%", "85%"]
+  );
+  const mobileRadius = useTransform(
+    scrollYProgress,
+    [0.45, 0.55],
+    [0, 26]
+  );
 
-  const controlDiv = useTransform(scrollYProgress, [0.63, 0.70, 0.77], [500, -50, -140]);
-  const controlDivOpacity = useTransform(scrollYProgress, [0.60, 0.70, 0.78], [0, 1, 1]);
-  const items = useTransform(scrollYProgress, [0.70, 0.78], ["-180%", "0%"]);
-  const size = useTransform(scrollYProgress, [0.74, 0.80, 0.86], ["44px", "32px", "30px"]);
-  const bordercolor = useTransform(scrollYProgress, [0.78, 0.90], ["#000000", "#ffffff"]);
-
-  // ─────────────────────────────────────────────
-  // LABELS ANIMATION (SMOOTH RANGES)
-  const lable1 = useTransform(scrollYProgress, [0.38, 0.48, 0.58], ["500%", "-1200%", "-3400%"]);
-  const lablescale = useTransform(scrollYProgress, [0.38, 0.48, 0.58], [0.5, 1, 0.5]);
-
-  const lable2 = useTransform(scrollYProgress, [0.38, 0.48, 0.58], ["500%", "-600%", "-3400%"]);
-
-  const lable3 = useTransform(scrollYProgress, [0.48, 0.58, 0.68], ["500%", "-1200%", "-3400%"]);
-  const lablescale2 = useTransform(scrollYProgress, [0.48, 0.58, 0.68], [0.5, 1, 0.5]);
-
-  const lable4 = useTransform(scrollYProgress, [0.48, 0.58, 0.68], ["500%", "-600%", "-2400%"]);
-
-  const lable5 = useTransform(scrollYProgress, [0.65, 0.72, 0.78], ["500%", "-890%", "-2400%"]);
-  const lable6 = useTransform(scrollYProgress, [0.65, 0.72, 0.78], ["500%", "-400%", "-2400%"]);
-
-  const lable7 = useTransform(scrollYProgress, [0.72, 0.80, 0.88], ["500%", "-300%", "-950%"]);
-  const lable8 = useTransform(scrollYProgress, [0.72, 0.80, 0.88], ["500%", "-400%", "-710%"]);
-  const lable9 = useTransform(scrollYProgress, [0.80, 0.88, 0.95], ["500%", "-200%", "-300%"]);
+  // Label animations (desktop only)
+  const l1 = useTransform(scrollYProgress, [0.5, 0.6, 0.65], ["500%", "-1200%", "-3400%"]);
+  const l2 = useTransform(scrollYProgress, [0.5, 0.6, 0.65], ["500%", "-600%", "-3400%"]);
+  const l3 = useTransform(scrollYProgress, [0.55, 0.68, 0.73], ["500%", "-1200%", "-3400%"]);
+  const l4 = useTransform(scrollYProgress, [0.55, 0.68, 0.73], ["500%", "-600%", "-2400%"]);
+  const l5 = useTransform(scrollYProgress, [0.75, 0.79, 0.85], ["500%", "-890%", "-2400%"]);
+  const l6 = useTransform(scrollYProgress, [0.75, 0.79, 0.85], ["500%", "-400%", "-2400%"]);
+  const l7 = useTransform(scrollYProgress, [0.8, 0.85, 0.9], ["500%", "-800%", "-1250%"]);
+  const l8 = useTransform(scrollYProgress, [0.8, 0.85, 0.9], ["500%", "-400%", "-710%"]);
+  const l9 = useTransform(scrollYProgress, [0.8, 0.85, 0.9], ["500%", "-200%", "-400%"]);
 
   return (
-    <section id="technology" ref={scrollRef} className="relative w-full h-[600vh]">
-      <div className="sticky top-[120px] flex justify-center">
+    <section
+      id="technology"
+      ref={scrollRef}
+      className="relative w-full h-[800vh] bg-[#eff0f0] light-bg-trigger"
+    >
+      <div className="sticky top-0 h-screen w-full flex justify-center items-center">
 
-        <motion.div style={{ height: backgroundHeight, width: backgroundWIdth }} className="w-full rounded-[32px] relative overflow-hidden">
+        {/* MAIN CONTAINER */}
+        <motion.div
+          style={
+            isMobile
+              ? {
+                  height: mobileHeight,
+                  width: mobileWidth,
+                  borderRadius: mobileRadius,
+                }
+              : {
+                  height: backgroundHeight,
+                  width: backgroundWidth,
+                  borderRadius: backgroundRadius,
+                }
+          }
+          className="bg-black relative overflow-hidden"
+        >
 
-          {/* BACKGROUND VIDEO */}
-          <motion.div style={{ opacity: videoOpacity, scale: videoScale }} className="absolute inset-0">
+          {/* VIDEO */}
+          <motion.div
+            style={{ y: videoRiseY }}
+            className="absolute top-full left-0 w-full h-full overflow-hidden"
+          >
             <video
               className="w-full h-full object-cover"
               src="/anvirobotics.mp4"
@@ -81,58 +491,88 @@ export const Technology = () => {
             />
           </motion.div>
 
-          {/* TOP TEXT CONTAINER */}
+          {/* OUR TECHNOLOGY */}
           <motion.div
-            style={{ opacity: topTextOpacity, y: topTextY }}
-            className="absolute top-[100px] w-full text-center z-20"
+            style={{ y: topTextY }}
+            className="absolute top-[100px] w-full text-center text-white px-6"
           >
-            <h1 className="text-[44px] text-white font-bold about-heading">Our Technology</h1>
-            <p className="text-[24px] text-white mt-2 about-content">
-              Blending AI, precision engineering, and automation we build robots that deliver <br />
-              unmatched power endurance, and intelligence.
+            <h2 className="about-heading text-[32px] md:text-[44px] font-bold">Our Technology</h2>
+            <p className="text-[16px] md:text-[24px] mt-2 opacity-85 md:w-[80%] mx-auto">
+              Blending AI, precision engineering, and robotics for unmatched power and intelligence.
             </p>
           </motion.div>
 
-          {/* CENTER TEXT — Autonomous Navigation */}
+          {/* AUTONAV */}
           <motion.div
-            style={{ y: divUP, opacity: divOpacity }}
-            className="absolute left-1/2 top-1/2 w-full text-center"
+            style={{ y: navY, opacity: navOpacity }}
+            className={`absolute w-full text-white px-6 ${
+              isMobile ? "left-0 top-[180px] text-left" : "left-1/2 top-1/2 text-center -translate-x-1/2"
+            }`}
           >
-            <div className="transform -translate-x-1/2">
-              <h1 className="text-[44px] font-black font-[Arial] text-white ">Autonomous Navigation</h1>
-              <p className="text-[24px] text-white mt-2 about-content">How it works</p>
-            </div>
+            <h2 className="text-[26px] md:text-[44px] font-bold mb-3">Autonomous Navigation</h2>
+            <p>How it Works</p>
+
+            {isMobile && (
+              <div className="space-y-3 text-[16px]">
+                <Label text="• LiDAR And Sensor Fusion" />
+                <Label text="• SLAM Mapping" />
+                <Label text="• AI-Driven Pathfinding" />
+                <Label text="• Dynamic Obstacle Avoidance" />
+              </div>
+            )}
           </motion.div>
 
-          {/* LABELS */}
-          <motion.h1 style={{ y: lable1, scale: lablescale }} className="absolute left-[15%] bottom-[-80px] bg-white text-black text-[20px] font-semibold px-4 py-2 rounded-md">• LiDAR And Sensor Fusion</motion.h1>
+          {/* DESKTOP LABELS */}
+          {!isMobile && (
+            <>
+              <motion.h1 style={{ y: l1 }} className="absolute left-[15%] bottom-[-80px] label">• LiDAR And Sensor Fusion</motion.h1>
+              <motion.h1 style={{ y: l2 }} className="absolute right-[5%] bottom-[-80px] label">• SLAM (Simultaneous Localization and Mapping)</motion.h1>
+              <motion.h1 style={{ y: l3 }} className="absolute left-[5%] bottom-[-80px] label">• AI-Driven Pathfinding</motion.h1>
+              <motion.h1 style={{ y: l4 }} className="absolute right-[5%] bottom-[-80px] label">• Dynamic Obstacle Avoidance</motion.h1>
+            </>
+          )}
 
-          <motion.h1 style={{ y: lable2, scale: lablescale }} className="absolute right-[5%] bottom-[-80px] bg-white text-black text-[20px] font-semibold px-4 py-2 rounded-md">• SLAM (Simultaneous Localization and Mapping)</motion.h1>
-
-          <motion.h1 style={{ y: lable3, scale: lablescale2 }} className="absolute left-[5%] bottom-[-80px] bg-white text-black text-[20px] font-semibold px-4 py-2 rounded-md">• AI-Driven Pathfinding</motion.h1>
-
-          <motion.h1 style={{ y: lable4, scale: lablescale2 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black text-[20px] font-semibold px-4 py-2 rounded-md">• Dynamic Obstacle Avoidance</motion.h1>
-
-          {/* CONTROL DASHBOARD */}
+          {/* DASHBOARD */}
           <motion.div
-            style={{ y: controlDiv, opacity: controlDivOpacity, border: bordercolor }}
-            className="absolute bottom-[-150px] w-full max-h-[80vh] h-full bg-black rounded-[32px] flex justify-center items-center"
+            style={{ y: dashY, opacity: dashOpacity }}
+            className={`absolute w-full text-white px-6 ${
+              isMobile ? "left-0 top-[380px] text-left" : "left-1/2 top-1/2 text-center -translate-x-1/2"
+            }`}
           >
-            <motion.div style={{ y: items }}>
-              <motion.h1 style={{ fontSize: size ,fontFamily:"Arial",fontStyle:"Black"}} className=" text-white font-black font-[Arial] ">The Control Dashboard</motion.h1>
-              <motion.p className="text-[24px] text-white text-center about-content">Innovations</motion.p>
-            </motion.div>
+            <h2 className="text-[26px] md:text-[44px] font-bold mb-3">The Control Dashboard</h2>
+            <p>Innovation</p>
+
+            {isMobile && (
+              <div className="text-[16px]">
+                <Label text="• Real-Time Fleet Oversight" />
+                <Label text="• Actionable Insights & Alerts" />
+                <Label text="• Intuitive Control & Customization" />
+                <Label text="• Data & Analytics" />
+                <Label text="• Customization" />
+              </div>
+            )}
           </motion.div>
 
-          {/* MORE LABELS */}
-          <motion.h1 style={{ y: lable5 }} className="absolute left-[5%] bottom-[-80px] bg-white text-black text-[20px] font-semibold px-4 py-2 rounded-md">• Real-Time Fleet Oversight</motion.h1>
-          <motion.h1 style={{ y: lable6 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black text-[20px] font-semibold px-4 py-2 rounded-md">• Actionable Insights & Alerts</motion.h1>
-          <motion.h1 style={{ y: lable7 }} className="absolute left-[5%] bottom-[-80px] bg-white text-black text-[20px] font-semibold px-4 py-2 rounded-md">• Intuitive Control & Customization</motion.h1>
-          <motion.h1 style={{ y: lable8 }} className="absolute right-[5%] bottom-[-80px] bg-white text-black text-[20px] font-semibold px-4 py-2 rounded-md">• Data & Analytics</motion.h1>
-          <motion.h1 style={{ y: lable9 }} className="absolute left-[40%] bottom-[-80px] bg-white text-black text-[20px] font-semibold px-4 py-2 rounded-md">• Customization</motion.h1>
+          {/* DESKTOP LABELS */}
+          {!isMobile && (
+            <>
+              <motion.h1 style={{ y: l5 }} className="absolute left-[5%] bottom-[-80px] label">• Real-Time Fleet Oversight</motion.h1>
+              <motion.h1 style={{ y: l6 }} className="absolute right-[5%] bottom-[-80px] label">• Actionable Insights & Alerts</motion.h1>
+              <motion.h1 style={{ y: l7 }} className="absolute left-[5%] bottom-[-80px] label">• Intuitive Control & Customization</motion.h1>
+              <motion.h1 style={{ y: l8 }} className="absolute right-[5%] bottom-[-80px] label">• Data & Analytics</motion.h1>
+              <motion.h1 style={{ y: l9 }} className="absolute left-[40%] bottom-[-80px] label">• Customization</motion.h1>
+            </>
+          )}
 
         </motion.div>
       </div>
     </section>
   );
 };
+
+// Label component
+const Label = ({ text }) => (
+  <div className="bg-white text-black px-4 py-2 mt-[20px] rounded-md text-[14px] shadow-sm">
+    {text}
+  </div>
+);
