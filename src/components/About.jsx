@@ -106,16 +106,16 @@ export const About = () => {
   const missionOpacity = isMobile ? missionOpacityMobile : missionOpacityFull;
 
   return (
-    <section id="about" ref={scrollRef} className="relative w-full h-[300vh]">
-      <div className="sticky max-md:py-[20px] top-0 flex flex-col justify-around align-middle h-auto min-h-[100vh] md:h-auto w-full overflow-hidden text-white bgred-400">
+    <section id="about" ref={scrollRef} className="relative w-full h-[250vh]">
+      <div className="sticky max-md:py-[20px] top-0 flex flex-col min-sm:gap-[2vh] justify-around align-middle max-md:pt-[80px] min-h-auto md:h-screen w-full overflow-hidden text-white bgred-400">
         {/* ABOUT */}
         <motion.div
           style={{
             opacity: aboutOpacity, // Uses the conditional opacity transform
             y: aboutY, // Uses the conditional Y transform
           }}
-          className=" w-[90%]
-            md:max-w-[650px] p-4 absolute top-[80px] md:top-[120px]
+          className="w-full
+            md:max-w-[650px] p-4 md:absolute top-[80px] md:top-[120px]
             md:left-[5%] md:translate-x-0 md:text-left
           "
         >
@@ -131,7 +131,7 @@ export const About = () => {
         <motion.div
           style={{ opacity: visionOpacity, y: visionY }} // Uses conditional transforms
           className="w-[90%]
-            md:max-w-[650px] p-4 absolute bottom-[35vh] md:top-[380px]
+            md:max-w-[650px] p-4 md:absolute bottom-[35vh] md:top-[380px]
             md:left-auto md:right-[5%] md:translate-x-0 md:text-left
           "
         >
@@ -146,7 +146,7 @@ export const About = () => {
         <motion.div
           style={{ opacity: missionOpacity, y: missionY }} // Uses conditional transforms
           className=" w-[90%]
-            md:max-w-[650px] p-4 absolute bottom-[0vh] md:top-[560px]
+            md:max-w-[650px] p-4 md:absolute bottom-[0vh] md:top-[560px]
             md:left-[5%] md:translate-x-0 md:text-left
           "
         >
