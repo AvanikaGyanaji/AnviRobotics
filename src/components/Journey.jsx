@@ -75,21 +75,18 @@ export const Journey = () => {
     offset: ["start start", "end end"],
   });
 
-  // 1. Calculate horizontal movement based on defined SVG width and viewport width
   const xMovement = useTransform(
     scrollYProgress,
     [0, 1],
-    // Move the SVG from 0px (start) to the negative distance equal to
-    // (SVG_WIDTH_DEFINED - window.innerWidth) (end)
+   
     ["0px", `-${SVG_WIDTH_DEFINED - window.innerWidth}px`]
   );
 
-  // 🔥 Animate Path Colors on Scroll
+ 
   useEffect(() => {
     if (!svgWrapperRef.current) return;
 
-    // The rect inside the masked group that represents the fill area.
-    // Target the specific <rect> with x="81" inside the group with the mask.
+    
     const rect = svgWrapperRef.current.querySelector("g[mask] rect");
 
     if (!rect) {
@@ -97,65 +94,31 @@ export const Journey = () => {
       return;
     }
 
-    // This rect must have its initial width set to the full path span
-    // and then scaled down to 0 to prepare for the animation.
-    // NOTE: In the original SVG, this rect might need its initial width adjusted
-    // to match the full path width (e.g., ~3200px) instead of the initial 68px.
-    // Assuming the path starts near x=81 and spans nearly the full width.
-    const FULL_WIDTH = SVG_WIDTH_DEFINED;
+       const FULL_WIDTH = SVG_WIDTH_DEFINED;
     rect.setAttribute("width", 0); // ensure animation starts from 0
 
     const unsub = scrollYProgress.on("change", (progress) => {
       const t = Math.min(Math.max(progress, 0), 1); // clamp
-
-      // convert scroll % to pixel width
-      // Scale the filling rect's width based on scroll progress
-      const newWidth = FULL_WIDTH * t;
+   const newWidth = FULL_WIDTH * t;
 
       rect.setAttribute("width", newWidth);
     });
 
     return () => unsub();
-  }, [scrollYProgress]); // Removed svgWidth from dependency array since it's hardcoded now
-
-//   return (
-//     <>
-//       <section
-//         id="journey"
-//         ref={sectionRef}
-//         className="relative w-full h-[250vh] bg-[#f5f5f5] "
-//       >
-//         <div className="sticky top-[100px] overflow-hidden w-full">
-//           <div className="flex justify-center">
-//             <h1 className="text-[48px] text-black">Our Journey Timeline</h1>
-//           </div>
-//           <motion.div
-//             ref={svgWrapperRef}
-//             style={{ x: xMovement }}
-//             // Added padding here for visual offset instead of complicating xMovement/SVG structure
-//             className="inline-block bg-black rounded-[28px] overflow-auto w-[90%] mx-auto "
-//             dangerouslySetInnerHTML={{
-//               __html: svgCode,
-//             }}
-//           />
-//         </div>
-//       </section>
-//     </>
-//   );
-// };
+  }, [scrollYProgress]); 
 return (
   <>
     <section
       id="journey"
       ref={sectionRef}
-      className="relative w-full h-[250vh] bg-[#eff0f0] pb-[100px] light-bg-trigger"
+      className="relative w-full h-[250vh] bg-[#eff0f0] py-[50px] pb-[50px] light-bg-trigger "
     >
       {/* Sticky container that stays fixed while page scrolls */}
-      <div className="sticky top-[100px] w-full">
+      <div className="sticky top-[10%] w-full h-auto">
 
         {/* Title */}
         <div className="flex  mb-6 px-[20px] md:justify-center">
-          <h2 className=" md:text-center text-start about-heading text-black">Our Journey Timeline</h2>
+          <h2 className=" text-center w-[100%] about-heading text-black">Our Journey Timeline</h2>
         </div>
 
         {/* Outer fixed black rounded container */}

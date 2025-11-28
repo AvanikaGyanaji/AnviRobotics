@@ -38,13 +38,13 @@ export const ContactUs = () => {
     <>
       <section
         id="contact"
-        className="min-h-auto w-full bg-[#eff0f0] py-[120px] flex justify-center light-bg-trigger"
+        className="min-h-auto w-full bg-[#eff0f0] pb-[50px]  flex justify-center light-bg-trigger"
       >
         {/* OUTER CARD WRAPPER */}
         <div
           className="
             w-[96%]
-            md:w-[92%] 
+            md:w-[95%] 
             max-w[1400px] 
             bg-black 
             rounded-[28px] 
@@ -57,9 +57,9 @@ export const ContactUs = () => {
         >
           {/* INNER GRADIENT (BOTTOM-CENTER) */}
           <div
-            className="
+            className=" innergradient
               absolute 
-              bottom-0 
+              bottom-[-15%] 
               left-1/2 
               -translate-x-1/2
               w-[600px] 
@@ -69,14 +69,16 @@ export const ContactUs = () => {
               blur-[120px]
               "
             style={{
-              background: `radial-gradient(
-                ellipse at center,
-                rgba(0, 151, 178, 0.45) 0%,
-                rgba(51, 188, 209, 0.35) 25%,
-                rgba(102, 211, 226, 0.22) 50%,
-                rgba(0, 90, 106, 0.18) 70%,
-                rgba(0, 0, 0, 1) 100%
-              )`,
+              // background: `radial-gradient(
+              //   ellipse at center,
+              //   rgba(0, 151, 178, 0.45) 0%,
+              //   rgba(51, 188, 209, 0.35) 25%,
+              //   rgba(102, 211, 226, 0.22) 50%,
+              //   rgba(0, 90, 106, 0.18) 70%,
+              //   rgba(0, 0, 0, 1) 100%
+              // )`,
+
+
             }}
           />
 
@@ -85,7 +87,7 @@ export const ContactUs = () => {
             
             {/* LEFT INFO */}
             <div className="text-white md:w-[50%] w-full">
-              <h1 className="about-heading md:mb-[35px] mb-[10px] font-[Arial] text-white">
+              <h1 className="about-heading w-full text-center md:text-start md:mb-[35px] mb-[10px] font-[Arial] text-white">
                 Contact Us
               </h1>
 

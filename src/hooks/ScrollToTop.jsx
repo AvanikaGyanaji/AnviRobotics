@@ -7,7 +7,7 @@ export const ScrollToTop = () => {
   useEffect(() => {
     document.body.style.position = "";
     document.body.style.top = "";
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });  
   }, [pathname]);
 
   return null;

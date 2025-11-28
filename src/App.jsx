@@ -4,7 +4,6 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { ScrollToTop } from "./hooks/ScrollToTop";
 import "./App.css";
 import { Home } from "./pages/home";
 import { Header } from "./components/Header";
@@ -14,7 +13,6 @@ const App = () => {
   return (
     <>
       <Router>
-        <ScrollToTop />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

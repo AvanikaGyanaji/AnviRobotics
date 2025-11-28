@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import RobotFeatures from "../components/RobotFeatures";
 import { Section6 } from "../components/Section6";
 import { Footer } from "../components/Footer";
+import { ScrollToTop } from "../hooks/ScrollToTop";
 
 const Surveillance = () => {
   const containerRef = useRef(null);
@@ -131,7 +132,8 @@ const Surveillance = () => {
 
   return (
     <div className="relative w-full bg-black">
-      
+      <ScrollToTop />
+
       {/* Wrapper for Sections 1–4 only */}
       <div ref={containerRef} className="relative overflow-hidden">
 
@@ -148,43 +150,43 @@ const Surveillance = () => {
         {/* Sections 1–4 */}
         <div ref={containerRef} className="relative z-10">
           <div className="min-h-screen flex flex-col items-start px-4 sm:px-8 md:px-[60px] py-[150px]">
-          <h1 className="text-[36px] md:text-[56px] font-arial font-regular text-white">
-            Surveillance <br /> Robot
-          </h1>
-          <p className="max-w-[420px] font-dm text-[16px] leading-7 text-[#FEFEFE76] mt-2">
-            Revolutionary AI-powered security that never sleeps. Protect your
-            property with intelligent, autonomous patrol technology.
-          </p>
-        </div>
+            <h1 className="text-[36px] md:text-[56px] font-arial font-regular text-white">
+              Surveillance <br /> Robot
+            </h1>
+            <p className="max-w-[420px] font-dm text-[16px] leading-7 text-[#FEFEFE76] mt-2">
+              Revolutionary AI-powered security that never sleeps. Protect your
+              property with intelligent, autonomous patrol technology.
+            </p>
+          </div>
 
-        {/* Section 2 */}
-        <div
-          ref={section2Ref}
-          className="min-h-screen flex flex-col justify-center px-4 sm:px-8 md:px-[60px]"
-        >
-          <p className="text-[24px] md:text-[28px] lg:text-[32px] font-regular leading-8 lg:leading-10 text-white break-words">
-            {(() => {
-              const text =
-                "Our AI-powered Surveillance Robot redefines modern security and safety. It offers real-time monitoring with intelligent data analysis. With autonomous mobility, it ensures seamless and efficient operations. Designed for reliability, it delivers continuous vigilance and rapid response.";
+          {/* Section 2 */}
+          <div
+            ref={section2Ref}
+            className="min-h-screen flex flex-col justify-center px-4 sm:px-8 md:px-[60px]"
+          >
+            <p className="text-[24px] md:text-[28px] lg:text-[32px] font-regular leading-8 lg:leading-10 text-white break-words">
+              {(() => {
+                const text =
+                  "Our AI-powered Surveillance Robot redefines modern security and safety. It offers real-time monitoring with intelligent data analysis. With autonomous mobility, it ensures seamless and efficient operations. Designed for reliability, it delivers continuous vigilance and rapid response.";
 
-              const revealLength = Math.floor(section2Progress * text.length);
-              const visibleText = text.slice(0, revealLength);
-              const hiddenText = text.slice(revealLength);
+                const revealLength = Math.floor(section2Progress * text.length);
+                const visibleText = text.slice(0, revealLength);
+                const hiddenText = text.slice(revealLength);
 
-              return (
-                <>
-                  <span>{visibleText}</span>
-                  <span className="opacity-30">{hiddenText}</span>
-                </>
-              );
-            })()}
-          </p>
-        </div>
+                return (
+                  <>
+                    <span>{visibleText}</span>
+                    <span className="opacity-30">{hiddenText}</span>
+                  </>
+                );
+              })()}
+            </p>
+          </div>
 
-        {/* Section 3 */}
-        <div
-          ref={section3Ref}
-          className="
+          {/* Section 3 */}
+          <div
+            ref={section3Ref}
+            className="
             min-h-screen bg-black 
             flex flex-col md:flex-row 
             items-center justify-between 
@@ -193,51 +195,51 @@ const Surveillance = () => {
             gap-10 md:gap-0 
             transition-all duration-300
           "
-          style={{ transform: `scale(${section3Scale})`, opacity: section3Opacity }}
-        >
-          {/* Left Image */}
-          <div className="flex-1 flex justify-center md:justify-end">
-            <img
-              src="/surveillance/b31.png"
-              className="w-[320px] h-[200px] md:w-[380px] md:h-[220px] lg:w-[457px] lg:h-[496px] object-cover"
-              alt="Side view"
-            />
-          </div>
+            style={{ transform: `scale(${section3Scale})`, opacity: section3Opacity }}
+          >
+            {/* Left Image */}
+            <div className="flex-1 flex justify-center md:justify-end">
+              <img
+                src="/surveillance/b31.png"
+                className="w-[320px] h-[200px] md:w-[380px] md:h-[220px] lg:w-[457px] lg:h-[496px] object-cover"
+                alt="Side view"
+              />
+            </div>
 
-          {/* Center Text */}
-          <p
-            className="
+            {/* Center Text */}
+            <p
+              className="
               text-white 
               text-[14px] md:text-[20px] lg:text-[30px] 
               text-center font-light leading-relaxed 
               max-w-[90%] px-20 md:px-0 md:max-w-[300px]
             "
-          >
-            "We Make <span className="text-[#EFEFEF76]">Security Smarter, Safer, And Endlessly Vigilant.</span>"
-          </p>
+            >
+              "We Make <span className="text-[#EFEFEF76]">Security Smarter, Safer, And Endlessly Vigilant.</span>"
+            </p>
 
-          {/* Right Image */}
-          <div className="flex-1 flex justify-center md:justify-start">
-            <img
-              src="/surveillance/b32.png"
-              className="w-[320px] h-[200px] md:w-[380px] md:h-[220px] lg:w-[457px] lg:h-[496px] object-cover"
-              alt="Front view"
-            />
+            {/* Right Image */}
+            <div className="flex-1 flex justify-center md:justify-start">
+              <img
+                src="/surveillance/b32.png"
+                className="w-[320px] h-[200px] md:w-[380px] md:h-[220px] lg:w-[457px] lg:h-[496px] object-cover"
+                alt="Front view"
+              />
+            </div>
           </div>
-        </div>
 
 
-        {/* Section 4 */}
-        <div
-          ref={section4Ref}
-          className="min-h-screen relative bg-black transition-all duration-300 ease-out"
-          style={{
-            transform: `scale(${section4Scale})`,
-            opacity: section4Opacity,
-          }}
-        >
-          <RobotFeatures />
-        </div>
+          {/* Section 4 */}
+          <div
+            ref={section4Ref}
+            className="min-h-screen relative bg-black transition-all duration-300 ease-out"
+            style={{
+              transform: `scale(${section4Scale})`,
+              opacity: section4Opacity,
+            }}
+          >
+            <RobotFeatures />
+          </div>
 
         </div>
 
@@ -262,19 +264,19 @@ const Surveillance = () => {
                   className="w-full h-full object-cover"
                 />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+                {/* Overlay */}
+                <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
 
-                <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
-                  Cost-Effective Security
-                </p>
+                  <p className="text-sm font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                    Cost-Effective Security
+                  </p>
 
-                {/*hidden initially, slides in on hover */}
-                <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
-                  Reduce security personnel cost by up to 60% while maintaining 24/7 coverage
-                </p>
+                  {/*hidden initially, slides in on hover */}
+                  <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
+                    Reduce security personnel cost by up to 60% while maintaining 24/7 coverage
+                  </p>
+                </div>
               </div>
-            </div>
 
               {/* Small Card */}
               <div className="relative z-10 overflow-hidden rounded-2xl group shadow-lg h-[351px]">
@@ -322,34 +324,34 @@ const Surveillance = () => {
                 </div>
               </div>
 
-            {/* Large Card */}
-            <div className="relative overflow-hidden group rounded-2xl shadow-lg h-[351px]">
-              <img
-                loading="lazy"
-                src="/surveillance/G6.png"
-                alt="Impact-Driven Solutions"
-                className="w-max h-full object-cover group-hover:scale-[1.05] transition-all duration-300"
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
+              {/* Large Card */}
+              <div className="relative overflow-hidden group rounded-2xl shadow-lg h-[351px]">
+                <img
+                  loading="lazy"
+                  src="/surveillance/G6.png"
+                  alt="Impact-Driven Solutions"
+                  className="w-max h-full object-cover group-hover:scale-[1.05] transition-all duration-300"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 transition-all duration-300 flex flex-col justify-end p-8 text-white bg-black/0 group-hover:bg-black/70">
 
-                <p className="text-[14px] font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
-                  Scalable Security
-                </p>
+                  <p className="text-[14px] font-bold max-w-[340px] transition-all duration-500 transform group-hover:translate-y-[-280px]">
+                    Scalable Security
+                  </p>
 
-                {/*hidden initially, slides in on hover */}
-                <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
-                  Easily expand your security coverage across multiple locations
-                </p>
+                  {/*hidden initially, slides in on hover */}
+                  <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
+                    Easily expand your security coverage across multiple locations
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
 
         {/* Section 6 */}
         <Section6 scrollY={scrollY} />
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );
