@@ -8,6 +8,7 @@ const Surveillance = () => {
   const section2Ref = useRef(null);
   const section3Ref = useRef(null);
   const section4Ref = useRef(null);
+  const isMobile = window.innerWidth < 768;
 
   const [scrollY, setScrollY] = useState(0);
   const [section2Progress, setSection2Progress] = useState(0);
@@ -166,7 +167,12 @@ const Surveillance = () => {
             {(() => {
               const text =
                 "Our AI-powered Surveillance Robot redefines modern security and safety. It offers real-time monitoring with intelligent data analysis. With autonomous mobility, it ensures seamless and efficient operations. Designed for reliability, it delivers continuous vigilance and rapid response.";
-
+              
+              if (isMobile) {
+                // 🟢 Mobile → All text fully visible, no reveal
+                return <span>{text}</span>;
+              }
+              
               const revealLength = Math.floor(section2Progress * text.length);
               const visibleText = text.slice(0, revealLength);
               const hiddenText = text.slice(revealLength);
@@ -193,7 +199,7 @@ const Surveillance = () => {
             gap-10 md:gap-0 
             transition-all duration-300
           "
-          style={{ transform: `scale(${section3Scale})`, opacity: section3Opacity }}
+          style={{ transform: isMobile? "none" : `scale(${section3Scale})`, opacity: isMobile? 1 : section3Opacity }}
         >
           {/* Left Image */}
           <div className="flex-1 flex justify-center md:justify-end">
@@ -208,9 +214,9 @@ const Surveillance = () => {
           <p
             className="
               text-white 
-              text-[14px] md:text-[20px] lg:text-[30px] 
+              text-[20px] md:text-[20px] lg:text-[30px] 
               text-center font-light leading-relaxed 
-              max-w-[90%] px-20 md:px-0 md:max-w-[300px]
+              max-w-[90%] px-4 md:px-0 md:max-w-[300px]
             "
           >
             "We Make <span className="text-[#EFEFEF76]">Security Smarter, Safer, And Endlessly Vigilant.</span>"
@@ -232,8 +238,8 @@ const Surveillance = () => {
           ref={section4Ref}
           className="min-h-screen relative bg-black transition-all duration-300 ease-out"
           style={{
-            transform: `scale(${section4Scale})`,
-            opacity: section4Opacity,
+            transform: isMobile ? "none" : `scale(${section4Scale})`,
+            opacity: isMobile ? 1 : section4Opacity,
           }}
         >
           <RobotFeatures />
@@ -270,7 +276,7 @@ const Surveillance = () => {
                 </p>
 
                 {/*hidden initially, slides in on hover */}
-                <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
+                <p className="text-[#EFEFEF76] md:text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
                   Reduce security personnel cost by up to 60% while maintaining 24/7 coverage
                 </p>
               </div>
@@ -290,7 +296,7 @@ const Surveillance = () => {
                     Smart Sentinel
                   </p>
                   {/* hidden initially, slides in on hover */}
-                  <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
+                  <p className="text-[#EFEFEF76] md:text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
                     Keep human security personnel out of potentially dangerous
                     situations
                   </p>
@@ -315,7 +321,7 @@ const Surveillance = () => {
                   </p>
 
                   {/* hidden initially, slides in on hover */}
-                  <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
+                  <p className="text-[#EFEFEF76] md:text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
                     Advanced robotic presence deters criminal activity before it
                     starts
                   </p>
@@ -338,7 +344,7 @@ const Surveillance = () => {
                 </p>
 
                 {/*hidden initially, slides in on hover */}
-                <p className="text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
+                <p className="text-[#EFEFEF76] md:text-[#FFFFFFE5] text-[14px] font-dm max-w-[225px] mt-2 max-sm:opacity-100 max-sm:max-h-none max-sm:static md:absolute md:bottom-4 md:right-4 md:opacity-0 md:max-h-0 md:overflow-hidden md:group-hover:max-h-[100px] md:group-hover:opacity-100 transition-all duration-500">
                   Easily expand your security coverage across multiple locations
                 </p>
               </div>
