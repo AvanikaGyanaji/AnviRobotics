@@ -8,7 +8,7 @@ const RobotFeatures = ({ section4Ref, section4Scale = 1, section4Opacity = 1 }) 
       className="min-h-screen relative bg-black transition-all duration-300 ease-out"
       style={{ transform: `scale(${section4Scale})`, opacity: section4Opacity }}
     >
-      <div className="w-full px-4 sm:px-8 md:px-[60px] py-8 sm:py-12 flex flex-col items-center justify-center min-h-screen box-border">
+      <div className="w-full px-4 sm:px-8 md:px-[60px] py-4 sm:py-4 flex flex-col items-center justify-center min-h-screen box-border">
         <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-semibold text-white mb-8 text-center">
           Our Robot Features
         </h2>
