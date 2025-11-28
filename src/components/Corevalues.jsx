@@ -48,10 +48,10 @@ export const Corevalues = () => {
       <section
         id="Corevalues"
         ref={sectionRef}
-        className="min-h-screen place-content-center w-full"
+        className="max-h-screen h-auto py-[50px] place-content-center w-full bg-[#eff0f0] light-bg-trigger"
       >
-        <div className="flex flex-col justify-center items-center w-full bg-[#00000033] py-[50px] ">
-          <h1 className="text-[48px] text-white font-[Arial] " >Our Core Values</h1>
+        <div className="flex flex-col justify-center items-center w-full bg-[#EEEEEE40] py-[100px] md:py-[200px] ">
+          <h2 className="w-full mx-auto px-[10px] text-start md:text-center about-heading text-[48px] text-black font-[Arial] " >Our Core Values</h2>
 
           {/* Wrapper */}
           <div className="relative w-full overflow-hidden mt-6">
@@ -59,7 +59,7 @@ export const Corevalues = () => {
             {/* TRACK */}
             <div
               ref={trackRef}
-              className="flex gap-x-[160px] pl-[25px] whitespace-nowrap text-[80px] text-white core-pingpong"
+              className="flex gap-x-[40px] md:gap-x-[160px] pl-[25px] whitespace-nowrap text-[40px] md:text-[80px] text-black core-pingpong"
               style={{
                 fontFamily: "TransitDisplay",
                 "--dist": `-${moveDist}px`,

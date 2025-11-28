@@ -188,6 +188,7 @@ section {
   font-family: Arial, sans-serif;
   /* font-style: Black; */
   padding-inline: 10px;
+  animation-iteration-count: 1;
 }
 @media (max-width:499px) {
   .heading {
@@ -344,14 +345,13 @@ section {
 
   /* ✅ Balanced blue glow for hero */
   background: radial-gradient(
-    ellipse at center top,
-  rgba(1, 4, 108, 0.55) 0%,       /* vivid bright blue */
-rgba(28, 110, 250, 0.4) 25%,    /* mid transition */
-rgba(120, 180, 255, 0.18) 55%,  /* soft fade */
-rgba(4, 32, 190, 0.9) 85%,      /* deep blue edge */
-rgba(0, 0, 0, 1) 100%           /* black */
-        /* merge into black for smooth fade */
-  );
+  ellipse at center top,
+  rgba(0, 151, 178, 0.55) 0%,       /* base #0097B2 glow */
+  rgba(51, 188, 209, 0.40) 25%,     /* lighter tint */
+  rgba(102, 211, 226, 0.18) 55%,    /* very soft aqua fade */
+  rgba(0, 122, 143, 0.85) 85%,      /* deeper turquoise edge */
+  rgba(0, 0, 0, 1) 100%             /* black fade */
+);
 
   filter: blur(70px);
   animation: showGradient 0.3s ease-in-out 3.8s forwards;
@@ -373,14 +373,17 @@ rgba(0, 0, 0, 1) 100%           /* black */
   bottom: -150px;
   opacity: 1;
   z-index: -10;
+background: radial-gradient(
+  ellipse at center,
+  rgba(0, 151, 178, 0.30) 0%,      /* brighter + softer center */
+  rgba(51, 188, 209, 0.25) 28%,    /* very light aqua mid */
+  rgba(102, 211, 226, 0.18) 52%,   /* smooth soft fade */
+  rgba(0, 90, 106, 0.12) 75%,      /* lighter teal atmospheric shadow */
+  rgba(0, 0, 0, 0.85) 100%         /* softer black blend */
+);
 
-  background: radial-gradient(
-    ellipse at center top,
-   rgba(14, 61, 190, 0.65) 0%,
-    rgba(22, 90, 230, 0.5) 25%,
-     rgba(22, 90, 230, 0.5) 55%, 
-     rgba(28, 110, 250, 0.4) 90%,
-      rgb(5, 39, 231) 100%);        /* pure black */
+
+
 
 
   filter: blur(200px);
@@ -439,17 +442,21 @@ rgba(0, 0, 0, 1) 100%           /* black */
 
 /* --- ABOUT SECTION (clean, no internal gradient) --- */
 .about-heading {
-  font-size: clamp(28px, 4vw, 48px);
+  font-size: clamp(24px, 4vw, 48px);
   font-style: normal;
   font-weight: 400; /* "Regular" */
   font-family: Arial;
 }
 
 .about-content {
-  font-size: clamp(18px, 2.5vw, 24px);
+  font-size: clamp(14px, 2.5vw, 24px);
   font-weight: 400;
 font-family: 'DM Sans', sans-serif;
 }
+.contact-para{
+  font-size: clamp(14px, 2.5vw, 18px);
+  font-family: 'DM Sans', sans-serif;}
+
 
 .about-section {
   position: relative;
@@ -552,3 +559,11 @@ p {
   font-family: "Dm Sans", sans-serif !important;
 }
 
+.label {
+  background-color: white;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+ 
+}

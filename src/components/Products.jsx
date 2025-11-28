@@ -116,7 +116,10 @@ export const Products = () => {
             : text3Opacity;
         const CardHeight = index === 0 ? card1 : index === 1 ? card2 : card3;
         return (
-          <li className="relative w-[280px] md:w-[25%] min-h-[45vh]">
+          <li
+            key={eachProd.label + (index + 1)}
+            className="relative w-[280px] md:w-[25%] min-h-[45vh]"
+          >
             <motion.div
               style={{ height: CardHeight }}
               key={eachProd + (index + 1) + "desktop"}
@@ -158,14 +161,14 @@ export const Products = () => {
           {ProductsList.map((eachProd, index) => (
             <li
               key={eachProd.label + index}
-              className="w-full shrink-0 snap-center flex flex-col relative align-middle items-center"
+              className="w-full shrink-0 snap-center flex flex-col align-middle items-center"
             >
               <div className="w-full max-w-[300px] place-content-center">
-                <div className="bg-[#00000030] w-full h-auto aspect-square flex justify-center align-middle rounded-t-[16px]">
+                <div className="bg-[#00000030] w-full h-auto flex justify-center align-middle rounded-t-[16px]">
                   <img
                     src={eachProd.imgUrl}
                     alt={eachProd.label}
-                    className="w-full max-w-[400px] h-[40vh] absolute bottom-[50px] object-contain scale-[110%] translate-y-[-5%]"
+                    className="w-full max-w-[400px] h-[40vh] object-contain pt-2"
                   />
                 </div>
                 <p
@@ -218,7 +221,7 @@ export const Products = () => {
         >
           {/* Title */}
           <div className="w-full max-w-[90%] m-auto md:w-full text-left md:text-center px-4 mb-12">
-            <h1 className="about-heading text-white">Our Products</h1>
+            <h2 className="about-heading text-white">Our Products</h2>
             <p className="about-content md:max-w-[80%] max-md:mt-[24px] mx-auto text-[#ffffff90]">
               From AI-powered surveillance to intelligent humanoids, Anvi
               Robotics delivers cutting-edge products designed for smarter,
