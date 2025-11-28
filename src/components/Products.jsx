@@ -220,9 +220,9 @@ export const Products = () => {
           style={{ opacity: window.innerWidth > 767 ? allContentOpacity : 1 }}
         >
           {/* Title */}
-          <div className="w-full max-w-[90%] m-auto md:w-full text-left md:text-center px-4 mb-12">
-            <h2 className="about-heading text-white">Our Products</h2>
-            <p className="about-content md:max-w-[80%] max-md:mt-[24px] mx-auto text-[#ffffff90]">
+          <div className="w-full max-w-[90%] m-auto md:w-full px-4 mb-12">
+            <h2 className="about-heading text-white text-center">Our Products</h2>
+            <p className="about-content md:max-w-[80%] max-md:mt-[24px] text-left md:text-center mx-auto text-[#ffffff90]">
               From AI-powered surveillance to intelligent humanoids, Anvi
               Robotics delivers cutting-edge products designed for smarter,
               safer, and faster solutions.

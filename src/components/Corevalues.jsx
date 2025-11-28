@@ -48,10 +48,10 @@ export const Corevalues = () => {
       <section
         id="Corevalues"
         ref={sectionRef}
-        className="max-h-screen h-auto py-[50px] place-content-center w-full bg-[#eff0f0] light-bg-trigger"
+        className="max-h-screen h-auto  place-content-center w-full bg-[#eff0f0] light-bg-trigger"
       >
-        <div className="flex flex-col justify-center items-center w-full bg-[#EEEEEE40] py-[100px] md:py-[200px] ">
-          <h2 className="w-full mx-auto px-[10px] text-start md:text-center about-heading text-[48px] text-black font-[Arial] " >Our Core Values</h2>
+        <div className="flex flex-col justify-center items-center w-full bg-[#EEEEEE40] py-[50px] md:py-[50px] ">
+          <h2 className="w-full mx-auto px-[10px]  text-center about-heading text-[48px] text-black font-[Arial] " >Our Core Values</h2>
 
           {/* Wrapper */}
           <div className="relative w-full overflow-hidden mt-6">

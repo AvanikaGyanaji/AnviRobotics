@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronsUp } from "lucide-react";
-import { scrollToTarget } from "../hooks/ScrollToTarget";
+// import { scrollToTarget } from "../hooks/ScrollToTarget";
 
 export const Herosection = () => {
-  const scrollHeight = useRef(0);
-  const [hasScrolledToId, setHasScrolledToId] = useState(false);
-  const SCROLL_DURATION = 400;
+  // const scrollHeight = useRef(0);
+  // const [hasScrolledToId, setHasScrolledToId] = useState(false);
+  // const SCROLL_DURATION = 400;
 
   if (typeof window !== "undefined") {
     const introPlayed = sessionStorage.getItem("introPlayed");
@@ -55,34 +55,34 @@ export const Herosection = () => {
     body.dataset.introDone = "true";
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      scrollHeight.current = window.scrollY;
-      const aboutUsElement = document.getElementById("about");
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     scrollHeight.current = window.scrollY;
+  //     const aboutUsElement = document.getElementById("about");
 
-      // Check threshold (10px) AND if navigation has NOT occurred yet
-      if (scrollHeight.current > 5 && !hasScrolledToId) {
-        if (aboutUsElement) {
-          // 🎯 MODIFICATION: Call the custom function with duration
-          scrollToTarget(aboutUsElement, SCROLL_DURATION);
+  //     // Check threshold (10px) AND if navigation has NOT occurred yet
+  //     if (scrollHeight.current > 5 && !hasScrolledToId) {
+  //       if (aboutUsElement) {
+  //         // 🎯 MODIFICATION: Call the custom function with duration
+  //         scrollToTarget(aboutUsElement, SCROLL_DURATION);
 
-          // Mark as complete to prevent repetition
-          setHasScrolledToId(true);
-          // console.log(`Smoothly navigated to 'about' over ${SCROLL_DURATION}ms.`);
-        }
-      }
-      // Reset logic: allow scrolling again if user returns to the top
-      else if (scrollHeight.current < 5 && hasScrolledToId) {
-        setHasScrolledToId(false);
-      }
-    };
+  //         // Mark as complete to prevent repetition
+  //         setHasScrolledToId(true);
+  //         // console.log(`Smoothly navigated to 'about' over ${SCROLL_DURATION}ms.`);
+  //       }
+  //     }
+  //     // Reset logic: allow scrolling again if user returns to the top
+  //     else if (scrollHeight.current < 5 && hasScrolledToId) {
+  //       setHasScrolledToId(false);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [hasScrolledToId]);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [hasScrolledToId]);
 
   return (
     <section
@@ -100,12 +100,12 @@ export const Herosection = () => {
         />
       </div>
 
-      <div className="flex flex-col justify-center items-center text-center px-[1vw]">
+      <div className="flex flex-col justify-center items-center text-center mr-[5%] px-[1vw]">
         <h1 className="heading hero-heading font-bold text-[#FEFEFE33]">
           <span className="word1">Smarter.</span>
           <span className="word2 pr-1">Faster.</span>
           <span className="word3 pr-1 relative">Limitless</span>
-          <span className="tm xs:text-[20px] md:text-[64px] lg:text-[80px] absolute">
+          <span className="tm absolute">
             ™
           </span>
         </h1>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import RobotFeatures from "../components/RobotFeatures";
 import { Section6 } from "../components/Section6";
 import { Footer } from "../components/Footer";
+import { ScrollToTop } from "../hooks/ScrollToTop";
 
 const Surveillance = () => {
   const containerRef = useRef(null);
@@ -132,7 +133,7 @@ const Surveillance = () => {
 
   return (
     <div className="relative w-full bg-black">
-      
+      <ScrollToTop/>
       {/* Wrapper for Sections 1–4 only */}
       <div ref={containerRef} className="relative overflow-hidden">
 
