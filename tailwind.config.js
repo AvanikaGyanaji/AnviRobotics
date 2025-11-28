@@ -9,7 +9,6 @@ module.exports = {
       fontFamily: {
         arial: ["Arial", "sans-serif"],
         dm: ["DM Sans", "sans-serif"],
-        inter: ['Inter', 'sans-serif'],
       },
     },
   },

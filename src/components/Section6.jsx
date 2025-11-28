@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const cards = [
@@ -31,6 +31,40 @@ const cards = [
 
 export const Section6 = () => {
   const scrollRef = useRef(null);
+  const containerRef = useRef(null);   // ✅ FIX ADDED
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [fade, setFade] = useState(false); // ✅ OPTIONAL (used in your code)
+
+  // Detect active image on scroll
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollX = container.scrollLeft;
+
+      const firstCard = container.children[0];
+      if (!firstCard) return;
+
+      const cardWidth = firstCard.clientWidth + 40; // 40px gap
+
+      const index = Math.round(scrollX / cardWidth);
+
+      if (index !== activeIndex) {
+        setFade(true);
+        setTimeout(() => {
+          setActiveIndex(index);
+          setFade(false);
+        }, 150);
+      }
+    };
+
+
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, [activeIndex]);
+
+
   const { scrollYProgress } = useScroll({
     target: scrollRef,
     offset: ["start start", "end end"],
@@ -39,120 +73,174 @@ export const Section6 = () => {
   const totalCards = cards.length;
 
   return (
-    <section
-      ref={scrollRef}
-      className="relative w-full bg-black"
-      style={{ height: `${(totalCards - 1) * 100 + 100}vh`, md: { paddingBottom: "60px" }}}
-    >
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start px-4 sm:px-8 md:px-[150px] py-[60px] overflow-hidden">
-        {/* Section Title */}
-        <h1 className="text-[24px] md:text-[28px] lg:text-[32px] font-semibold text-white mb-8 lg:mb-12 text-center z-10">
+    <>
+      {/* MOBILE VIEW CAROUSEL */}
+      <div className="md:hidden w-full bg-black py-12">
+
+        {/* MOBILE HEADING */}
+        <h1 className="text-[22px] text-center font-semibold text-white mb-8 px-6">
           Perfect For Any Environment
         </h1>
 
-        {/* Card Container */}
-        <div className="relative w-full flex-1 h-[200px] md:h-[600px]">
-          {cards.map((card, index) => {
-            const isLeftImage = index % 2 === 0;
+        {/* CAROUSEL */}
+        <div
+          ref={containerRef}
+          className="w-full overflow-x-auto flex flex-row snap-x snap-mandatory px-4 gap-10 scrollbar-none"
+          style={{ scrollbarWidth: "none" }}
+        >
+          {cards.map((card, index) => (
+            <div
+              key={index}
+              className="w-[90vw] shrink-0 snap-center flex flex-col items-center"
+            >
+              {/* IMAGE BOX */}
+              <div className="bg-[#ffffff10] w-full aspect-square rounded-2xl flex flex-col justify-center items-center relative overflow-hidden">
+                <img
+                  src={card.img}
+                  alt={card.title}
+                  className="w-full h-[90%] object-cover"
+                />
+                {/* TEXT BOX */}
+                <div className="w-full py-4 px-4">
+                  <h2 className="text-white text-[14px] font-semibold">{card.title}</h2>
+                  <p className="text-white/24 text-[12px] mt-1">{card.desc}</p>
+                </div>
+              </div>    
+            </div>
+          ))}
+        </div>
 
-            const transitionDuration = 1 / (totalCards - 1);
-            const start = index === 0 ? 0 : (index - 1) * transitionDuration + transitionDuration * 0.2;
-            const middle = index * transitionDuration;
-            const end = index === totalCards - 1 ? 1 : (index + 1) * transitionDuration * 0.2 + middle;
-
-            // Opacity
-            const opacity = useTransform(
-              scrollYProgress,
-              index === 0
-                ? [0, 0.05, end - 0.05, end]
-                : index === totalCards - 1
-                ? [start + 0.05, start + 0.1, 1, 1] // smooth fade-in for last card
-                : [start, start + 0.05, end - 0.05, end],
-              index === 0
-                ? [1, 1, 1, 0]
-                : index === totalCards - 1
-                ? [0, 1, 1, 1]
-                : [0, 1, 1, 0]
-            );
-
-            // Image Y movement
-            const imageY = useTransform(
-              scrollYProgress,
-              index === 0
-                ? [0, end]
-                : index === totalCards - 1
-                ? [start, middle]
-                : [start, middle, end],
-              isLeftImage
-                ? index === 0
-                  ? ["0%", "-120%"]
-                  : index === totalCards - 1
-                  ? ["120%", "0%"]
-                  : ["120%", "0%", "-120%"]
-                : index === 0
-                ? ["0%", "120%"]
-                : index === totalCards - 1
-                ? ["-120%", "0%"]
-                : ["-120%", "0%", "120%"]
-            );
-
-            // Text Y movement
-            const textY = useTransform(
-              scrollYProgress,
-              index === 0
-                ? [0, end]
-                : index === totalCards - 1
-                ? [start, middle]
-                : [start, middle, end],
-              isLeftImage
-                ? index === 0
-                  ? ["0%", "120%"]
-                  : index === totalCards - 1
-                  ? ["-120%", "0%"]
-                  : ["-120%", "0%", "120%"]
-                : index === 0
-                ? ["0%", "-120%"]
-                : index === totalCards - 1
-                ? ["120%", "0%"]
-                : ["120%", "0%", "-120%"]
-            );
-
-            return (
-              <div
-                key={index}
-                className="absolute top-0 left-0 w-full h-full grid grid-cols-2 md:grid-cols-2 gap-4 lg:gap-10 items-center"
-              >
-                {/* IMAGE BLOCK */}
-                <motion.div
-                  className={`w-full flex items-center justify-center ${isLeftImage ? "" : "md:order-2"}`}
-                  style={{ y: imageY, opacity: opacity }}
-                  transition={{ ease: "easeInOut", duration: 0.5 }}
-                >
-                  <img
-                    src={card.img}
-                    alt={card.title}
-                    className="w-full min-h-[300px] lg:min-h-[500px] object-cover"
-                  />
-                </motion.div>
-
-                {/* TEXT BLOCK */}
-                <motion.div
-                  className={`flex flex-col items-center justify-center text-center text-white px-6 py-8 min-h-[200px] sm:min-h-[250px] ${isLeftImage ? "md:order-2" : ""}`}
-                  style={{
-                    background: "linear-gradient(to bottom, rgba(35,138,255,0.18) 0%, rgba(235,235,235,0) 100%)",
-                    y: textY,
-                    opacity: opacity,
-                  }}
-                  transition={{ ease: "easeInOut", duration: 0.5 }}
-                >
-                  <h2 className="text-[22px] lg:text-[30px] font-semibold mb-4">{card.title}</h2>
-                  <p className="text-[16px] md:text-[22px] text-[#ffffff66]">{card.desc}</p>
-                </motion.div>
-              </div>
-            );
-          })}
+        {/* DOTS INDICATOR */}
+        <div className="w-full flex justify-center gap-2 mt-4">
+          {cards.map((_, i) => (
+            <div
+              key={i}
+              className={`h-[8px] w-[8px] rounded-full transition-all duration-300 ${
+              activeIndex === i ? "bg-white scale-125" : "bg-white/40"
+            }`}
+            ></div>
+          ))}
         </div>
       </div>
-    </section>
+      
+      {/* 🖥 DESKTOP VERSION */}
+      <div className="hidden md:block">
+        <section
+          ref={scrollRef}
+          className="relative w-full bg-black sticky"
+          style={{ height: `${(totalCards - 1) * 100 + 100}vh`, md: { paddingBottom: "60px" }}}
+        >
+          <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start px-4 sm:px-8 md:px-[150px] py-[60px] overflow-hidden">
+            {/* Section Title */}
+            <h2 className="text-[24px] md:text-[28px] lg:text-[32px] font-semibold text-white mb-8 lg:mb-12 text-center z-10">
+              Perfect For Any Environment
+            </h2>
+
+            {/* Card Container */}
+            <div className="relative w-full flex-1 h-[200px] md:h-[600px] overflow-hidden">
+              {cards.map((card, index) => {
+                const isLeftImage = index % 2 === 0;
+
+                const transitionDuration = 1 / (totalCards - 1);
+                const start = index === 0 ? 0 : (index - 1) * transitionDuration + transitionDuration * 0.2;
+                const middle = index * transitionDuration;
+                const end = index === totalCards - 1 ? 1 : (index + 1) * transitionDuration * 0.2 + middle;
+
+                // Opacity
+                const opacity = useTransform(
+                  scrollYProgress,
+                  index === 0
+                    ? [0, 0.05, end - 0.05, end]
+                    : index === totalCards - 1
+                    ? [start + 0.05, start + 0.1, 1, 1] // smooth fade-in for last card
+                    : [start, start + 0.05, end - 0.05, end],
+                  index === 0
+                    ? [1, 1, 1, 0]
+                    : index === totalCards - 1
+                    ? [0, 1, 1, 1]
+                    : [0, 1, 1, 0]
+                );
+
+                // Image Y movement
+                const imageY = useTransform(
+                  scrollYProgress,
+                  index === 0
+                    ? [0, end]
+                    : index === totalCards - 1
+                    ? [start, middle]
+                    : [start, middle, end],
+                  isLeftImage
+                    ? index === 0
+                      ? ["0%", "-120%"]
+                      : index === totalCards - 1
+                      ? ["120%", "0%"]
+                      : ["120%", "0%", "-120%"]
+                    : index === 0
+                    ? ["0%", "120%"]
+                    : index === totalCards - 1
+                    ? ["-120%", "0%"]
+                    : ["-120%", "0%", "120%"]
+                );
+
+                // Text Y movement
+                const textY = useTransform(
+                  scrollYProgress,
+                  index === 0
+                    ? [0, end]
+                    : index === totalCards - 1
+                    ? [start, middle]
+                    : [start, middle, end],
+                  isLeftImage
+                    ? index === 0
+                      ? ["0%", "120%"]
+                      : index === totalCards - 1
+                      ? ["-120%", "0%"]
+                      : ["-120%", "0%", "120%"]
+                    : index === 0
+                    ? ["0%", "-120%"]
+                    : index === totalCards - 1
+                    ? ["120%", "0%"]
+                    : ["120%", "0%", "-120%"]
+                );
+
+                return (
+                  <div
+                    key={index}
+                    className="absolute top-0 left-0 w-full h-full grid grid-cols-2 md:grid-cols-2 gap-4 lg:gap-10 items-center"
+                  >
+                    {/* IMAGE BLOCK */}
+                    <motion.div
+                      className={`w-full flex items-center justify-center ${isLeftImage ? "" : "md:order-2"}`}
+                      style={{ y: imageY, opacity: opacity }}
+                      transition={{ ease: "easeInOut", duration: 0.5 }}
+                    >
+                      <img
+                        src={card.img}
+                        alt={card.title}
+                        className="w-full min-h-[300px] lg:min-h-[500px] object-cover"
+                      />
+                    </motion.div>
+
+                    {/* TEXT BLOCK */}
+                    <motion.div
+                      className={`flex flex-col items-center justify-center text-center text-white px-6 py-8 min-h-[200px] sm:min-h-[250px] ${isLeftImage ? "md:order-2" : ""}`}
+                      style={{
+                        background: "linear-gradient(to bottom, rgba(35,138,255,0.18) 0%, rgba(235,235,235,0) 100%)",
+                        y: textY,
+                        opacity: opacity,
+                      }}
+                      transition={{ ease: "easeInOut", duration: 0.5 }}
+                    >
+                      <h2 className="text-[22px] lg:text-[30px] font-semibold mb-4">{card.title}</h2>
+                      <p className="text-[16px] md:text-[22px] text-[#ffffff66]">{card.desc}</p>
+                    </motion.div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 };
