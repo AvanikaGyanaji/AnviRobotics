@@ -127,17 +127,17 @@ export const Section6 = () => {
       <div className="hidden md:block">
         <section
           ref={scrollRef}
-          className="relative w-full bg-black"
+          className="relative w-full bg-black sticky"
           style={{ height: `${(totalCards - 1) * 100 + 100}vh`, md: { paddingBottom: "60px" }}}
         >
           <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start px-4 sm:px-8 md:px-[150px] py-[60px] overflow-hidden">
             {/* Section Title */}
-            <h1 className="text-[24px] md:text-[28px] lg:text-[32px] font-semibold text-white mb-8 lg:mb-12 text-center z-10">
+            <h2 className="text-[24px] md:text-[28px] lg:text-[32px] font-semibold text-white mb-8 lg:mb-12 text-center z-10">
               Perfect For Any Environment
-            </h1>
+            </h2>
 
             {/* Card Container */}
-            <div className="relative w-full flex-1 h-[200px] md:h-[600px]">
+            <div className="relative w-full flex-1 h-[200px] md:h-[600px] overflow-hidden">
               {cards.map((card, index) => {
                 const isLeftImage = index % 2 === 0;
 
