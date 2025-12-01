@@ -86,7 +86,7 @@ export const ContactUs = () => {
           <div className="flex flex-col md:flex-row gap-[20px] md:gap-[50px] w-full relative z-[10]">
             
             {/* LEFT INFO */}
-            <div className="text-white md:w-[50%] w-full">
+            <div className="text-white md:w-[50%] md:px-[5%] w-full ">
               <h1 className="about-heading w-full text-center md:text-start md:mb-[35px] mb-[10px] font-[Arial] text-white">
                 Contact Us
               </h1>
