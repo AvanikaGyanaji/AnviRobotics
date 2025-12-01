@@ -206,8 +206,8 @@ Blending AI, precision engineering, and automation we build robots that deliver 
               <motion.h1 style={{ y: l5 }} className="absolute left-[15%] bottom-[-80px] label w-auto md:w-[150px] flex "><span className="mr-[10px] text-2xl">•</span> Real-Time Fleet Oversight</motion.h1>
               <motion.h1 style={{ y: l6 }} className="absolute right-[15%] bottom-[-80px] label w-auto md:w-[200px]  flex"><span className="mr-[10px] text-2xl">•</span> Actionable Insights & Alerts</motion.h1>
               <motion.h1 style={{ y: l7 }} className="absolute left-[15%] bottom-[-80px] label w-auto md:w-[200px] flex "><span className="mr-[10px] text-2xl">•</span> Intuitive Control & Customization</motion.h1>
-              <motion.h1 style={{ y: l8 }} className="absolute right-[15%] bottom-[-80px] label">• Data & Analytics</motion.h1>
-              <motion.h1 style={{ y: l9 }} className="absolute left-[40%] bottom-[-80px] label">• Customization</motion.h1>
+              <motion.h1 style={{ y: l8 }} className="absolute right-[15%] bottom-[-80px] label"><span className="mr-[10px] text-2xl">•</span> Data & Analytics</motion.h1>
+              <motion.h1 style={{ y: l9 }} className="absolute left-[40%] bottom-[-80px] label"><span className="mr-[10px] text-2xl">•</span> Customization</motion.h1>
             </>
           )}
 

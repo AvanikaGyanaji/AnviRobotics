@@ -111,7 +111,7 @@ export const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="w-full border-t border-[#ffffff60] py-[10px] text-white text-sm flex flex-row justify-between md:px-[15%] px-[5%] text-center md:text-left gap-3">
-          <p className="text-[#ffffff72]">© 2025 anvi.co</p>
+          <p className="text-[#ffffff72]">© 2025 Anvi Robotics</p>
 
           <Link
             to={""}
