@@ -9,7 +9,7 @@ const RobotFeatures = ({ section4Ref, section4Scale = 1, section4Opacity = 1 }) 
       style={{ transform: `scale(${section4Scale})`, opacity: section4Opacity }}
     >
       <div className="w-full px-4 sm:px-8 md:px-[60px] py-4 sm:py-4 flex flex-col items-center justify-center min-h-screen box-border">
-        <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-semibold text-white mb-8 text-center">
+        <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-regular text-white mb-8 text-center">
           Our Robot Features
         </h2>
 

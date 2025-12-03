@@ -78,7 +78,7 @@ export const Section6 = () => {
       <div className="md:hidden w-full bg-black py-12">
 
         {/* MOBILE HEADING */}
-        <h1 className="text-[22px] text-center font-semibold text-white mb-8 px-6">
+        <h1 className="text-[22px] text-center font-regular text-white mb-8 px-6">
           Perfect For Any Environment
         </h1>
 
@@ -132,7 +132,7 @@ export const Section6 = () => {
         >
           <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start px-4 sm:px-8 md:px-[150px] py-[60px] overflow-hidden">
             {/* Section Title */}
-            <h2 className="text-[24px] md:text-[28px] lg:text-[32px] font-semibold text-white mb-8 lg:mb-12 text-center z-10">
+            <h2 className="text-[24px] md:text-[28px] lg:text-[32px] font-regular text-white mb-8 lg:mb-12 text-center z-10">
               Perfect For Any Environment
             </h2>
 

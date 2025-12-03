@@ -253,7 +253,7 @@ const Surveillance = () => {
       {/* Sections 5–6 will scroll normally with NO fixed background */}
       <div className="relative bg-black z-0">
         <div className="min-h-screen relative bg-black w-full px-4 sm:px-8 md:px-[50px] py-[50px]">
-          <h2 className="text-[24px] md:text-[32px] font-semibold text-white mb-10 text-center">
+          <h2 className="text-[24px] md:text-[32px] font-regular text-white mb-10 text-center">
             Our Robot Solutions
           </h2>
           {/* Image Grid Section */}
