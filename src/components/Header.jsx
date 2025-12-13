@@ -103,7 +103,7 @@ export const Header = () => {
 >
 
         <div className="logo relative w-[150px] h-[70px] flex items-center">
-          <img src="/logos/anvi_robotics_logo.svg" className=" inset-0 object-contain" />
+          <img src="/logos/anvi_robotics_White.svg" className=" inset-0 object-contain" />
         </div>
 
         {/* DESKTOP NAV */}
