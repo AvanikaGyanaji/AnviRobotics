@@ -96,14 +96,14 @@ export const Header = () => {
   style={{ top: showHeader ? 0 : -headerHeight }}
   className={`
     fixed left-0 w-full flex justify-between items-center py-[10px]
-    px-6 lg:px-[120px] z-[2000]
+    px-6 md:px-[80px] lg:px-[120px] z-[2000]
     transition-all duration-300
     bg-black md:bg-transparent
   `}
 >
 
-        <div className="logo relative w-[110px] h-[70px]">
-          <img src="/logos/anvi_white.png" className="absolute inset-0 object-contain" />
+        <div className="logo relative w-[150px] h-[70px] flex items-center">
+          <img src="/logos/anvi_robotics_logo.svg" className=" inset-0 object-contain" />
         </div>
 
         {/* DESKTOP NAV */}

@@ -42,8 +42,8 @@ export const Footer = () => {
           {/* Column 1 */}
           <div className="flex flex-col justify-center items-center md:items-start gap-4">
             <img
-              className="max-w-[200px] max-h-[80px] self-center"
-              src="/logos/anvi_white.png"
+              className="w-[150px] h-[80px] self-center"
+              src="/logos/anvi_robotics_logo.svg"
             />
 
             <div className="flex justify-center align-middle gap-6 mt-4">

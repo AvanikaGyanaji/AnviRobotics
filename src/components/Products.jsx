@@ -73,9 +73,9 @@ export const Products = () => {
     ["50vh", "40vh", "40vh", "7vh"]
   );
 
-  const robot1Y = useTransform(scrollYProgress, [0, 0.1], [-80, 55]);
-  const robot2Y = useTransform(scrollYProgress, [0.33, 0.43], [-80, 55]);
-  const robot3Y = useTransform(scrollYProgress, [0.66, 0.76], [-80, 55]);
+  const robot1Y = useTransform(scrollYProgress, [0, 0.2,0.3], [-200,-80, 55]);
+  const robot2Y = useTransform(scrollYProgress, [0.33, 0.53], [-80, 55]);
+  const robot3Y = useTransform(scrollYProgress, [0.66, 0.86], [-80, 55]);
 
   const robo1opacity = useTransform(scrollYProgress, [0, 0.1, 0.25], [0, 1, 1]);
   const robo2opacity = useTransform(
@@ -93,9 +93,10 @@ export const Products = () => {
   const text2Opacity = robo2opacity;
   const text3Opacity = robo3opacity;
 
+ 
   const allContentOpacity = useTransform(scrollYProgress, [0, 0.1], [0.4, 1]);
 
-  const bottomsec = useTransform(scrollYProgress, [0.05, 0.1], ["55%", "0%"]);
+  const bottomsec = useTransform(scrollYProgress, [0.05, 0.2], ["55%", "0%"]);
   const bottomsecopacity = useTransform(scrollYProgress, [0.05, 0.1], [1, 0.2]);
 
   const DesktopProdCards = (

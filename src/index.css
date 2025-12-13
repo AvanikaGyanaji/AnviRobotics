@@ -256,7 +256,7 @@ section {
 .word3{
   /* padding-right: px; */
   display: inline-block;
-  animation: word3Highlight 0.8s ease-in-out 2.8s forwards;
+  animation: word3Highlight 0.8s ease-in-out 2.5s forwards;
 
 }
 @keyframes word3Highlight {
