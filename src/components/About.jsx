@@ -122,7 +122,7 @@ export const About = () => {
           <h1 className="mb-[24px] about-heading">About Us</h1>
           <p className="about-content">
             Excellence at Every Step. We blend advanced engineering with
-            real-world application to deliver reliable, scalable robotics that
+            real world application to deliver reliable, scalable robotics that
             perform seamlessly fast, precise, and trustworthy.
           </p>
         </motion.div>
@@ -137,7 +137,7 @@ export const About = () => {
         >
           <h1 className="mb-[24px] about-heading">Our Vision</h1>
           <p className="about-content">
-            Pioneering change and powering possibilities—shaping a future where
+            Pioneering change and powering possibilities shaping a future where
             robotics empowers people with smarter, safer innovation.
           </p>
         </motion.div>

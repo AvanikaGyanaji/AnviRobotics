@@ -40,32 +40,32 @@ export const Technology = () => {
     ["0%", "0%", "-50%", "-100%"]
   );
 
-  const topTextY = useTransform(scrollYProgress, [0.25, 0.35], [0, -250]);
+  const topTextY = useTransform(scrollYProgress, [0.25, 0.35], ["0%","-200%" ]);
 
   const navY = useTransform(
     scrollYProgress,
-    [0.3, 0.4, 0.65,0.75],
+    [0.3, 0.4, 0.59,0.70],
     ["320%", "0%", "0%", "-550%"]
   );
   const navOpacity = useTransform(scrollYProgress, [0.3, 0.45,0.7], [0, 1,0.2]);
 
-  const dashY = useTransform(scrollYProgress, [0.65,0.75, 0.8], ["500%","120%", "-60%"]);
-  const dashOpacity = useTransform(scrollYProgress, [0.65, 0.85,0.98], [1, 1,0]);
+  const dashY = useTransform(scrollYProgress, [0.6,0.68, 0.75], ["500%","120%", "-60%"]);
+  const dashOpacity = useTransform(scrollYProgress, [0.65, 0.73,0.98], [1, 1,0]);
 
   // DESKTOP — keep original animations
   const backgroundHeight = useTransform(
     scrollYProgress,
-    [0.3, 0.45, 0.49, 0.55, 0.65],
+    [0.3, 0.4, 0.45, 0.55, 0.65],
     ["100vh", "100vh", "95vh", "90vh", "80vh"]
   );
   const backgroundWidth = useTransform(
     scrollYProgress,
-    [0.3, 0.45, 0.49, 0.65, 0.75],
+    [0.3, 0.4, 0.45, 0.65, 0.75],
     ["100%", "100%", "95%", "90%", "80%"]
   );
   const backgroundRadius = useTransform(
     scrollYProgress,
-    [0.4, 0.55],
+    [0.35, 0.55],
     [0, 32]
   );
 
@@ -91,8 +91,8 @@ export const Technology = () => {
   const l2 = useTransform(scrollYProgress, [0.34, 0.45, 0.55], ["500%", "-600%", "-3400%"]);
   const l3 = useTransform(scrollYProgress, [0.45, 0.55, 0.65], ["500%", "-1200%", "-3400%"]);
   const l4 = useTransform(scrollYProgress, [0.45, 0.55, 0.65], ["500%", "-600%", "-2400%"]);
-  const l5 = useTransform(scrollYProgress, [0.75, 0.79, 0.85], ["500%", "-890%", "-2400%"]);
-  const l6 = useTransform(scrollYProgress, [0.75, 0.79, 0.85], ["500%", "-400%", "-2400%"]);
+  const l5 = useTransform(scrollYProgress, [0.75, 0.81, 0.86], ["500%", "-890%", "-2400%"]);
+  const l6 = useTransform(scrollYProgress, [0.75, 0.81, 0.86], ["500%", "-400%", "-2400%"]);
   const l7 = useTransform(scrollYProgress, [0.8, 0.85, 0.99], ["500%", "-800%", "-2250%"]);
   const l8 = useTransform(scrollYProgress, [0.8, 0.85, 0.99], ["500%", "-400%", "-2710%"]);
   const l9 = useTransform(scrollYProgress, [0.8, 0.85, 0.99], ["500%", "-200%", "-2400%"]);
@@ -186,7 +186,7 @@ Blending AI, precision engineering, and automation we build robots that deliver 
               isMobile ? "left-0 top-[380px] text-left" : "left-1/2 top-1/2 text-center -translate-x-1/2"
             }`}
           >
-            <h2 className="technology-heading font-black mb-3">The Control Dashboard</h2>
+            <h2 className="technology-heading font-black ">The Control Dashboard</h2>
             <p>Innovation</p>
 
             {isMobile && (
@@ -206,8 +206,8 @@ Blending AI, precision engineering, and automation we build robots that deliver 
               <motion.h1 style={{ y: l5 }} className="absolute left-[15%] bottom-[-80px] label w-auto md:w-[150px] flex "><span className="mr-[10px] text-2xl">•</span> Real-Time Fleet Oversight</motion.h1>
               <motion.h1 style={{ y: l6 }} className="absolute right-[15%] bottom-[-80px] label w-auto md:w-[200px]  flex"><span className="mr-[10px] text-2xl">•</span> Actionable Insights & Alerts</motion.h1>
               <motion.h1 style={{ y: l7 }} className="absolute left-[15%] bottom-[-80px] label w-auto md:w-[200px] flex "><span className="mr-[10px] text-2xl">•</span> Intuitive Control & Customization</motion.h1>
-              <motion.h1 style={{ y: l8 }} className="absolute right-[15%] bottom-[-80px] label"><span className="mr-[10px] text-2xl">•</span> Data & Analytics</motion.h1>
-              <motion.h1 style={{ y: l9 }} className="absolute left-[40%] bottom-[-80px] label"><span className="mr-[10px] text-2xl">•</span> Customization</motion.h1>
+              <motion.h1 style={{ y: l8 }} className="absolute right-[15%] bottom-[-80px] label flex items-center"><span className="mr-[10px] text-2xl">•</span> Data & Analytics</motion.h1>
+              <motion.h1 style={{ y: l9 }} className="absolute left-[40%] bottom-[-80px] label flex items-center"><span className="mr-[10px] text-2xl">•</span> Customization</motion.h1>
             </>
           )}
 

@@ -100,7 +100,7 @@ export const Herosection = () => {
         />
       </div>
 
-      <div className="flex flex-col justify-center items-center text-center mr-[5%] px-[1vw]">
+      <div className="flex flex-col justify-center items-center text-center mr-[1%] px-[1vw]">
         <h1 className="heading hero-heading font-bold text-[#FEFEFE33]">
           <span className="word1">Smarter.</span>
           <span className="word2 pr-1">Faster.</span>
